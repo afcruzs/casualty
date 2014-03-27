@@ -1,4 +1,4 @@
-package casualtyApp.com.model
+package com.casualtyApp.model
 
 class DataBaseConnection {
 
