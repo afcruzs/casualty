@@ -6,5 +6,5 @@ class Group {
 	 * 
 	 * @author: Felipe
 	 */
-	
+	def idgroup = 1	
 }

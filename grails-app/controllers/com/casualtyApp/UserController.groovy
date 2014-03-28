@@ -15,10 +15,11 @@ class UserController {
 	
 	def create() { 
 		
-		def newUser = new User()
+		render "Creating"
+		/*def newUser = new User()
 		newUser.properties = params
 		newUser.save()
-		return [userInstance: newUser]
+		return [userInstance: newUser]*/
 		
 	}
 	
