@@ -24,7 +24,13 @@ class Event {
 		return tags.remove(tag)
 	}
 
-	//Constructor
+	//Default Constructor
+	public Event()
+	{
+		
+	}
+	
+	//constructor with all fields
 	public Event(int idEvent, String title, Date startTime,
 			Date endTime, String description, int category, ArrayList<String> tags,
 			Double latitude, Double longitude, int idUserCreator) {
