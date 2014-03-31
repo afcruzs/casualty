@@ -11,15 +11,16 @@ class User {
 	def  boolean isUnalConfirmed
 	def  final static int MAX_EVENTS=5;
 	def  final static int MAX_GROUPS=15;
-	def  HashMap myGroups= new HashMap<Integer,Group>(MAX_GROUPS);
-	def  HashMap myEvents= new HashMap<Integer,Event>(MAX_EVENTS);
+	def  HashMap myGroups;
+	def  HashMap myEvents;
 	
 	
 	
 	
 	//Default Constructor
 	public User(){
-		
+		myGroups= new HashMap<Integer,Group>(MAX_GROUPS);
+		myEvents= new HashMap<Integer,Event>(MAX_EVENTS);
 	}
 	
 	//Constructor with all fields
