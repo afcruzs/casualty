@@ -5,7 +5,7 @@ package com.casualtyApp.model
 class User {
 	
 	def  int idUser
-	def  String nameUser
+//	def  String username
 	def  String emailUser
 	def  Date createdAt
 	def  boolean isUnalConfirmed
@@ -14,7 +14,9 @@ class User {
 	def  HashMap myGroups;
 	def  HashMap myEvents;
 	
-	
+	//One to one relation ship with shiro instance,
+	//Because SecUser class can't be modified.
+	def SecUser shiroUser
 	
 	
 	//Default Constructor
@@ -24,12 +26,12 @@ class User {
 	}
 	
 	//Constructor with all fields
-	public User(int idUser, String nameUser, String emailUser,
+	public User(int idUser, String username, String emailUser,
 			Date createdAt, boolean isUnalConfirmed, HashMap<Integer,Group> myGroups,
-			HashMap<Integer,Event> myEvents) {
+			HashMap<Integer,Event> myEvents, SecUser shiroUser) {
 		super();
 		this.idUser = idUser;
-		this.nameUser = nameUser;
+	//	this.username = username;
 		this.emailUser = emailUser;
 		this.createdAt = createdAt;
 		this.isUnalConfirmed = isUnalConfirmed;
@@ -37,6 +39,7 @@ class User {
 		this.myEvents = myEvents;
 		this.maxGroups = maxGroups;
 		this.maxEvents = maxEvents;
+		this.shiroUser = shiroUser;
 	}
 			
 	
