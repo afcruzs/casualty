@@ -60,7 +60,7 @@ class User {
 	//Adds a event to myGroups map, receive a group, then verify if there is no groups with that id
 	//and if the size of the map is less than MAX_GROUPS
 	def boolean addGroup(Group group){
-		if(myGroups.get(group.getIdgroup())==null && myGroups.size()<MAX_GROUPS){
+		if(myGroups.get(group.getIdGroup())==null && myGroups.size()<MAX_GROUPS){
 			this.myGroups.put(group.getIdGroup(), group);
 			return true;
 		}else{

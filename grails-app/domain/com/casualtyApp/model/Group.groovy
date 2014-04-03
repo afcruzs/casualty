@@ -56,7 +56,7 @@ class Group{
 	
 	//Default Constructor
 	public Group(int idGroup,String nameGroup,String description,Date createAt,
-		ArrayList<Event> groupEvents,ArrayList<User> members,int maxEvents,int userType)
+		ArrayList<Event> groupEvents,ArrayList<User> members,int userType)
 	{
 		super();
 		this.idGroup = idGroup;
@@ -65,7 +65,6 @@ class Group{
 		this.createAt = createAt;
 		this.groupEvents = groupEvents;
 		this.members = members;
-		this.maxEvents = maxEvents;
 		this.userType = userType;
 		
 	}

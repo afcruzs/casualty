@@ -1,40 +1,131 @@
+package com.casualtyApp.model
 
-package com.casualtyApp.model;
 
-import javassist.bytecode.stackmap.BasicBlock.Catch;
-import grails.test.mixin.TestFor;
 
-@TestFor(Event)
-class EventTest extends GroovyTestCase{
+import java.util.ArrayList;
 
-	def Event event
+import grails.test.mixin.*
+
+import org.junit.*
+
+/**
+ * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ */
+@TestFor(User)
+class UserTests extends GroovyTestCase {
+
+	def User user;
 	
-	
-	void testCreateEvent(){
-		Event evt;
-		Date ini=new Date(2014,4,3,12,10);
-		Date fin=new Date(2014,4,3,12,15);
-		evt=new Event(1, "event"+1+"", ini, fin,"desc "+ 1 + "", 1,new ArrayList<String>() ,1,1,1)
-		assertNotNull("Error, event create is Null",evt)
+	//test validate create user
+	void testCreateUser(){
+		user=new User();
+		assertNotNull("!Error! user null after create! ",user)
 	}
 	
-	void testDateEvent(){
-		Event evt;
-		Date ini=new Date(2014,4,3,12,15);
-		Date fin=new Date(2014,4,3,12,10);
+	//test add max Events
+	void testAddEvent1(){
+		user=new User();
 		
-		try{
-			evt=new Event(1, "event"+1+"", ini, fin,"desc "+ 1 + "", 1,new ArrayList<String>() ,1,1,1)
-			
-			fail("Event failed, the start date must be less than the end date");
-			
-		}catch(Exception e){
+		Event evt;
+		for(int i=0;i<5;i++){
+			Date t=new Date();
+			boolean temp=user.addEvent(new Event(i, "event"+i+"", t, t,"desc "+ i + "", i,new ArrayList<String>() ,1,1,i));
+			assertEquals("Error, Event Add failed",temp, true)
+			assertNotNull("Error, Event add Null",user.myEvents.get(i))
 		}
+		assertEquals("Error, Num Event Failed",user.myEvents.size(),5);
+		
+	}
+	
+	//test try add events > 5
+	void testAddEvent2(){
+		user=new User();
+		Event evt;
+		Date t=new Date();
+		boolean temp;
+		for(int i=0;i<5;i++){
+			temp=user.addEvent(new Event(i, "event"+i+"", t, t,"desc "+ i + "", i,new ArrayList<String>() ,1,1,i));
+			assertEquals("Error, Event Add failed",temp, true)
+			assertNotNull("Error, Event add Null",user.myEvents.get(i))
+		}
+		
+		temp=user.addEvent(new Event(6, "event"+6+"", t, t,"desc "+ 6 + "", 6,new ArrayList<String>() ,1,1,6));
+		assertEquals("Error, Add more than 5 Events",temp, false)
+		assertNull("Error, Add event Invalid",user.myEvents.get(6))
+		
+	}
+	
+	//test validate two events equals
+	void testAddEvent3(){
+		user=new User();
+		Event evt;
+		Date t=new Date();
+		boolean temp;
+		temp=user.addEvent(new Event(1, "event"+1+"", t, t,"desc "+ 1 + "", 1,new ArrayList<String>() ,1,1,1));
+		assertEquals("Error, Event Add failed",temp, true)
+		assertNotNull("Error, Event add Null",user.myEvents.get(1))
+		
+		temp=user.addEvent(new Event(1, "event"+1+"", t, t,"desc "+ 1 + "", 1,new ArrayList<String>() ,1,1,1));
+		assertEquals("Error, Add more than 1 Events with the same Id",temp, false)
 	}
 	
 	
-	public void test() {
-		fail("Not yet implemented");
+	
+	//test add max Events
+	void testAddGroup1(){
+		user=new User();
+		Date t=new Date();
+		Group testGroup;
+		
+		for(int i=0;i<15;i++){
+			testGroup=new Group(i, "group", "description ", t, new ArrayList<Event>(),new ArrayList<User>(), 1)
+			boolean temp=user.addGroup(testGroup)
+			assertEquals("Error, Group Add failed",temp, true)
+			assertNotNull("Error, Group add Null",user.myGroups.get(i))
+		}
+		assertEquals("Error, Num Groups Failed",user.myGroups.size(),15);
 	}
-
+	
+	//test try add events > 5
+	void testAddGroup2(){
+		user=new User();
+		Date t=new Date();
+		Group testGroup;
+		
+		for(int i=0;i<15;i++){
+			testGroup=new Group(i, "group", "description ", t, new ArrayList<Event>(),new ArrayList<User>(), 1)
+			boolean temp=user.addGroup(testGroup)
+			assertEquals("Error, Group Add failed",temp, true)
+			assertNotNull("Error, Group add Null",user.myGroups.get(i))
+		}
+		assertEquals("Error, Num Groups Failed",user.myGroups.size(),15);
+		testGroup=new Group(16, "group", "description ", t, new ArrayList<Event>(),new ArrayList<User>(), 1)
+		boolean temp=user.addGroup(testGroup)
+		assertEquals("Error, Add more than 15 Groups",temp, false)
+		assertNull("Error, Add Group Invalid",user.myEvents.get(16))
+		
+	}
+	
+	//test validate two events equals
+	void testAddGroup3(){
+		user=new User();
+		Date t=new Date();
+		Group testGroup;
+		boolean temp;
+		testGroup=new Group(1, "group", "description ", t, new ArrayList<Event>(),new ArrayList<User>(), 1)
+		temp=user.addGroup(testGroup)
+		assertEquals("Error, Group Add failed",temp, true)
+		assertNotNull("Error, Group add Null",user.myGroups.get(1))
+		
+		testGroup=new Group(1, "group", "description ", t, new ArrayList<Event>(),new ArrayList<User>(), 1)
+		temp=user.addGroup(testGroup)
+		assertEquals("Error, Group Add failed",temp, false)
+	}
+	
+	
+	
+	
+	void testSomething() {
+	   fail "Implement me"
+	}
 }
