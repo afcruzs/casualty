@@ -3,12 +3,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Registro</title>
-    <meta name="layout" content="main"/>
+    <title>Casualty</title>
+     <link rel="stylesheet" href="${resource(dir:'css',file:'register.css')}" />
 </head>
 
-<body>
-  <h1>Registrese</h1>
+<body background = "${resource(dir:'images',file:'fond.jpg')}">
+<section class = "section">
+  <h1>Register</h1>
   
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
@@ -19,29 +20,31 @@
         <g:renderErrors bean="${user}" as="list"/>
     </div>
   </g:hasErrors>
-
-  <g:form action="register">
+  <g:form action="register" class = "form">
     <table>
       <tbody>
         <tr>
-          <td>Nombre de usuario:</td>
+          <td>Username:</td>
           <td><input type="text" name="username" value="${username}" /></td>
         </tr>
         <tr>
-          <td>Contraseña:</td>
+          <td>Password:</td>
           <td><input type="password" name="password" value="" /></td>
         </tr>
         <tr>
-          <td>Confirme Contraseña:</td>
+          <td>Confirm Password:</td>
           <td><input type="password" name="password2" value="" /></td>
         </tr>
         <tr>
           <td />
-          <td><input type="submit" value="Sign up" /></td>
+          <td><input type="submit" value="Sign up" />
+          <input type="submit" value="Back" />
+          </td>
         </tr>
       </tbody>
     </table>
   </g:form>
+ </section>
 </body>
 
 </html>
