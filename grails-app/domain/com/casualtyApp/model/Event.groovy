@@ -14,10 +14,8 @@ class Event {
 	def  Double latitude
 	def  Double longitude
 	def  int idUserCreator
-	
 	static belongsTo = [classGroup: ClassGroup,user:User]
 
-	
 	static constraints = {
 		
 		title (nullable: false, blank: false, unique: true)
