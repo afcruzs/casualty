@@ -17,6 +17,7 @@ class Event {
 	
 	static belongsTo = [classGroup: ClassGroup,user:User]
 
+	
 	static constraints = {
 		
 		title (nullable: false, blank: false, unique: true)
