@@ -14,11 +14,14 @@ h1{
 }
 
 body{
-  	
-	/*background: radial-gradient(45px 45px, ellipse, FAE1C8 0%, FF952A 20%);
-	background: -o-radial-gradient(45px 45px, ellipse, FAE1C8 0%, FF952A 20%);
-	background: -moz-radial-gradient(45px 45px, ellipse, FAE1C8 0%, FF952A 20%);
-	background: -webkit-radial-gradient(45px 45px, ellipse, FAE1C8 0%, FF952A 20%);*/
+	
+	background-image: url(../images/fond.jpg);
+
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
 	}
 
 .section{
@@ -29,6 +32,15 @@ body{
 	height: 90%;
 	border: 1px solid #DDDDDD; 
 	
+}
+
+.message{
+	
+	//border: 1px solid #DDDDDD;
+	width: 19.5%;
+	margin: 0 auto;
+	color: #E20613;
+
 }
 
 .form{

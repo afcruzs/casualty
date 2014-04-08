@@ -1,0 +1,25 @@
+
+*{ 
+	
+    font-size: 24px; 
+	font-family: "Times New Roman";
+} 
+
+h1{
+	
+	margin: 100 auto;
+	width: 30%;
+	//border: 1px solid #DDDDDD;
+	font-size: 4em;
+}
+
+body{
+	
+	background-image: url(../images/jesus.gif);
+
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+}

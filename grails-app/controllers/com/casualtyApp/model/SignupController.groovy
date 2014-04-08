@@ -16,7 +16,7 @@ class SignupController {
 		// Check to see if the username already exists
 		def user = SecUser.findByUsername(params.username)
 		if (user) {
-			flash.message = "Ya existe el usuario '${params.username}'"
+			flash.message = "User already exists '${params.username}'"
 			redirect(action:'index')
 		}
 		
@@ -51,12 +51,16 @@ class SignupController {
 					redirect(controller: 'home', action: 'index')
 				}
 				else {
-					redirect(controller: 'auth', action: 'login')
+					redirect(controller: 'auth', action: 'index')
 				}
 			}
 		}
 		
 	}
+	
+	/*def loginaux(){
+		redirect(controller: 'auth', action: "index", params: params)
+	}*/
 	
 	
 }

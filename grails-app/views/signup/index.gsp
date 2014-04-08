@@ -3,24 +3,19 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="${resource(dir:'css',file:'register.css')}" />
     <title>Casualty</title>
-     <link rel="stylesheet" href="${resource(dir:'css',file:'register.css')}" />
 </head>
 
-<body background = "${resource(dir:'images',file:'fond.jpg')}">
+<body>
 <section class = "section">
   <h1>Register</h1>
-  
-  <g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-  </g:if>
-
   <g:hasErrors bean="${user}">
-    <div class="alert alert-error">
+    <div class="alert-alert-error">
         <g:renderErrors bean="${user}" as="list"/>
     </div>
   </g:hasErrors>
-  <g:form action="register" class = "form">
+  <g:form class = "form">
     <table>
       <tbody>
         <tr>
@@ -37,13 +32,16 @@
         </tr>
         <tr>
           <td />
-          <td><input type="submit" value="Sign up" />
-          <input type="submit" value="Back" />
+          <td><input type="submit" value="Sign up" onclick = "this.form.action = 'register'"/>
+          <input type="submit" value="Back" onclick = "this.form.action = 'register'"/>
           </td>
         </tr>
       </tbody>
     </table>
   </g:form>
+  <g:if test="${flash.message}">
+    <div class="message">${flash.message}</div>
+  </g:if>
  </section>
 </body>
 

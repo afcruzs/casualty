@@ -25,7 +25,7 @@ class AuthController {
         
         // If a controller redirected to this page, redirect back
         // to it. Otherwise redirect to the root URI.
-        def targetUri = params.targetUri ?: "/"
+        def targetUri = params.targetUri ?: "/home/index"
         
         // Handle requests saved by Shiro filters.
         SavedRequest savedRequest = WebUtils.getSavedRequest(request)
@@ -78,4 +78,7 @@ class AuthController {
     def unauthorized = {
        // render "You do not have permission to access this page."
     }
+	
+	def registeraux(){ redirect(controller: 'signup', action: "index")}
+	
 }
