@@ -1,7 +1,7 @@
 
 *{ 
 	
-    font-size: 24px; 
+    font-size: 12; 
 	font-family: "Times New Roman";
 } 
 
@@ -10,7 +10,7 @@ h1{
 	margin: 100 auto;
 	width: 30%;
 	//border: 1px solid #DDDDDD;
-	font-size: 4em;
+	font-size: 2em;
 }
 
 body{
@@ -20,6 +20,6 @@ body{
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
+	background-size: 10%;
 	
 }
