@@ -41,7 +41,10 @@ class AuthController {
             SecurityUtils.subject.login(authToken)
 
             log.info "Redirecting to '${targetUri}'."
-            redirect(uri: targetUri)
+			
+			
+			
+            redirect(controller: "home", action: "index", params :  [ username: params.username ] )
         }
         catch (AuthenticationException ex){
             // Authentication failed, so display the appropriate message
@@ -72,7 +75,7 @@ class AuthController {
         webRequest.getCurrentRequest().session = null
 
         // For now, redirect back to the home page.
-        redirect(uri: "/")
+        redirect(uri: "/auth/index")
     }
 
     def unauthorized = {
