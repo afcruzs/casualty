@@ -14,6 +14,10 @@ class ClassGroup{
 	def static final int MAX_EVENTS = 10
 	def int userType
 	
+	static belongsTo = User
+	static hasMany = [event:Event,user:User] //un grupo puede crear cero o muchos eventos, un grupo puede contener minimo un o muchos usuarios
+	
+	
 	def boolean addEvent(Event NameEvent)
 	{
 		if(groupEvents.get(NameEvent.getIdEvent())== null && groupEvents.size() < MAX_EVENTS)

@@ -14,8 +14,10 @@ class Event {
 	def  Double latitude
 	def  Double longitude
 	def  int idUserCreator
+	
+	//eventos puede ser creado por maximo un y minimo un usuario o un grupo
 	static belongsTo = [classGroup: ClassGroup,user:User]
-
+	  
 	static constraints = {
 		
 		title (nullable: false, blank: false, unique: true)
