@@ -2,6 +2,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="${resource(dir:'css',file:'login.css')}" />
+  <link rel="stylesheet" href="${resource(dir:'bootstrap/css', file:'bootstrap.css')}" />
+  <link rel="stylesheet" href="${resource(dir:'bootstrap/css', file:'bootstrap-responsive.css')}" />
   <title>Casualty</title>
 </head>
 <body>
@@ -25,8 +27,8 @@
         </tr>
         <tr>
           <td />
-          <td><input type="submit" value="Sign in" onclick = "this.form.action = 'signIn'"/>
-         	 <input type="submit" value="Register" onclick = "this.form.action = 'registeraux'"/>
+          <td><input type="submit" value="Sign in" onclick = "this.form.action = 'signIn'" class="btn btn-info"/>
+         	 <input type="submit" value="Register" onclick = "this.form.action = 'registeraux'" class="btn btn-info"/>
           </td>
         </tr>
       </tbody>
