@@ -13,20 +13,14 @@
  * 
  */
 function initialize() {
-	
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(do_initialize);
-	  } else {
-	    alert("Geolocation is not supported by this browser.");
-		default_map_loader();
-	  }
+	default_map_loader();	  
 }
 /*
  * Callback function to initalize the map, by default with zoom 13 
  * and positions as parameters. It inits the map in the HTML finding the
  * div with id "map_canvas".
  */
-function do_initialize(position){
+/*function do_initialize(position){
 	
 	var lat = position.coords.latitude;
 	var lng = position.coords.longitude;
@@ -38,7 +32,7 @@ function do_initialize(position){
 	        };
     var map = new google.maps.Map(document.getElementById("map_canvas"),
         mapOptions);
-}
+}*/
 
 /*
  * Inits the map with no position as argument.
