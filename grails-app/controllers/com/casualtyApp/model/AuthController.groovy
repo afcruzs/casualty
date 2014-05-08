@@ -43,8 +43,13 @@ class AuthController {
             log.info "Redirecting to '${targetUri}'."
 			
 			
-			
-            redirect(controller: "home", action: "index", params :  [ username: params.username ] )
+			/*
+			 * Instead of Forward redirect could be used
+			 * BUT username params COULD BE EXPOSED.
+			 * 
+			 * @author: Felipe
+			 */
+            forward(controller: "home", action: "index", params :  [ username: params.username ] )
         }
         catch (AuthenticationException ex){
             // Authentication failed, so display the appropriate message
