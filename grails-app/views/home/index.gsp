@@ -29,7 +29,7 @@
 	
 
 	<!-- when the load is done initialize the map. -->
-	<body onload="initialize()" >
+	<body onload="initialize(${params.events})" >
 		<input id="clickMe" type="button" value="AÑADIR MARKER TEST!" onclick="loadMarkerTest();" />
 		
 		
