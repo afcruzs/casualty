@@ -5,9 +5,11 @@ import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.SavedRequest
 import org.apache.shiro.web.util.WebUtils
+import org.w3c.dom.events.EventException;
 
 class AuthController {
     def shiroSecurityManager
+	def eventsService
 
     def index = { redirect(action: "login", params: params) }
 
@@ -49,7 +51,10 @@ class AuthController {
 			 * 
 			 * @author: Felipe
 			 */
-            forward(controller: "home", action: "index", params :  [ username: params.username ] )
+			
+			
+			
+            forward(controller: "home", action: "index", params : [events:eventsService.getFirstEvents()] )
         }
         catch (AuthenticationException ex){
             // Authentication failed, so display the appropriate message

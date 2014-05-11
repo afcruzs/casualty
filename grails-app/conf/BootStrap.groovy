@@ -1,5 +1,6 @@
 import org.apache.shiro.crypto.hash.Sha512Hash
 
+import com.casualtyApp.model.Event
 import com.casualtyApp.model.SecRole
 import com.casualtyApp.model.SecUser
 

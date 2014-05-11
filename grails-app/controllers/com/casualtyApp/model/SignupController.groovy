@@ -48,7 +48,7 @@ class SignupController {
 					def authToken = new UsernamePasswordToken(user.username, params.password)
 					SecurityUtils.subject.login(authToken)
 					
-					redirect(controller: 'home', action: 'index', params : [username : user.username] )
+					redirect(controller: 'auth', action: 'login' )
 				}
 				else {
 					redirect(controller: 'auth', action: 'index')
