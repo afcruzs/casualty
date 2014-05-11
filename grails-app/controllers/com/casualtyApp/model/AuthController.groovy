@@ -92,6 +92,6 @@ class AuthController {
        // render "You do not have permission to access this page."
     }
 	
-	def registeraux(){ redirect(controller: 'signup', action: "index")}
+	def registeraux(){redirect(controller: 'signup', action: "index")}
 	
 }

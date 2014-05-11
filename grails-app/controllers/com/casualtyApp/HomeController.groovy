@@ -11,4 +11,5 @@ class HomeController {
     def admin() {
        //render "This page requires the logged in user to be an Administrator"
     }
+	
 }

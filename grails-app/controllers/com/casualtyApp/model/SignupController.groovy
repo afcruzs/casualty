@@ -58,9 +58,9 @@ class SignupController {
 		
 	}
 	
-	/*def loginaux(){
+	def loginaux(){
 		redirect(controller: 'auth', action: "index", params: params)
-	}*/
+	}
 	
 	
 }

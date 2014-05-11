@@ -34,23 +34,27 @@ nav{
 	
 }*/
 
-
+/*
 html {
 	border: 1px solid #DDDDDD;
 	height: 100%;
 	width: 100%;
-}
-
+}*/
+/*
 body{
 
 	background: #D4D3D3;
 	height: 100%;
 	
+}*/
+
+#clickMe{
+	width: 20%;
+	margin: 0 auto;
 }
 
 #map_canvas { 
 	margin: 0 auto;
-	//border: 1px solid #DDDDDD;
 	height: 70%;
-	width: 100%;
+	width: 80%;
 }
