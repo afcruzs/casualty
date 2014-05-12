@@ -29,7 +29,10 @@ class EventsService {
 			endTime : new Date(), description : "DSDJKASHDFDF", latitude :   4.638202,
 			longitude : -74.084043, user : new User( shiroUser : SecUser.get(2) ) )
 		
-		f.tags = l 
+		ArrayList<String> l2 = new ArrayList<>()
+		l2.add("JAJAJ")
+		l2.add("JEJHJEEJ")
+		f.tags = l2
 		
 		return [ eventToJSON(e), eventToJSON(f) ]
     }
