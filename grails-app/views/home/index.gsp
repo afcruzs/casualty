@@ -50,6 +50,12 @@
           </ul>
           <div class="nav-collapse collapse pull-right">
             <ul class="nav">
+              <li>
+              <g:form class="navbar-form">
+ 				<input type="search" class="search-query" placeholder="Buscar"><!--puntas redondeadas-->
+           	  </g:form>
+              </li>
+			  <li class="divider-vertical"></li>
               <li class="active"><a href="loginaux">New Event</a></li>
               <li><a href="#about">New Group</a></li>
               <li><a href="#contact">Contact</a></li>
