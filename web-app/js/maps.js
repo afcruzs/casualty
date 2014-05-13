@@ -101,16 +101,19 @@ function showMarker(jsonMarker){
     });
 	
     /*
-     * Open Infowindow on marker's click event.
+     * Abre el InfoWindow cuando se le hace click al marker,
+     * se valida que google street view este abierrto para que
+     * también lo abrá alli.
      */
     google.maps.event.addListener(marker, 'click', function() {
         
+    	
     	infowindow.open(map,marker);
         if (map.getStreetView().getVisible())
         	infowindow.open(map.getStreetView(), marker)
         
      });
-	
+    	
 }
 
 /*
@@ -126,4 +129,11 @@ function default_map_loader(){
 	        };
     map = new google.maps.Map(document.getElementById("map_canvas"),
         mapOptions);
+    
+   
+    google.maps.event.addListener(map, 'dblclick', function() {
+        
+    	alert("Acá se debe abrir el MODAL :3")
+        
+     });
 }
