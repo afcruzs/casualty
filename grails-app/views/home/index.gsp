@@ -110,15 +110,15 @@
 
 							<button type="button" class="close" data-dismiss="modal">salir</button>
 							
-							<h4 class="text-center">Add Event</h4>
+							<h4 class="text-center">Agregar Evento</h4>
 							<div class="row-fluid">
 								
 
 								<div class="span12">
 									
-									<label for="">Name Event</label>
-									<input type="text"><br>
-									<label for="">First Date</label>
+									<label for="">Nombre del evento</label>
+									<input type="text" id = "nombre_evento"><br>
+									<label for="">Fecha de inicio</label>
 
 									<div class="input-append date" id="date2" data-date="10-05-2014" data-date-format="dd-mm-yyyy">
 							  			<input class="span6" size="50" type="text" value="10-05-2014">
@@ -129,7 +129,7 @@
 							 			</span>	
 									</div>	
 									<br>
-									<label for="">end Date</label>
+									<label for="">Fecha de finalización</label>
 									<div class="input-append date" id="date" data-date="10-05-2014" data-date-format="dd-mm-yyyy">
 							  			<input class="span6" size="50" type="text" value="10-05-2014">
 							 				<span class="add-on">
@@ -140,12 +140,13 @@
 									</div>
 									<br>
 
-									<label for="">description</label>
-									<input type="text"><br>
-									<label for="">Tags</label>
-									<input type="text"><br>
-									<label for="">Create for</label>
-									<input type="text"><br>
+									<label for="">Descripción</label>
+									<input type="text" id="descripcion"><br>
+									<label for="">Etiquetas</label>
+									<input type="text" id="tags"><br>
+									<!--
+									<label for="">Creado por (?)</label>
+									<input type="text"><br> -->
 
 								</div>
 
@@ -156,8 +157,8 @@
 						</div>
 					
 						<div class="modal-footer"> 
-							<button type="button" class ="btn" data-dismiss="modal" > close</button>
-							<button type="button" class ="btn btn-primary"  > Save</button>
+							<button type="button" class ="btn" data-dismiss="modal" >Cerrar</button>
+							<button type="button" class ="btn btn-primary" onclick="buildNewEventInMap()" >Guardar</button>
 						</div>
 					</div>
 			<!--end create the modal-->

@@ -54,6 +54,32 @@ function showEvents(events){
 } 
 
 /*
+ * Esta función debe estar encargada de
+ * mostrar el nuevo marker en el mapa
+ * con lo datos de entrada del modal.
+ * 
+ * Jquery toma los valores de acuerdo
+ * al id del input o el datepicker de bootrsap
+ * que esten en el html.
+ * 
+ * @author: Felipe
+ */
+function buildNewEventInMap(){
+	var xd = $('#nombre_evento').val();
+	var desc = $('#descripcion').val();
+	var tags = $('#tags').val();
+	var d2 = $('#date2').data('date');
+	var d = $('#date').data('date');
+	
+	/*
+	 * En lugar de mostrarlos como alert debe construir
+	 * el objeto tipo json y mostrarlo como marker...
+	 */
+	
+	alert(xd + desc + tags + d2 + d)
+}
+
+/*
  * Shows a event with a jsonObject of a event (Domain Class).
  * 
  * jsonMarker is as follows:
@@ -133,7 +159,6 @@ function default_map_loader(){
    
     google.maps.event.addListener(map, 'dblclick', function() {
         
-    	alert("Acá se debe abrir el MODAL :3")
-        
+    	$('#myModal').modal('show');        
      });
 }
