@@ -12,6 +12,8 @@ class User {
 	def  boolean isUnalConfirmed
 	def SecUser shiroUser
 	
+	def EventCreator eventCreator
+	
 	/*Un usuario puede crear cero o muchos eventos,
 	 * un usuario puede pertenecer a cero o a muchos grupos.
 	 * No se permite que la fecha de creacion sea anterior a la fecha actual

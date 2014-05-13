@@ -13,7 +13,7 @@ class Event {
 	def  Double latitude
 	def  Double longitude
 	
-	static belongsTo = [/*classGroup: ClassGroup,*/user:User]
+	static belongsTo = [eventCreator:EventCreator]
 	  //------------------------
 	/*ninguno de los atributos se permite que sean nulos, no sean espacios en blanco
 	 * y que ninguno sea unico excepto por el titulo que no se permite.
