@@ -28,15 +28,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Causalty</a>
+          <a class="brand" href="#">Causality</a>
           <ul class="nav">
           <li class="divider-vertical hidden-desktop"></li>
           </ul>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="#">Inicio</a></li>
+              <li><a href="#about">Acerca</a></li>
+              <li><a href="#contact">Contactanos</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -101,24 +101,24 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item active"><!--esta inicialmente-->
-						<r:img  file="admin_dash.jpg" alt=""/>		
+						<r:img  file="poker2.png" alt=""/>		
 						<div class="carousel-caption">
-							<h4>This is a test</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi eveniet distinctio repudiandae eius? Cupiditate, quisquam, voluptas, nostrum ducimus repellat maiores similique incidunt laborum voluptatum numquam sapiente possimus alias non.</p>
+							<h4>Poker en la casa de Fabian</h4>
+							<p>Mesa de Poker en la casa de Fabian, apuesta mínima $5.000. Hay trago, lleven comida.  </p>
 						</div>
 					</div>
 					<div class="item">
-						<r:img  file="admin_dash2.jpg" alt=""/>	
+						<r:img  file="fumaton.png" alt=""/>	
 						<div class="carousel-caption">
-							<h4>This is a test</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum deserunt nihil sequi distinctio suscipit laborum amet dolorum modi. Ex quisquam consectetur ipsam voluptas architecto beatae molestias blanditiis asperiores accusantium quae.</p>
+							<h4>Fumatón en la playita</h4>
+							<p>Vengan a manifestarse contra el imperio paramilitar que se está formando en la universidad, hay crespa, metralla, creepi  y pepas</p>
 						</div>
 					</div>
 					<div class="item">
-						<r:img  file="motog.jpg" alt=""/>
+						<r:img  file="micro.jpg" alt=""/>
 						<div class="carousel-caption">
-							<h4>This is a test</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, aliquid, nisi, eligendi, voluptate perferendis accusamus beatae rem facere distinctio id a autem magni impedit? Odit eligendi molestias eius natus nihil!</p>
+							<h4>Micro en las canchas del Cyt</h4>
+							<p>Micro ya en las canchas del CyT, dos equipos (Meluk vs Tito) de 7 cada uno, apuren que ya hay 5</p>
 						</div>
 					</div>
 				</div>
@@ -134,8 +134,9 @@
 			</div>
 		</div>
 	  	<div class="span5 text-center hero-unit">
-			<h1>Causalty</h1>
-       		 <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+			<h1>Causality</h1>
+       		 <p>Bienvenido a Casuality™, una herramienta que te permitirá convocar a eventos de tu interes y lo mejor de todo, de forma casual. No importa si no conoces
+       		 a nadie que tenga tus mismos gustos, no te preocupes, convoca a un evento y espera, la gente llegará.</p>
         	<p><a href="registeraux" class="btn btn-large btn-success btn-large btn-block">Sign up today &raquo;</a></p>
       	</div>	
 </div>
@@ -143,7 +144,7 @@
 	<!-- inicio datos de mas -->
 	<div class="row-fluid">
         <div class="span4 text-center">
-          <r:img class="img-circle" file="interesting.jpg" alt=""/>		
+          <r:img class="img-circle" file="marker.png" alt=""/>		
           <h2>Heading</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
@@ -152,10 +153,10 @@
           <h2 >Heading</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
-          <r:img class="img-circle" file="interesting.jpg" alt=""/>	
+          <r:img class="img-circle" file="groups.png" alt=""/>	
         </div><!-- /.span4 -->
         <div class="span4 text-center">
-          <r:img class="img-circle" file="interesting.jpg" alt=""/>	
+          <r:img class="img-circle" file="crono.png" alt=""/>	
           <h2>Heading</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
@@ -183,7 +184,7 @@
 	$().ready(function(){
 		/*$(".carousel").*//*para todos*/
 		$("#myslide").carousel({
-			interval: 10000, /*tiempo de cambio*/
+			interval: 7000, /*tiempo de cambio*/
 			pause: "hover", /*se detiene si el usuario pone el mouse dentro*/
 
 		});
