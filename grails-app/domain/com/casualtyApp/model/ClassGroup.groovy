@@ -5,20 +5,20 @@ class ClassGroup{
 	 * 
 	 * @author: Diego
 	 */
-	def int idGroup
+	//def int idGroup
 	def String nameGroup
 	def String description
 	def Date createAt
-	def HashMap groupEvents
-	def ArrayList<User> members
-	def static final int MAX_EVENTS = 10
+	//def HashMap groupEvents
+	//def ArrayList<User> members
+	//def static final int MAX_EVENTS = 10
 	def int userType
 	
 	static belongsTo = User
 	static hasMany = [event:Event,user:User] //un grupo puede crear cero o muchos eventos, un grupo puede contener minimo un o muchos usuarios
 	
 	
-	def boolean addEvent(Event NameEvent)
+/*	def boolean addEvent(Event NameEvent)
 	{
 		if(groupEvents.get(NameEvent.getIdEvent())== null && groupEvents.size() < MAX_EVENTS)
 		{
@@ -27,9 +27,9 @@ class ClassGroup{
 		}else{
 		    return false;
 		}
-	}
+	}*/
 	
-	def boolean removeEvent(Event NameEvent)
+	/*def boolean removeEvent(Event NameEvent)
 	{
 		if(groupEvents.get(NameEvent.getIdEvent()) != null){
 			this.groupEvents.remove(NameEvent.getIdEvent());
@@ -37,7 +37,7 @@ class ClassGroup{
 		}else{
 			return false;
 		}
-	}
+	}*/
 	
 	public String toString(){
 		//String lol = "";
@@ -47,32 +47,32 @@ class ClassGroup{
 		return "pecora";
 	}
 	
-	def void addUser(User NameUser)
+	/*def void addUser(User NameUser)
 	{
 		members.add(NameUser)
-	}
+	}*/
 	
-	//Default Constructor
+/*	//Default Constructor
 	public ClassGroup()
 	{
-			groupEvents = new HashMap<Integer,Event>(MAX_EVENTS);
+			//groupEvents = new HashMap<Integer,Event>(MAX_EVENTS);
 	}
-	
+	*/
 	//Default Constructor
-	public ClassGroup(int idGroup,String nameGroup,String description,Date createAt,
-		ArrayList<Event> groupEvents,ArrayList<User> members,int userType)
+/*	public ClassGroup(int idGroup,String nameGroup,String description,Date createAt/*,
+		ArrayList<Event> groupEvents*//*,ArrayList<User> members*//*,int userType)
 	{
 		super();
 		this.idGroup = idGroup;
 		this.nameGroup = nameGroup;
 		this.description = description;
 		this.createAt = createAt;
-		this.groupEvents = groupEvents;
-		this.members = members;
+		//this.groupEvents = groupEvents;
+		//this.members = members;
 		this.userType = userType;
 		
 	}
-
+*/
 	
 	
 }

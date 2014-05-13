@@ -4,7 +4,7 @@ package com.casualtyApp.model
  * @author: Donato
  */
 class Event {
-	def  int idEvent
+	//def  int idEvent
 	def  String title
 	def  Date startTime
 	def  Date endTime
@@ -13,12 +13,12 @@ class Event {
 	def  ArrayList<String> tags
 	def  Double latitude
 	def  Double longitude
-	def  int idUserCreator
+	//def  int idUserCreator
 	
 	//eventos puede ser creado por maximo un y minimo un usuario o un grupo
-	static belongsTo = [classGroup: ClassGroup,user:User]
-	  
-	static constraints = {
+	static belongsTo = [/*classGroup: ClassGroup,*/user:User]
+	  //------------------------
+	/*static constraints = {
 		
 		title (nullable: false, blank: false, unique: true)
 		startTime(nullable: false, blank: false, unique: false)
@@ -28,8 +28,9 @@ class Event {
 		tags(nullable: false, blank: false, unique: false)
 		latitude(nullable: false, blank: false, unique: false)
 		longitude(nullable: false, blank: false, unique: false)
-		idUserCreator(nullable: false, blank: false, unique: false)
-	}
+		//idUserCreator(nullable: false, blank: false, unique: false)
+	}*/
+	//---------------------------
 
 	def void addTag(String tag){
 		tags.add(tag)
@@ -43,24 +44,15 @@ class Event {
 		return "Event title = " + title + "\nstartTime = " + startTime
 				+ "\nendTime = " + endTime + "\ndescription = " + description
 				+ "\ncategory = " + category + "\ntags = " + tags + "\nlatitude = "
-				+ latitude + "\nlongitude = " + longitude + "\nidUserCreator = "
-				+ idUserCreator + "]";
-	}
-
-
-
-	//Default Constructor
-	public Event()
-	{
-
+				+ latitude + "\nlongitude = " + longitude + "]";
 	}
 
 	//constructor with all fields
-	public Event(int idEvent, String title, Date startTime,
+	public Event(String title, Date startTime,
 	Date endTime, String description, int category, ArrayList<String> tags,
-	Double latitude, Double longitude, int idUserCreator) {
+	Double latitude,Double longitude) {
 		super();
-		this.idEvent = idEvent
+
 		this.title = title;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -69,7 +61,7 @@ class Event {
 		this.tags = tags;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.idUserCreator = idUserCreator;
+		
 	}
 	
 	
