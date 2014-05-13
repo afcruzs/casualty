@@ -4,7 +4,6 @@ package com.casualtyApp.model
  * @author: Donato
  */
 class Event {
-	//def  int idEvent
 	def  String title
 	def  Date startTime
 	def  Date endTime
@@ -13,23 +12,23 @@ class Event {
 	def  ArrayList<String> tags
 	def  Double latitude
 	def  Double longitude
-	//def  int idUserCreator
 	
-	//eventos puede ser creado por maximo un y minimo un usuario o un grupo
 	static belongsTo = [/*classGroup: ClassGroup,*/user:User]
 	  //------------------------
-	/*static constraints = {
-		
-		title (nullable: false, blank: false, unique: true)
+	/*ninguno de los atributos se permite que sean nulos, no sean espacios en blanco
+	 * y que ninguno sea unico excepto por el titulo que no se permite.
+	 * @author: Diego
+	 * */
+	static constraints = {
+		title (nullable: false, blank: false, unique: true, maxSize:300)
 		startTime(nullable: false, blank: false, unique: false)
 		endTime(nullable: false, blank: false, unique: false)
-		description(nullable: false, blank: false, unique: false)
+		description(nullable: false, blank: false, unique: false, maxSize:800)
 		category(nullable: false, blank: false, unique: false)
 		tags(nullable: false, blank: false, unique: false)
 		latitude(nullable: false, blank: false, unique: false)
 		longitude(nullable: false, blank: false, unique: false)
-		//idUserCreator(nullable: false, blank: false, unique: false)
-	}*/
+	}
 	//---------------------------
 
 	def void addTag(String tag){
