@@ -183,10 +183,11 @@
 	$().ready(function(){
 		/*$(".carousel").*//*para todos*/
 		$("#myslide").carousel({
-			interval: 7000, /*tiempo de cambio*/
+			interval: 10000, /*tiempo de cambio*/
 			pause: "hover", /*se detiene si el usuario pone el mouse dentro*/
 
 		});
+
 
 		$("#pagcero").on("click",function(e){
 			e.preventDefault();
