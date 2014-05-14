@@ -1,10 +1,13 @@
 package com.casualtyApp
 
+
+
 class HomeController {
 	/*
 	 * Test methods for authentication
 	 */
     def index() {
+	
        render( view: "index", model : [ username :  params.username ] )
     }
 
