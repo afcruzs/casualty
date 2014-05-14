@@ -152,15 +152,18 @@
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div><!-- /.span4 -->
         <div class="span4 text-center">
-          <h2 >Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <h2 >Grupos</h2>
+          <p>Causality te permite tambien crear grupos y añadir usuarios a ellos para así poder publicar eventos a nombre del grupo. Si eres parte de una equipo de futbol, o de
+          maratones de programación, o eres miembro de una compañia de teatro esto es para ti, entra y descubre más.</p>
+          
           <p><a class="btn" href="#">View details &raquo;</a></p>
           <r:img class="img-circle" file="groups.png" alt=""/>	
         </div><!-- /.span4 -->
         <div class="span4 text-center">
           <r:img class="img-circle" file="crono.png" alt=""/>	
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <h2>Aprovecha tu tiempo</h2>
+          <p>Si tienes cuatro horas de hueco en el horario y no sabes que hacer : facil, registrate en causality y busca entre los eventos alguno de tu interes, hay para todos los gustos
+           en casuality encontrarás eventos de deportes, ocio, estudio y otras "cosas". Qué esperas? entra ya!</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div><!-- /.span4 -->
      </div><!-- /.row -->
