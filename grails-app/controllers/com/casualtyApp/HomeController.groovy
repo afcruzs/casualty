@@ -1,6 +1,6 @@
 package com.casualtyApp
 
-
+import org.apache.shiro.SecurityUtils
 
 class HomeController {
 	/*
@@ -8,7 +8,7 @@ class HomeController {
 	 */
     def index() {
 	
-       render( view: "index", model : [ username :  params.username ] )
+       render( view: "index", model : [ username :  SecurityUtils.getSubject().getPrincipal() ] )
     }
 
     def admin() {

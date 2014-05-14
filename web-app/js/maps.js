@@ -78,7 +78,9 @@ function buildNewEventInMap(){
 	var d = $('#date').data('date');
 
 	
-
+	var name = "Anonimo";
+	if( username != null && username != 'null' )
+		name = username;
 	 
 	 var newEvent = {
 		 "title" : my_title,
@@ -88,7 +90,7 @@ function buildNewEventInMap(){
 		 "tags" : tags.split(","),
 		 "latitude" : lati,
 		 "longitude" : longi,
-		 "user" : username
+		 "user" : name
 		 
 	 };
 	 

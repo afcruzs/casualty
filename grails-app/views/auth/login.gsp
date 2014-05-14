@@ -52,10 +52,10 @@
             </ul>
             <g:form class="navbar-form pull-right">
             	<input type="hidden" name="targetUri" value="${targetUri}" /> <!-- esto nose que hace (esto lo genero el shiro creo) -->
-              	<input class="span2" type="text" name="username" placeholder="Username" value="${username}" />
-             	<input class="span2" type="password" name="password" placeholder="Password" value="${password}" />
+              	<input class="span2" type="text" name="username" placeholder="usuario" value="${username}" />
+             	<input class="span2" type="password" name="password" placeholder="contraseña" value="${password}" />
             	<!-- <label>Remember me?:</label> -->
-            	<button  type="submit" value="Sign in" onclick = "this.form.action = 'signIn'" class="btn">Sign in</button>
+            	<button  type="submit" value="Sign in" onclick = "this.form.action = 'signIn'" class="btn">Iniciar Sesión</button>
             	<g:checkBox class="span1" name="rememberMe" value="${rememberMe}" />
             </g:form>
           </div><!--/.nav-collapse -->

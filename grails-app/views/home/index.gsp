@@ -6,8 +6,6 @@
  	<g:javascript src="jquery-1.11.1.min.js"/> 
  	<g:javascript src="bootstrap.min.js"/>
  	<g:javascript src="bootstrap-datepicker.js"/>
- 	
- 		
 
 <html>
 	<head>
@@ -67,19 +65,17 @@
            	  </g:form>
               </li>
 			  <li class="divider-vertical"></li>
-              <li class="active"><a href="loginaux">New Event</a></li>
-              <li><a href="#about">New Group</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="loginaux">Eventos</a></li>
+              <li><a href="#about">Grupos</a></li>
+              <li><a href="#contact">Contacto</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">UserActive <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href = "${createLink(controller:'auth', action:'signOut')}" >Log Out</a></li>
-                  <li><a href="#">Configurations</a></li>
-                  <li><a href="#">Other Something</a></li>
+                  <li><a href = "${createLink(controller:'auth', action:'signOut')}" >Cerrar sesión</a></li>
                   <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li class="nav-header">Perfil</li>
+                  <li><a href="#">Mi Perfil</a></li>
+                  <li><a href="#">Configuración</a></li>                  
                 </ul>
               </li>
             </ul>
@@ -89,21 +85,7 @@
 </div>
 
 <hr>
-		<!--inicio botones negro -->
-			<div class="row-fluid">
-				<div class="pagination pagination-large pagination-centered">
-					<div class="span4">
-							<a href="#" class="btn btn-large btn-inverse"><i class="icon-map-marker"></i>Add To Marker</a>
-					</div>
-					<div class="span4">
-						<a href="#" class="btn btn-large btn-inverse"><i class="icon-search"></i>Search Event</a>
-					</div>
-					<div class="span4">
-						<a href="#myModal" data-toggle="modal" class="btn btn-large btn-inverse">Modal</a>
-	
-					</div>
-				</div>	
-			</div>	
+		
 			<!-- create the modal-->
 				<div id="myModal" class="modal hide fade">
 						<div class="modal-header">
@@ -195,49 +177,8 @@
 	</div>
 	
 	<!-- fin actually loads the map -->
-	<hr>
-	<!-- create accordian -->
-	<div class="row-fluid">
-			<div class="span12">
-				<div class="accordion" id="main">
-					<div class="accordion-group">
-						<div class="accordion-heading">
-							<a href="#com1" class="accordion-toggle" data-toggle="collapse" data-parent="#main">Instructions 1</a>
-						</div>
-						<div id="com1" class="accordion-body collapse">
-							<div class="accordion-inner">
-								<p class="text-center text-inverse">Texto de prueba 1, manejo google maps para colocar los markets, presione una coordenada en el mapa para generar evento</p>
-							</div>
-						</div>
-					</div>
-					<div class="accordion-group">
-						<div class="accordion-heading">
-							<a href="#com2" class="accordion-toggle" data-toggle="collapse" data-parent="#main">Instructions 2</a>
-						</div>
-						<div id="com2" class="accordion-body collapse">
-							<div class="accordion-inner">
-								<p class="text-center text-inverse">Texto de prueba 2, manejo google maps para colocar los markets, presione una coordenada en el mapa para generar evento</p>
-							</div>
-
-						</div>
-					</div>
-					<div class="accordion-group">
-						<div class="accordion-heading">
-							<a href="#com3" class="accordion-toggle" data-toggle="collapse" data-parent="#main">Instructions 3</a>
-						</div>
-						<div id="com3" class="accordion-body collapse in">
-							<div class="accordion-inner">
-								<p class="text-center text-inverse">Texto de prueba 3, manejo google maps para colocar los markets, presione una coordenada en el mapa para generar evento</p>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-
-			</div>
-		</div>
+	
+	
 	
 	<script>
 		$().ready(function(){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta http-equiv="refresh" content="0; url=../CausalityAppProject/auth/login/" />
+	<meta http-equiv="refresh" content="0; url=../CausalityAppProject/auth/" />
 	
 	</head>
 	<body>
