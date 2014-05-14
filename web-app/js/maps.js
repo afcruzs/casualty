@@ -12,9 +12,8 @@ var map;
 
 var lati;
 var longi;
+var username;
 
-
-var maxInfoWindowWidth = 350;
 
 /*
  * Function that is called by the GSP to init the map.
@@ -23,8 +22,10 @@ var maxInfoWindowWidth = 350;
  * if fails a alert is show and default loader is called.
  * 
  */
-function initialize(events) {
+function initialize(events,u_name) {
 	default_map_loader();	  
+	username = u_name;
+	
 	if( events != null )
 		showEvents(events);
 }
@@ -87,7 +88,7 @@ function buildNewEventInMap(){
 		 "tags" : tags.split(","),
 		 "latitude" : lati,
 		 "longitude" : longi,
-		 "user" : "user"
+		 "user" : username
 		 
 	 };
 	 
