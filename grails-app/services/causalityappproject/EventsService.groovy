@@ -34,7 +34,7 @@ class EventsService {
 		l2.add("JEJHJEEJ")
 		f.tags = l2
 		
-		return [ eventToJSON(e), eventToJSON(f) ]
+		return [ ]
     }
 	
 	

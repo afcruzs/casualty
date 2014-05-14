@@ -10,6 +10,9 @@
  */
 var map;
 
+var lati;
+var longi;
+
 
 var maxInfoWindowWidth = 350;
 
@@ -65,6 +68,11 @@ function showEvents(events){
  * @author: Felipe
  */
 function buildNewEventInMap(){
+	
+	var location = new google.maps.LatLng(
+			lati,
+			longi );
+	
 	var xd = $('#nombre_evento').val();
 	var desc = $('#descripcion').val();
 	var tags = $('#tags').val();
@@ -76,7 +84,14 @@ function buildNewEventInMap(){
 	 * el objeto tipo json y mostrarlo como marker...
 	 */
 	
-	alert(xd + desc + tags + d2 + d)
+	 var marker = new google.maps.Marker({
+	        position: location,
+	        map: map,
+	        title: xd
+	    });
+	
+	 $('#myModal').modal('close');
+	//alert(xd + desc + tags + d2 + d)
 }
 
 /*
@@ -157,7 +172,10 @@ function default_map_loader(){
         mapOptions);
     
    
-    google.maps.event.addListener(map, 'dblclick', function() {
+    google.maps.event.addListener(map, 'dblclick', function(event) {
+        
+    	lati = event.latLng.lat();
+        longi = event.latLng.lng();
         
     	$('#myModal').modal('show');        
      });
