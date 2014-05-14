@@ -68,30 +68,31 @@ function showEvents(events){
  * @author: Felipe
  */
 function buildNewEventInMap(){
+
 	
-	var location = new google.maps.LatLng(
-			lati,
-			longi );
-	
-	var xd = $('#nombre_evento').val();
+	var my_title = $('#nombre_evento').val();
 	var desc = $('#descripcion').val();
 	var tags = $('#tags').val();
 	var d2 = $('#date2').data('date');
 	var d = $('#date').data('date');
+
 	
-	/*
-	 * En lugar de mostrarlos como alert debe construir
-	 * el objeto tipo json y mostrarlo como marker...
-	 */
-	
-	 var marker = new google.maps.Marker({
-	        position: location,
-	        map: map,
-	        title: xd
-	    });
-	
-	 $('#myModal').modal('close');
-	//alert(xd + desc + tags + d2 + d)
+
+	 
+	 var newEvent = {
+		 "title" : my_title,
+		 "startTime" : d2,
+		 "endTime" : d,
+		 "description" : desc,
+		 "tags" : tags.split(","),
+		 "latitude" : lati,
+		 "longitude" : longi,
+		 "user" : "user"
+		 
+	 };
+	 
+	 showMarker(newEvent);
+	 $('#myModal').modal('hide');
 }
 
 /*
