@@ -38,7 +38,7 @@
           </ul>
           <div class="nav-collapse collapse pull-right">
             <ul class="nav">
-              <li class="active"><a href="loginaux">Home</a></li>
+              <li class="active"><a href="loginaux">Inicio</a></li>
               <li><a href="#about">Acerca de</a></li>
               <li><a href="#contact">Contacto</a></li>
               <li class="dropdown">
@@ -61,7 +61,7 @@
 		<div class="span8">
 		<!-- inicio well -->
 		<div class="well">
-			  <h1 class="text-center">Register</h1>
+			  <h1 class="text-center">Registro</h1>
 				  <g:hasErrors bean="${user}">
 				    <div class="alert-alert-error">
 				        <g:renderErrors bean="${user}" as="list"/>
@@ -75,20 +75,24 @@
 								    <table>
 								      <tbody>
 								        <tr>
-								          <td>Username:</td>
+								          <td>Nombre:</td>
 								          <td><input type="text" name="username" value="${username}" /></td>
 								        </tr>
 								        <tr>
-								          <td>Password:</td>
+								          <td>Contraseña:</td>
 								          <td><input type="password" name="password" value="" /></td>
 								        </tr>
 								        <tr>
-								          <td>Confirm Password:</td>
+								          <td>Confirmar Contraseña:</td>
 								          <td><input type="password" name="password2" value="" /></td>
+								        </tr>
+										<tr>
+								          <td>Correo:</td>
+								          <td><input type="email" name="email" value="" /></td>
 								        </tr>
 								        <tr>
 								          <td />
-								          <td><input type="submit" value="Sign up" onclick = "this.form.action = 'register'"/>
+								          <td><input type="submit" value="Registrarse" onclick = "this.form.action = 'register'"/>
 								          </td>
 								        </tr>
 								      </tbody>
