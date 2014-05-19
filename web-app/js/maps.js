@@ -69,6 +69,9 @@ function showEvents(events){
  * @author: Felipe
  */
 function buildNewEventInMap(){
+	
+	
+	
 
 	
 	var my_title = $('#nombre_evento').val();
@@ -87,12 +90,28 @@ function buildNewEventInMap(){
 		 "startTime" : d2,
 		 "endTime" : d,
 		 "description" : desc,
-		 "tags" : tags.split(","),
+		 "tags" : tags,
 		 "latitude" : lati,
 		 "longitude" : longi,
 		 "user" : name
 		 
 	 };
+	 
+	 
+	 
+	 /*
+	  * Por medio de AJAX se logra llamar el metodo
+	  * saveNewEvent de home y se le pasa newEvent
+	  * como parametro para guardar el evento en la DB.
+	  */
+	 jQuery.ajax({
+	        type:'POST', 
+	        data : newEvent,
+	        url:"saveNewEvent",
+	        success:function(data,textStatus){console.log(data)},
+	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	  });
+	  
 	 
 	 showMarker(newEvent);
 	 $('#myModal').modal('hide');
@@ -107,7 +126,7 @@ function buildNewEventInMap(){
  * startTime : "10/05/2014 1:11 pm"
  * endTime : "10/05/2014 4:11 pm"
  * description : "Description text"
- * tags : Array of tags (Strings)
+ * tags : String of tags 
  * latitude: double latitude
  * longitude double longitude
  * user : userName string
@@ -126,9 +145,10 @@ function showMarker(jsonMarker){
 				  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
 				  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: ';
 	
-	for( var i=0; i<jsonMarker.tags.length; i++){
-		contentString += '<strong> '+jsonMarker.tags[i]+'</strong>';
-		if( i != jsonMarker.tags.length - 1 )
+	var arrTags = jsonMarker.tags.split(",")
+	for( var i=0; i<arrTags.length; i++){
+		contentString += '<strong> '+arrTags[i]+'</strong>';
+		if( i != arrTags.length - 1 )
 			contentString += ",";
 	}
 	

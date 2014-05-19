@@ -54,7 +54,7 @@ class AuthController {
 			
 			
 			
-            forward(controller: "home", action: "index", params : [events:eventsService.getFirstEvents()] )
+            redirect(controller: "home", action: "index" )
         }
         catch (AuthenticationException ex){
             // Authentication failed, so display the appropriate message

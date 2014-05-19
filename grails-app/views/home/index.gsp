@@ -42,7 +42,7 @@
 	
 
 <!-- when the load is done initialize the map. -->
-<body onload="initialize(${params.events},'${username}')" >
+<body onload="initialize(${events},'${username}')" >
 
 <!-- inicio menu -->
 <div class="navbar navbar-fixed-top">

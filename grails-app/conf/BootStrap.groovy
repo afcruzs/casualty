@@ -21,20 +21,21 @@ class BootStrap {
 	   
 		def userRole = new SecRole(name:"User")
 		userRole.addToPermissions("Home:index")
+		userRole.addToPermissions("Home:saveNewEvent")
 		userRole.save()
 	   
 		def admin = new SecUser(username: "Admin", passwordHash: new Sha512Hash("password").toHex())
 		admin.addToRoles(adminRole)
 		admin.save()
 	   
-		def user = new SecUser(username: "User", passwordHash: new Sha512Hash("password").toHex())
+		/*def user = new SecUser(username: "User", passwordHash: new Sha512Hash("password").toHex())
 		user.addToRoles(userRole)
-		user.save()
+		user.save()*/
 		
 		//----------------------------------------------------------------
 		//def ArrayList<String> p = new ArrayList<>()
 		//p.add("jugar")
-		def a = new User(emailUser:'davanegaspr@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:user, eventCreator : new EventCreator())
+		def a = new User(emailUser:'davanegaspr@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator())
 		a.save(flush:true,failOnError:true)
 		
 		//a.addToEvent(new Event(title:'holamundo',startTime:new Date(),endTime:new Date(),description:'divertido',category:2,tags = p,latitude:4.6442081,longitude:-74.100177))

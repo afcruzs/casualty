@@ -43,12 +43,21 @@ class SignupController {
 					def userRole =  SecRole.findByName('User')
 					user.addToRoles(userRole)
 					user.save()
-
+					
+					
+					//save user info in User instance
+					
+					def userInfo = new User(emailUser:params.email,createdAt: new Date(), 
+						isUnalConfirmed:isUnalConfirmed(params.email),shiroUser:user, 
+						eventCreator : new EventCreator())
+					
+					userInfo.save()
+					
 					// Login user
 					def authToken = new UsernamePasswordToken(user.username, params.password)
 					SecurityUtils.subject.login(authToken)
 					
-					redirect(controller: 'auth', action: 'login' )
+					redirect(controller: 'home', action: 'index' )
 				}
 				else {
 					redirect(controller: 'auth', action: 'index')
@@ -60,6 +69,19 @@ class SignupController {
 	
 	def loginaux(){
 		redirect(controller: 'auth', action: "index", params: params)
+	}
+	
+	/*
+	 * Permite establecer si elcorreo suministrado
+	 * es unal.edu.co.
+	 * 
+	 * @author: Felipe
+	 */
+	def isUnalConfirmed(String email){
+		String [] t = email.split("@")
+		if( t.length < 2 ) return false
+		return t[1].equals("unal.edu.co")
+		
 	}
 	
 	

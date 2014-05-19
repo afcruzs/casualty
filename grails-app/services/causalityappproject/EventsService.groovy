@@ -9,12 +9,16 @@ import com.casualtyApp.model.User
 class EventsService {
 	/*
 	 * TODO: Implement HOW to query the events 
-	 * on the first show of the google map.
 	 * 
+	 * Por el momento se estan trayendo TODOS los objetos
+	 * de la base de datos.
 	 */
     def getFirstEvents() {
-		
-		return [ eventToJSON( Event.get(1) ), eventToJSON( Event.get(2) ), eventToJSON( Event.get(3) ), eventToJSON( Event.get(4) ) ]
+		def jsonEvents = []
+		for( Event e : Event.all ){
+			jsonEvents.add( eventToJSON(e) )
+		}
+		return jsonEvents
     }
 	
 	
@@ -33,7 +37,7 @@ class EventsService {
 			latitude e.getLatitude()
 			longitude e.getLongitude()
 			user e.getEventCreator().getUser().getShiroUser().getUsername()
-			tags Arrays.asList(e.tags.split(","))
+			tags e.tags
 		}
 		
 		return builder.toString()
