@@ -10,10 +10,28 @@
  */
 var map;
 
+/*
+ * Son variables globales útiles
+ * 
+ * lati, longi -> definen las coordenadas al hacer el evento
+ * para insertar un nuevo evento.
+ */
 var lati;
 var longi;
+/*
+ * username -> Nombre del usuario actualmente logueado
+ */
 var username;
-
+/*
+ * lastupdate -> es la cantidad de tiempo en millisegundos desde que
+ * se actualizo por última vez, asegura que no haya overhead actualizando
+ * el mapa por medio de consultas.
+ */
+var lastupdate;
+/*
+ * lastEventId -> es el id del ultimo evento que se mostro en el mapa.
+ */
+var lastEventId;
 
 /*
  * Function that is called by the GSP to init the map.
@@ -28,6 +46,9 @@ function initialize(events,u_name) {
 	
 	if( events != null )
 		showEvents(events);
+	
+	lastupdate = (new Date()).getTime();
+	console.log(lastupdate);
 }
 
 
@@ -53,7 +74,9 @@ function loadMarkerTest(){
 function showEvents(events){
 	for( var i=0; i<events.length; i++){
 		console.log( events[i] );
-		showMarker( events[i] );		
+		showMarker( events[i] );	
+		lastEventId = events[i].id;
+		console.log( "TheId",lastEventId );
 	}
 } 
 
@@ -182,6 +205,41 @@ function showMarker(jsonMarker){
 }
 
 /*
+ * Actualiza el mapa si no ha pasado mucho tiempo desde que
+ * se actualizo la última vez.
+ * 
+ * por defecto (quemado en código) es 3 segundos (3 ms)
+ * 
+ * Esta función se llama cuando hay un bounds_changed event
+ * en el mapa.
+ * 
+ * para asegurar que no se carguen eventos previos se 
+ * pasa el id del último evento que esta en el mapa,
+ * asi getLastEvents solo trae los eventos con id mayor.
+ * 
+ * @author: Felipe
+ */
+function updateMapIfNeeded(){
+	var currentTime = (new Date());
+	if( currentTime.getTime() - lastupdate > 3000 ){
+		console.log("update",currentTime - lastupdate);
+		lastupdate = currentTime;
+		jQuery.ajax({
+	        type:'POST', 
+	        data : { "lastEventId" : lastEventId },
+	        url:"getLastEvents",
+	        success:function(data,textStatus){
+	        	for( var i=0; i<data.length; i++){
+	        		showMarker( JSON.parse(data[i]) ); 
+	        	}
+	        },
+	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	  });
+	}
+		
+}
+
+/*
  * Inits the map
  */
 function default_map_loader(){
@@ -195,12 +253,24 @@ function default_map_loader(){
     map = new google.maps.Map(document.getElementById("map_canvas"),
         mapOptions);
     
-   
+   /*
+    * Se abre el modal con doble click
+    */
     google.maps.event.addListener(map, 'dblclick', function(event) {
         
     	lati = event.latLng.lat();
         longi = event.latLng.lng();
         
     	$('#myModal').modal('show');        
+     });
+    
+
+   /*
+    * Si se cambia la posicion del mapa se actualiza el mapa.
+    */ 
+    google.maps.event.addListener(map, 'bounds_changed', function(event) {
+    	
+    	updateMapIfNeeded();
+    	
      });
 }

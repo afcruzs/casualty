@@ -23,7 +23,9 @@ class EventsService {
 	
 	
 	/*
-	 * Convert a event to a JSON object.
+	 * Convierte un evento en un objeto JSON
+	 * con propiedades útiles como el nombre de usuario
+	 * para ser mostrado en el mapa.
 	 * 
 	 * @author: Felipe
 	 */
@@ -38,6 +40,7 @@ class EventsService {
 			longitude e.getLongitude()
 			user e.getEventCreator().getUser().getShiroUser().getUsername()
 			tags e.tags
+			id e.getId()
 		}
 		
 		return builder.toString()

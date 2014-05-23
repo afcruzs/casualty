@@ -5,6 +5,7 @@ import org.apache.shiro.SecurityUtils
 import com.casualtyApp.model.Event
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
+import grails.converters.JSON
 
 class HomeController {
 	/*
@@ -59,6 +60,25 @@ class HomeController {
 		return date.getTime()
 
 		
+	}
+	
+	
+	/*
+	 * Obtiene los últimos eventos en la DB que sean mayores
+	 * al id que se pasa por parametro, estos eventos son convertidos
+	 * al json estándar que se usa en el servide y se devuelven via
+	 * Ajax con el render, para que posteriormente en javascript puedan
+	 * ser procesados y leídos por el mapa.
+	 * 
+	 * @author: felipe
+	 */
+	def getLastEvents(){
+		def lastEvents = Event.findAllByIdGreaterThan(params.lastEventId)
+		def jsonEvents = []
+		for( Event e : lastEvents)
+			jsonEvents.add( eventsService.eventToJSON(e) )
+		
+		render jsonEvents as JSON
 	}
 	
 }
