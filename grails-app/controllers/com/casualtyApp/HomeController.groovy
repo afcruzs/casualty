@@ -81,4 +81,11 @@ class HomeController {
 		render jsonEvents as JSON
 	}
 	
+	def profile(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		render( view: "profile",model : [user : currentUser , username :
+		   SecurityUtils.getSubject().getPrincipal()] )
+		
+	}
+	
 }

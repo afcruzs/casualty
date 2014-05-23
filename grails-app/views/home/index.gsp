@@ -53,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Causalty</a>
+          <a class="brand" href="#">Causality</a>
           <ul class="nav">
           <li class="divider-vertical"></li>
           </ul>
@@ -65,7 +65,7 @@
            	  </g:form>
               </li>
 			  <li class="divider-vertical"></li>
-              <li class="active"><a href="loginaux">Eventos</a></li>
+              <li class="active"><a href="#">Eventos</a></li>
               <li><a href="#about">Grupos</a></li>
               <li><a href="#contact">Contacto</a></li>
               <li class="dropdown">
@@ -74,7 +74,7 @@
                   <li><a href = "${createLink(controller:'auth', action:'signOut')}" >Cerrar sesión</a></li>
                   <li class="divider"></li>
                   <li class="nav-header">Perfil</li>
-                  <li><a href="#">Mi Perfil</a></li>
+                  <li><a href="profile">Mi Perfil</a></li>
                   <li><a href="#">Configuración</a></li>                  
                 </ul>
               </li>

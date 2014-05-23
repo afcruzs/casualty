@@ -11,7 +11,7 @@ class SecSecurityFilters {
 	 * @author: Felipe
 	 */
 	def publicActions = [
-		signup: ['index','register'],
+		signup: ['*'],
 		auth:['*']
 	]
 	

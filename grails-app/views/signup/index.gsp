@@ -75,8 +75,24 @@
 								    <table>
 								      <tbody>
 								        <tr>
-								          <td>Nombre:</td>
+								          <td>Nombre de usuario:</td>
 								          <td><input type="text" name="username" value="${username}" /></td>
+								        </tr>
+								        <tr>
+								          <td>Nombre:</td>
+								          <td><input type="text" name="name" value="${name}" /></td>
+								        </tr>
+								        <tr>
+								          <td>Apellido:</td>
+								          <td><input type="text" name="lastname" value="${lastname}" /></td>
+								        </tr>
+								        <tr>
+								          <td>Biografía:</td>
+								          <td><input type="text" name="biography" value="${biography}" /></td>
+								        </tr>
+								        <tr>
+								          <td>Ubicación:</td>
+								          <td><input type="text" name="ubication" value="${ubication}" /></td>
 								        </tr>
 								        <tr>
 								          <td>Contraseña:</td>

@@ -13,6 +13,10 @@ class User {
 	def SecUser shiroUser
 	
 	def EventCreator eventCreator
+	def String name
+	def String lastName
+	def String biography
+	def String ubication
 	
 	/*Un usuario puede crear cero o muchos eventos,
 	 * un usuario puede pertenecer a cero o a muchos grupos.

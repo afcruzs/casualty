@@ -49,7 +49,9 @@ class SignupController {
 					
 					def userInfo = new User(emailUser:params.email,createdAt: new Date(), 
 						isUnalConfirmed:isUnalConfirmed(params.email),shiroUser:user, 
-						eventCreator : new EventCreator())
+						eventCreator : new EventCreator(), name : params.name, 
+						lastName : params.lastname, biography: params.biography, 
+						ubication : params.ubication)
 					
 					userInfo.save()
 					

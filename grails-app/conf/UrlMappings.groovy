@@ -9,5 +9,9 @@ class UrlMappings {
 
 		"/"(view:"/index")
 		"500"(view:'/error')
+		"/" {
+			controller = "auth"
+			action = "index"
+		 }
 	}
 }
