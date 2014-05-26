@@ -14,27 +14,27 @@ class HomeController {
 	
 	def eventsService
 	
-    def index() {
+	def index() {
 	
-       render( view: "index", model : [ events: eventsService.getFirstEvents(), username :  
+	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
 		   SecurityUtils.getSubject().getPrincipal() ] )
-    }
+	}
 
-    def admin() {
-       //render "This page requires the logged in user to be an Administrator"
-    }
+	def admin() {
+	   //render "This page requires the logged in user to be an Administrator"
+	}
 	
 	/*
 	 * Se salva el nuevo evento en la base de datos relacionandolo con
 	 * el usuario actualmente logueado.
-	 * 
+	 *
 	 * @author: Felipe
 	 */
 	def saveNewEvent(){
 		println SecurityUtils.getSubject().getPrincipal()
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		currentUser.eventCreator.addToEvents( new Event(params.title,parseDate(params.startTime),
-												parseDate(params.endTime),params.description,1, params.tags, 
+												parseDate(params.endTime),params.description,1, params.tags,
 												Double.parseDouble(params.latitude),
 												Double.parseDouble(params.longitude)) )
 		
@@ -69,7 +69,7 @@ class HomeController {
 	 * al json estándar que se usa en el servide y se devuelven via
 	 * Ajax con el render, para que posteriormente en javascript puedan
 	 * ser procesados y leídos por el mapa.
-	 * 
+	 *
 	 * @author: felipe
 	 */
 	def getLastEvents(){
@@ -81,10 +81,50 @@ class HomeController {
 		render jsonEvents as JSON
 	}
 	
+	def changePassword(){
+		println ("asdsaeloo")
+		redirect(controller: 'home', action: 'index' )
+		
+		
+	}
+	
 	def profile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		
+		
+		def names= new Object[5]
+		def desc= new Object[5]
+		for(int i=0;i<5;i++){
+			names[i]="Sin Evento"
+			desc[i]="sin descripcion"
+		}
+		int i=0
+		for(event in currentUser.eventCreator.events){
+			 desc[i]=event.description
+			 names[i++]=event.title
+			 
+		 }
+		
 		render( view: "profile",model : [user : currentUser , username :
-		   SecurityUtils.getSubject().getPrincipal()] )
+		   SecurityUtils.getSubject().getPrincipal() , names : names , desc : desc] )
+		
+	}
+	
+	def updateProfile(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		
+		currentUser.biography=params.biography
+		currentUser.name=params.name
+		currentUser.lastName=params.lastName
+		currentUser.ubication=params.ubication
+		currentUser.emailUser=params.email
+		
+		if(currentUser.save()){
+			redirect(controller: 'home', action: 'index' )
+		}else{
+			redirect(controller: 'home', action: 'index' )
+		}
+		
 		
 	}
 	
