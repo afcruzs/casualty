@@ -101,27 +101,17 @@
 									<label for="">Nombre del evento</label>
 									<input type="text" id = "nombre_evento"><br>
 									<label for="">Fecha de inicio</label>
-
-									<div class="input-append date" id="date2" data-date="10-05-2014" data-date-format="dd-mm-yyyy">
-							  			<input class="span6" size="50" type="text" value="10-05-2014">
-							 			<span class="add-on">
-							 				<i class="icon-th">
-							 					 	
-							 				</i>
-							 			</span>	
-									</div>	
+									<input type="date"><br>
+										
+									<label for="">Hora Inicial</label>
+									<input type="time"><br>
 									<br>
 									<label for="">Fecha de finalización</label>
-									<div class="input-append date" id="date" data-date="10-05-2014" data-date-format="dd-mm-yyyy">
-							  			<input class="span6" size="50" type="text" value="10-05-2014">
-							 				<span class="add-on">
-							 					<i class="icon-th" >
-							 					 	
-							 					 </i>
-							 				</span>
-									</div>
+								    <input type="date"><br>
 									<br>
-
+									<label for="">Hora Final</label>
+									<input type="time"><br>
+									
 									<label for="">Descripción</label>
 									<input type="text" id="descripcion"><br>
 									<label for="">Etiquetas</label>
