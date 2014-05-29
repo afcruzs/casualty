@@ -107,7 +107,7 @@ class HomeController {
 		def descEvent="";
 		
 		for(event in currentUser.eventCreator.events){
-			 descEvent=descEvent + event.title + "@"
+			 descEvent=descEvent + event.description + "@"
 			 nombresEvent=nombresEvent + event.title + "@"
 			 
 		 }
