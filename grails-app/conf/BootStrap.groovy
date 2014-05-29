@@ -22,16 +22,12 @@ class BootStrap {
 	   
 		def userRole = new SecRole(name:"User")
 		userRole.addToPermissions("Home:*")
-		/*userRole.addToPermissions("Home:index")
-		userRole.addToPermissions("Home:saveNewEvent")
-		userRole.addToPermissions("Signup:register")
-		userRole.addToPermissions("Home:profile")*/
 		userRole.save()
-	   
+		
 		def admin = new SecUser(username: "Admin", passwordHash: new Sha512Hash("password").toHex())
 		admin.addToRoles(adminRole)
 		admin.save()
-	   
+		
 		def a = new User(emailUser:'davanegaspr@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
 			, name : "Diego", lastName : "Vanegas", biography: "La biografia", ubication : "San Andres")
 		a.save(flush:true,failOnError:true)
@@ -45,21 +41,18 @@ class BootStrap {
 		/*creacion de grupos
 		 * @author: Diego
 		 * */
-		def z = new User(emailUser:'ptorresg@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
-			, name : "julian", lastName : "perez", biography: "estudiante...", ubication : "Bogota")
-		z.save(flush:true,failOnError:true)
 		
 		def ii = new ClassGroup(nameGroup:'Pecoras',description:'Viernes de juegos de azar',createAt: new Date(),userType:2,eventCreator : new EventCreator())
 		ii.save(flush:true,failOnError:true)
 		
-		ii.addToUser(z)
-		
-		//println e.getEventCreator().getUser()
-		
+		ii.addToUser(a)
 		
 		def aa = new Event('Competencia de natacion',new Date(),new Date(),'vive la emocion de la competencia y gana muchos premios',2,"Nadar,saltar",4.6362093,-74.0830734)
 		ii.eventCreator.addToEvents(aa)
-					
+		
+		
+		
+		
     }
     def destroy = {
     }
