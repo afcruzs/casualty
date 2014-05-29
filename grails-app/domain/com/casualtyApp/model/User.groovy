@@ -24,7 +24,10 @@ class User {
 	 * No se permite que la fecha de creacion sea anterior a la fecha actual
 	 *  @author: Diego
 	 * */
-	static hasMany = [classGroup:ClassGroup]
+	
+	static hasMany = [classGroup:ClassGroup, eventsToAttend: Event]
+	static belongsTo = Event
+	
 	
 	static constraints = {
 		 emailUser(nullable: false, blank: false, unique: false,email:true)

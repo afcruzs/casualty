@@ -1,0 +1,6 @@
+05-29 14:50:46 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT_ASSISTANTS" not found; SQL statement:
+alter table event_assistants drop constraint FK11CF081A6F7454B [42102-164]
+05-29 14:50:46 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT_ASSISTANTS" not found; SQL statement:
+alter table event_assistants drop constraint FK11CF081AF6F2C9E9 [42102-164]

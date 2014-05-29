@@ -33,10 +33,18 @@ class HomeController {
 	def saveNewEvent(){
 		try{
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-			currentUser.eventCreator.addToEvents( new Event(params.title,parseDate(params.startTime, params.startHour),
+			
+			
+			
+			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
 													parseDate(params.endTime, params.endHour),params.description,1, params.tags,
 													Double.parseDouble(params.latitude),
-													Double.parseDouble(params.longitude)) )
+													Double.parseDouble(params.longitude)) 
+			
+			newEvent.addToAssistants(currentUser)
+			currentUser.addToEventsToAttend(newEvent)
+			currentUser.eventCreator.addToEvents( newEvent )
+			
 		}catch(Exception e){
 			render "Error"
 		}
@@ -76,11 +84,11 @@ class HomeController {
 	
 	
 	/*
-	 * Obtiene los últimos eventos en la DB que sean mayores
+	 * Obtiene los ï¿½ltimos eventos en la DB que sean mayores
 	 * al id que se pasa por parametro, estos eventos son convertidos
-	 * al json estándar que se usa en el servide y se devuelven via
+	 * al json estï¿½ndar que se usa en el servide y se devuelven via
 	 * Ajax con el render, para que posteriormente en javascript puedan
-	 * ser procesados y leídos por el mapa.
+	 * ser procesados y leï¿½dos por el mapa.
 	 *
 	 * @author: felipe
 	 */
