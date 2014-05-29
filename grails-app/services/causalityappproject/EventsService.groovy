@@ -32,7 +32,7 @@ class EventsService {
 	def eventToJSON(Event e){
 				//println e.getEventCreator().getUser()
 				//println e.getEventCreator().getClassGroup()
-		if(e.getEventCreator().getClassGroup() == null){
+		if(e.getEventCreator().getUser() != null ){
 				
 		   def builder = new JsonBuilder()
 				builder {
@@ -45,31 +45,30 @@ class EventsService {
 				user e.getEventCreator().getUser().getShiroUser().getUsername()
 				tags e.tags
 				id e.getId()
-						}
+			}
 		
-		return builder.toString()
+			return builder.toString()
 		}else{
 			/*en caso de que el evento fuese creado por un grupo en vez de un Usuario
 			 * @author:Diego
-			 * */
-	   def builder = new JsonBuilder()
-			builder {
-			title e.getTitle()
-			startTime e.getStartTime().toString()
-			endTime e.getEndTime().toString()
-			description e.getDescription()
-			latitude e.getLatitude()
-			longitude e.getLongitude()
-			
-			user e.getEventCreator().getClassGroup().getNameGroup()
-			//user e.getEventCreator().getUser().getShiroUser().getUsername()
-			
-			tags e.tags
-			id e.getId()
-					}
-	
-	return builder.toString()
-	}
+			 */
+		   def builder = new JsonBuilder()
+				builder {
+					title e.getTitle()
+					startTime e.getStartTime().toString()
+					endTime e.getEndTime().toString()
+					description e.getDescription()
+					latitude e.getLatitude()
+					longitude e.getLongitude()
+					
+					user e.getEventCreator().getClassGroup().getNameGroup()
+					
+					tags e.tags
+					id e.getId()
+				}
+		
+				return builder.toString()
+		}
 		
 		
 	}

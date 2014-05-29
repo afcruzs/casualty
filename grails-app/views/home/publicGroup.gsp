@@ -40,7 +40,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="index">Causality</a>
+				<a class="brand" href="#">Causalty</a>
 				<ul class="nav">
 					<li class="divider-vertical"></li>
 				</ul>
@@ -75,44 +75,12 @@
 
 	<!-- inicio container -->
 <body
-	onload="initialize('${user}','${username}','${ names}','${desc }','${tam}')">
+	onload="initialize('${user}','${username}','${ names}','${desc }')">
 
 	<div class="container">
 
 
-		<div id="Modal" class="modal hide">
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal">salir</button>
-
-				<h4 class="text-center">Cambio de contraseña</h4>
-				<div class="row-fluid">
-
-
-					<div class="span12">
-
-						<label for="">contraseña anterior</label>
-						<input type="text" name="vieja" >
-						<label for="">nueva contraseña</label>
-						<input type="text" name="nueva" >
-
-
-					</div>
-
-
-				</div>
-
-
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">
-					Volver</button>
-				<input type="submit" data-dismiss="modal" class="btn btn-primary"
-									value="Guardar" onclick="action = 'changePassword'" />				
-
-			</div>
-		</div>
+		
 
 
 
@@ -123,7 +91,7 @@
 		<div class="row-fluid">
 			<div class="span8">
 				<div class="page-header">
-					<h4>Información de Perfil</h4>
+					<h1>Información de Grupo</h1>
 				</div>
 			</div>
 		</div>
@@ -132,102 +100,26 @@
 			<div class="span2">
 				<ul class="thumbnails">
 					<li class="span12"><a href="#" class="thumbnail"> 
-					<r:img
-								  file="fumaton.png" alt="" />
+					<r:img file="fumaton.png" alt="" />
 
 					</a></li>
 				</ul>
-				<a href="#" class="btn btn-success">Cargar Imagen</a>
+				
 			</div>
 			<div class="span6">
 				<div class="well">
 					<g:form id = "form1">
+					
+						<h1>${groupName}</h1>
 
-						<label for="">Nombre</label>
-						<input type="text" name="name" value='${user.name}'>
-						<label for="">Apellidos</label>
-						<input type="text" name="lastName" value='${user.lastName}'>
-						<label for="">Email</label>
-						<input type="text" name="email" value='${user.emailUser}'>
-						<hr>
-
-
-						<div class="accordion" id="main">
-							<div class="accordion-group">
-								<div class="accordion-heading">
-									<a href="#com1" class="accordion-toggle" data-toggle="collapse"
-										data-parent="#main">Mis Eventos</a>
-								</div>
-
-								<div id="com1" class="accordion-body collapse">
-									<div class="accordion-inner">
-
-										<div class="accordion" id="main2">
-											<div class="accordion-group">
-											
-											<script>
-												var veces=0;
-												var k = "${tam}";
-												var cadNames = "${names}"
-												var splitNames=cadNames.split("@")
-												var cadDesc = "${desc}"
-												var splitDesc = cadDesc.split("@")
-												
-												while (veces<k){	
-																	
-													document.write("<div class='accordion-heading'>");
-													document.write("<a href='#"+veces+"'class='accordion-toggle' data-toggle='collapse' data-parent='#main2'>"+splitNames[veces]+"</a>");
-													document.write("</div>");
-													document.write("<div id='"+veces+"'class='accordion-body collapse'>");
-													document.write("<div class='accordion-inner'>"+ splitDesc[veces] +"</div>");
-													document.write("</div>");
-													veces++;
-												}
-											</script>
-											
-											</div>
-
-										</div>
-
-
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-
-						<hr>
-						<label for="">Ubicación</label>
-						<input type="text" name="ubication" value='${user.ubication}'>
-						<label for="">Biografia</label>
-						<textarea class="form-control" name="biography" rows="3">'${user.biography}'</textarea>
-
-						<label for="">Nombre de usuario</label>
-						<p class="">
-							${username}
-						</p>
-						<br>
-						<!--<a href="#myModal" class="btn btn-success">cambio de
-							contraseña</a>-->
 						
-						<!--</form>-->						
-						<br>
-						<div class="row-fluid">
-							<div class="span9"></div>
-							<div class="span3">
-								<input type="submit" class="btn btn-primary"
-									value="Guardar Cambios"
-									onclick="this.form.action = 'updateProfile'" />
-								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
-							</div>
-
-
-						</div>
 					</g:form>
+					
 				</div>
-
-
+				
+				
+				
+				
 				<div class="span5">&nbsp;</div>
 			</div>
 		</div>

@@ -100,9 +100,12 @@ function buildNewEventInMap(){
 	var my_title = $('#nombre_evento').val();
 	var desc = $('#descripcion').val();
 	var tags = $('#tags').val();
-	var d2 = $('#date2').data('date');
-	var d = $('#date').data('date');
-
+	var d2 = $('#date2').val();
+	var d = $('#date').val();
+	var start_hour = $('#start_hour').val();
+	var end_hour = $('#end_hour').val();
+	
+	
 	
 	var name = "Anonimo";
 	if( username != null && username != 'null' )
@@ -116,11 +119,13 @@ function buildNewEventInMap(){
 		 "tags" : tags,
 		 "latitude" : lati,
 		 "longitude" : longi,
-		 "user" : name
+		 "user" : name,
+		 "startHour" : start_hour,
+		 "endHour" : end_hour
 		 
 	 };
 	 
-	 
+	 console.log(newEvent);
 	 
 	 /*
 	  * Por medio de AJAX se logra llamar el metodo
@@ -131,7 +136,10 @@ function buildNewEventInMap(){
 	        type:'POST', 
 	        data : newEvent,
 	        url:"saveNewEvent",
-	        success:function(data,textStatus){console.log(data)},
+	        success:function(data,textStatus){ 
+	        	if( data == "Error" )
+	        		alert("Ha ocurrido un error");
+	        },
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
 	  });
 	  
@@ -175,7 +183,8 @@ function showMarker(jsonMarker){
 			contentString += ",";
 	}
 	
-	contentString += '</p>' + 'Creado por: <b> ' + jsonMarker.user + '</b>';
+	var href = "publicProfile?username="+ jsonMarker.user;
+	contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b>';
 	
 	var infowindow = new google.maps.InfoWindow({
 		content: contentString,
