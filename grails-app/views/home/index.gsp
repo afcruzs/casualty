@@ -101,16 +101,16 @@
 									<label for="">Nombre del evento</label>
 									<input type="text" id = "nombre_evento"><br>
 									<label for="">Fecha de inicio</label>
-									<input type="date"><br>
+									<input type="date" id="date2"><br>
 										
 									<label for="">Hora Inicial</label>
-									<input type="time"><br>
+									<input type="time" id="start_hour"><br>
 									<br>
 									<label for="">Fecha de finalización</label>
-								    <input type="date"><br>
+								    <input type="date" id="date"><br>
 									<br>
 									<label for="">Hora Final</label>
-									<input type="time"><br>
+									<input type="time" id="end_hour"><br>
 									
 									<label for="">Descripción</label>
 									<input type="text" id="descripcion"><br>

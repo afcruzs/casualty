@@ -31,30 +31,42 @@ class HomeController {
 	 * @author: Felipe
 	 */
 	def saveNewEvent(){
-		println SecurityUtils.getSubject().getPrincipal()
-		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		currentUser.eventCreator.addToEvents( new Event(params.title,parseDate(params.startTime),
-												parseDate(params.endTime),params.description,1, params.tags,
-												Double.parseDouble(params.latitude),
-												Double.parseDouble(params.longitude)) )
+		try{
+			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+			currentUser.eventCreator.addToEvents( new Event(params.title,parseDate(params.startTime, params.startHour),
+													parseDate(params.endTime, params.endHour),params.description,1, params.tags,
+													Double.parseDouble(params.latitude),
+													Double.parseDouble(params.longitude)) )
+		}catch(Exception e){
+			render "Error"
+		}
+		render "Success"
 		
-		render params
 	}
 	
 	/*
 	 * Funcion auxiliar para convertir el string que retorna la vista en un Date
 	 */
-	def parseDate(String s){
+	def parseDate(String d,String hour){
 		
-		def t = s.split("-")
-		int year = Integer.parseInt(t[2])
+		def t = d.split("-")
+		int year = Integer.parseInt(t[0])
 		int month = Integer.parseInt(t[1])-1
-		int day = Integer.parseInt(t[0])
+		int day = Integer.parseInt(t[2])
+		
+		def h = hour.split(":")
+		int _hour = Integer.parseInt( h[0] )
+		int minute = Integer.parseInt( h[1] )
 		
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.YEAR, year);
 		date.set(Calendar.MONTH, month);
 		date.set(Calendar.DAY_OF_MONTH, day);
+		
+		
+		date.set(Calendar.HOUR_OF_DAY, _hour)
+		date.set(Calendar.MINUTE, minute)
+		
 		
 		
 		return date.getTime()
