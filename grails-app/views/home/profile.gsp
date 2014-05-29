@@ -40,7 +40,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Causalty</a>
+				<a class="brand" href="index">Causality</a>
 				<ul class="nav">
 					<li class="divider-vertical"></li>
 				</ul>
@@ -60,7 +60,7 @@
 										sesión</a></li>
 								<li class="divider"></li>
 								<li class="nav-header">Perfil</li>
-								<li><a href="myModal">Mi Perfil</a></li>
+								<li><a href="profile">Mi Perfil</a></li>
 								<li><a href="#">Configuración</a></li>
 							</ul></li>
 					</ul>

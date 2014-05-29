@@ -183,7 +183,8 @@ function showMarker(jsonMarker){
 			contentString += ",";
 	}
 	
-	contentString += '</p>' + 'Creado por: <b> ' + jsonMarker.user + '</b>';
+	var href = "publicProfile?username="+ jsonMarker.user;
+	contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b>';
 	
 	var infowindow = new google.maps.InfoWindow({
 		content: contentString,

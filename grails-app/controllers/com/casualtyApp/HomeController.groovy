@@ -122,6 +122,25 @@ class HomeController {
 		
 	}
 	
+	def publicProfile(){
+		def username = params.username
+		
+		if( SecUser.findByUsername(username) != null ){
+			def currentUser = User.get( SecUser.findByUsername(username).id )
+			render( view: "publicProfile",model : [user : currentUser , username :
+				username , names : [] , desc : [] ] )
+		}else{
+			render( view: "publicGroup",model : [ groupName : username ] )
+			
+		}
+		
+		
+	}
+	
+	def publicGroup(){
+
+	}
+	
 	def updateProfile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		
