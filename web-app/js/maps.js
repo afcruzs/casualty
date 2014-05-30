@@ -10,8 +10,16 @@
  */
 var map;
 
+var idCurrentEvent;
+
+var _isAssistant;
+
+var infowindow;
+
+var currentMarke;
+
 /*
- * Son variables globales útiles
+ * Son variables globales ï¿½tiles
  * 
  * lati, longi -> definen las coordenadas al hacer el evento
  * para insertar un nuevo evento.
@@ -24,7 +32,7 @@ var longi;
 var username;
 /*
  * lastupdate -> es la cantidad de tiempo en millisegundos desde que
- * se actualizo por última vez, asegura que no haya overhead actualizando
+ * se actualizo por ï¿½ltima vez, asegura que no haya overhead actualizando
  * el mapa por medio de consultas.
  */
 var lastupdate;
@@ -81,7 +89,7 @@ function showEvents(events){
 } 
 
 /*
- * Esta función debe estar encargada de
+ * Esta funciï¿½n debe estar encargada de
  * mostrar el nuevo marker en el mapa
  * con lo datos de entrada del modal.
  * 
@@ -171,25 +179,11 @@ function showMarker(jsonMarker){
 	jsonMarker.latitude,
 	jsonMarker.longitude );
 	
-	var contentString = '<h2>'+jsonMarker.title+'</h2>'+
-				  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
-				  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
-				  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: ';
 	
-	var arrTags = jsonMarker.tags.split(",")
-	for( var i=0; i<arrTags.length; i++){
-		contentString += '<strong> '+arrTags[i]+'</strong>';
-		if( i != arrTags.length - 1 )
-			contentString += ",";
-	}
 	
-	var href = "publicProfile?username="+ jsonMarker.user;
-	contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b>';
 	
-	var infowindow = new google.maps.InfoWindow({
-		content: contentString,
-		maxWidth : 350
-	});
+
+	
 	
     var marker = new google.maps.Marker({
         position: location,
@@ -200,11 +194,47 @@ function showMarker(jsonMarker){
     /*
      * Abre el InfoWindow cuando se le hace click al marker,
      * se valida que google street view este abierrto para que
-     * también lo abrá alli.
+     * tambiï¿½n lo abrï¿½ alli.
      */
     google.maps.event.addListener(marker, 'click', function() {
-        
     	
+    	currentMarker=marker;
+    	idCurrentEvent=jsonMarker.id;
+    	isAssistant();
+    	
+		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
+					  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
+					  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
+					  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: '
+		
+		var arrTags = jsonMarker.tags.split(",")
+		for( var i=0; i<arrTags.length; i++){
+			contentString += '<strong> '+arrTags[i]+'</strong>';
+			if( i != arrTags.length - 1 )
+				contentString += ",";
+		}
+		
+		if(!_isAssistant){
+			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn"> Asistir</button>'+'</p>';
+		}
+		else{
+			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn"> Ya no quiero asistir</button>'+'</p>';
+		}
+		
+		var href = "publicProfile?username="+ jsonMarker.user;
+		
+		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b>';
+		
+		if(infowindow)
+			infowindow.close();
+		
+		infowindow = new google.maps.InfoWindow({
+		content: contentString,
+		maxWidth : 350
+		});
+
+		
+		
     	infowindow.open(map,marker);
         if (map.getStreetView().getVisible())
         	infowindow.open(map.getStreetView(), marker)
@@ -213,17 +243,94 @@ function showMarker(jsonMarker){
     	
 }
 
+function aux(value){
+	_isAssistant=value;
+	console.log(_isAssistant)
+}
+function isAssistant(){
+	console.log(idCurrentEvent)
+	jQuery.ajax({
+        type:'POST', 
+        async: false,
+        data : { "idevent" : idCurrentEvent},
+        url:"isAssistant",
+        success:function(data,textStatus){ 
+        	if( data == "Error" )
+        		alert("Ha ocurrido un error");
+        	if( data == "Yes"){
+        		console.log("Es un asistente")
+        		aux(true)
+        	}
+        	if( data =="No"){
+        		console.log("No es un asistente")
+        		aux(false)
+        		
+        	}
+        	
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
+	
+}
+
+function attendEvent(){
+	
+	
+	console.log(idCurrentEvent)
+	
+	jQuery.ajax({
+        type:'POST', 
+        async: false,
+        data : { "idevent" : idCurrentEvent },
+        url:"attendEvent",
+        success:function(data,textStatus){ 
+        	if( data == "Error" )
+        		alert("Ha ocurrido un error");
+        	if( data == "Success"){
+        		console.log("Success")
+        	}
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){
+        	
+        }
+  });
+
+	google.maps.event.trigger(currentMarker, 'click', {});
+	
+}
+
+function unAttendEvent(){
+	
+	console.log(idCurrentEvent)
+	
+	jQuery.ajax({
+        type:'POST',
+        async: false,
+        data : { "idevent" : idCurrentEvent },
+        url:"unAttendEvent",
+        success:function(data,textStatus){ 
+        	if( data == "Error" )
+        		alert("Ha ocurrido un error");
+        	if( data == "Success"){
+        		console.log("Success")
+        	}
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
+	google.maps.event.trigger(currentMarker, 'click', {});
+	
+}
 /*
  * Actualiza el mapa si no ha pasado mucho tiempo desde que
- * se actualizo la última vez.
+ * se actualizo la ï¿½ltima vez.
  * 
- * por defecto (quemado en código) es 3 segundos (3 ms)
+ * por defecto (quemado en cï¿½digo) es 3 segundos (3 ms)
  * 
- * Esta función se llama cuando hay un bounds_changed event
+ * Esta funciï¿½n se llama cuando hay un bounds_changed event
  * en el mapa.
  * 
  * para asegurar que no se carguen eventos previos se 
- * pasa el id del último evento que esta en el mapa,
+ * pasa el id del ï¿½ltimo evento que esta en el mapa,
  * asi getLastEvents solo trae los eventos con id mayor.
  * 
  * @author: Felipe

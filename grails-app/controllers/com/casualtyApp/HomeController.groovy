@@ -5,6 +5,7 @@ import org.apache.shiro.SecurityUtils
 import com.casualtyApp.model.Event
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
+
 import grails.converters.JSON
 
 class HomeController {
@@ -46,6 +47,63 @@ class HomeController {
 			render "Error"
 		}
 		render "Success"
+		
+	}
+	
+	/*
+	 * Funcion que sirve para agregar un usuario a la lista de personas que asistirán a un evento
+	 * 
+	 */
+	
+	def attendEvent(){
+		
+		try{
+			def eventForAttend = Event.get(params.idevent)
+			
+						
+			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )			
+			eventForAttend.addToAssistants(currentUser)
+			currentUser.addToEventsToAttend(eventForAttend)
+			render "Success"
+		}
+		catch(Exception e){
+			render "Error"
+		}
+		
+	}
+	
+	
+	
+	def isAssistant(){
+		try{
+		def eventForAttend = Event.get(params.idevent)	
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )			
+		if(currentUser in eventForAttend.assistants){
+			render "Yes"
+			System.out.println("Es un asistente")
+			}
+		else{
+			render "No"
+			}
+		}
+		catch(Exception e){
+			render "Error"
+		}
+		
+	}
+	
+	def unAttendEvent(){
+		try{
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def eventForAttend = Event.get(params.idevent)
+		eventForAttend.removeFromAssistants(currentUser)
+		currentUser.removeFromEventsToAttend(eventForAttend)
+		render "Success"
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			render "Error"
+		}
 		
 	}
 	

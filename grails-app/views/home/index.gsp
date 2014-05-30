@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 	<!-- includes map javascript functions. -->
 	<g:javascript src="maps.js" />
