@@ -16,7 +16,7 @@ var _isAssistant;
 
 var infowindow;
 
-var currentMarke;
+var currentMarker;
 
 /*
  * Son variables globales �tiles
