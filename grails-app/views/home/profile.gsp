@@ -139,6 +139,7 @@
 				</ul>
 				<a href="#" class="btn btn-success">Cargar Imagen</a>
 			</div>
+			
 			<div class="span6">
 				<div class="well">
 					<g:form id = "form1">

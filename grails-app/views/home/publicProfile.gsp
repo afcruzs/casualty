@@ -75,23 +75,19 @@
 
 	<!-- inicio container -->
 <body
-	onload="initialize('${user}','${username}','${ names}','${desc }')">
+	onload="initialize('${user}','${username}','${ names}','${desc }','${tam}')">
+
+
+
 
 	<div class="container">
-
-
-		
-
-
-
-
 
 		<div class="span12">&nbsp;</div>
 		<div class="span12">&nbsp;</div>
 		<div class="row-fluid">
 			<div class="span8">
 				<div class="page-header">
-					<h1>Información de Usuario</h1>
+					<h1>Información del Usuario</h1>
 				</div>
 			</div>
 		</div>
@@ -99,99 +95,85 @@
 		<div class="row-fluid">
 			<div class="span2">
 				<ul class="thumbnails">
-					<li class="span12"><a href="#" class="thumbnail"> 
-					<r:img file="fumaton.png" alt="" />
+					<li class="span12"><a href="#" class="thumbnail"> <r:img
+								file="fumaton.png" alt="" />
 
 					</a></li>
 				</ul>
-				
+
 			</div>
+			
 			<div class="span6">
 				<div class="well">
-					<g:form id = "form1">
-					
-						<h1>${username}</h1>
+					<g:form id="form1">
 
-						<h3>${user.name} ${user.lastName}</h3>
-
-
+						<label for=""><h3>Nombre</h3></label>
+						<p class="form-control-static">${user.name}</p>
+						
+						<label for=""><h3>Apellido</h3></label>
+						<p class="form-control-static">${user.lastName}</p>
+						<hr>
 						<div class="accordion" id="main">
 							<div class="accordion-group">
 								<div class="accordion-heading">
 									<a href="#com1" class="accordion-toggle" data-toggle="collapse"
 										data-parent="#main">Mis Eventos</a>
 								</div>
-
+								
 								<div id="com1" class="accordion-body collapse">
 									<div class="accordion-inner">
-
 										<div class="accordion" id="main2">
 											<div class="accordion-group">
-												<div class="accordion-heading">
-													<a href="#event1" class="accordion-toggle"
-														data-toggle="collapse" data-parent="#main2">${names[0]} </a>
-														
-												</div>
-												<div id="event1" class="accordion-body collapse">
-													<div class="accordion-inner">${desc[0] }</div>
-												</div>
-												<div class="accordion-heading">
-													<a href="#event2" class="accordion-toggle"
-														data-toggle="collapse" data-parent="#main2">${names[1]}</a>
-												</div>
-												<div id="event2" class="accordion-body collapse">
-													<div class="accordion-inner">${desc[1] }</div>
-												</div>
-												<div class="accordion-heading">
-													<a href="#event3" class="accordion-toggle"
-														data-toggle="collapse" data-parent="#main2">${names[2]}</a>
-												</div>
-												<div id="event3" class="accordion-body collapse">
-													<div class="accordion-inner">${desc[2] }</div>
-												</div>
-												<div class="accordion-heading">
-													<a href="#event4" class="accordion-toggle"
-														data-toggle="collapse" data-parent="#main2">${names[3]}</a>
-												</div>
-												<div id="event4" class="accordion-body collapse">
-													<div class="accordion-inner">${desc[3] }</div>
-												</div>
-												<div class="accordion-heading">
-													<a href="#event5" class="accordion-toggle"
-														data-toggle="collapse" data-parent="#main2">${names[4]}</a>
-												</div>
-												<div id="event5" class="accordion-body collapse">
-													<div class="accordion-inner">${desc[4] }</div>
-												</div>
-
+												
+												<script>
+													var veces=0;
+													var k = "${tam}";
+													var cadNames = "${names}"
+													var splitNames=cadNames.split("@")
+													var cadDesc = "${desc}"
+													var splitDesc = cadDesc.split("@")
+													
+													while (veces<k){	
+																		
+														document.write("<div class='accordion-heading'>");
+														document.write("<a href='#"+veces+"'class='accordion-toggle' data-toggle='collapse' data-parent='#main2'>"+splitNames[veces]+"</a>");
+														document.write("</div>");
+														document.write("<div id='"+veces+"'class='accordion-body collapse'>");
+														document.write("<div class='accordion-inner'>"+ splitDesc[veces] +"</div>");
+														document.write("</div>");
+														veces++;
+													}
+												</script>
+											
 											</div>
-
 										</div>
-
-
 									</div>
 								</div>
+								
 							</div>
 						</div>
 
-
-
 						<hr>
-						<h3>${user.ubication}</h3>
+
 						
-						<blockquote>
-			  			<p>${user.biography}</p>
-						 <footer> ${user.name} <cite title="Source Title">${user.lastName}</cite></footer>
-						</blockquote>
+						<label for="">ubicacion</label>
+						<p class="form-control-static">${user.ubication}</p>
+						<hr>
+						<label for="">Biografia</label>
+						<div class="well">
+							<p>${user.biography}</p>
+						</div>
 						
-						<h3> Eventos Recientes <small> última semana </small></h3>
+						<h3>
+							Eventos Recientes <br><small> última semana </small>
+						</h3>
 					</g:form>
-					
+
 				</div>
-				
-				
-				
-				
+
+
+
+
 				<div class="span5">&nbsp;</div>
 			</div>
 		</div>

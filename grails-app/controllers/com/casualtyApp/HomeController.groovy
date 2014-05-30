@@ -8,9 +8,6 @@ import com.casualtyApp.model.User;
 import grails.converters.JSON
 
 class HomeController {
-	/*
-	 * Test methods for authentication
-	 */
 	
 	def eventsService
 	
@@ -108,17 +105,17 @@ class HomeController {
 		
 	}
 	
+	
 	def profile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		
 		def nombresEvent="";
 		def descEvent="";
-		
 		for(event in currentUser.eventCreator.events){
 			 descEvent=descEvent + event.description + "@"
 			 nombresEvent=nombresEvent + event.title + "@"
 			 
 		 }
+		
 		render( view: "profile",model : [user : currentUser , username :
 		   SecurityUtils.getSubject().getPrincipal() , names : nombresEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
 		
@@ -132,14 +129,21 @@ class HomeController {
 		
 		if( SecUser.findByUsername(username) != null ){
 			def currentUser = User.get( SecUser.findByUsername(username).id )
+			
+			def namesEvent="";
+			def descEvent="";
+			for(event in currentUser.eventCreator.events){
+				 descEvent=descEvent + event.description + "@"
+				 namesEvent=namesEvent + event.title + "@"
+				 
+			 }
+			
 			render( view: "publicProfile",model : [user : currentUser , username :
-				username , names : [] , desc : [] ] )
+				username , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
 		}else{
 			render( view: "publicGroup",model : [ groupName : username ] )
 			
 		}
-		
-		
 	}
 	
 	def publicGroup(){
