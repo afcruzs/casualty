@@ -5,6 +5,7 @@ import org.apache.shiro.SecurityUtils
 import com.casualtyApp.model.Event
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
+import com.sun.org.omg.CORBA.ExcDescriptionSeqHelper;
 
 import grails.converters.JSON
 
@@ -144,6 +145,29 @@ class HomeController {
 		
 		return date.getTime()
 
+		
+	}
+	
+	
+	def getAssistants(){
+
+		try{
+		def eventAssistants = Event.get(params.idevent).assistants;
+		def StringBuilder assistants = new StringBuilder();
+		
+		for(User u in eventAssistants)
+			assistants.append(u.getShiroUser().getUsername()+ ",")
+		
+		assistants.setLength(assistants.length()-1)
+		System.out.println(assistants)
+		render assistants
+			
+		}
+		catch(Exception e ){
+			
+			e.printStackTrace();
+			render "Error"
+		}
 		
 	}
 	

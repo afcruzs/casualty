@@ -18,6 +18,12 @@ var infowindow;
 
 var currentMarker;
 
+var assistantsCurrentEvent;
+
+var hrefAssistants;
+
+
+
 /*
  * Son variables globales �tiles
  * 
@@ -57,6 +63,23 @@ function initialize(events,u_name) {
 	
 	lastupdate = (new Date()).getTime();
 	console.log(lastupdate);
+}
+
+
+function showAssistants(){
+
+	hrefAssistants = '</p> Estas personas asistirán al evento: <b> ';
+	for(var i =0;i<assistantsCurrentEvent.length-1;i++){
+		
+		hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[i] + ' >'+ assistantsCurrentEvent[i]   + ', </a>';
+		console.log(assistantsCurrentEvent[i] );
+	}
+	hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[assistantsCurrentEvent.length-1] + ' >'+ assistantsCurrentEvent[assistantsCurrentEvent.length-1]   + ' </a>';
+	
+	hrefAssistants +='</b></p>';
+
+	
+	
 }
 
 
@@ -150,8 +173,9 @@ function buildNewEventInMap(){
 	        success:function(data,textStatus){ 
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
-	        	lastEventId = data;
-	        	console.log(data);
+	        	else{
+	        		lastEventId = data;
+	        	}
 	        },
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
 	  });
@@ -162,6 +186,33 @@ function buildNewEventInMap(){
 	 showMarker(newEvent);
 	 $('#myModal').modal('hide');
 }
+
+
+function getAssistants(){
+	
+
+	 jQuery.ajax({
+	        type:'POST', 
+	        data : { "idevent" : idCurrentEvent},
+	        url:"getAssistants",
+	        async : false,
+	        success:function(data,textStatus){ 
+	        	if( data == "Error" )
+	        		alert("Ha ocurrido un error");
+	        	else{
+	        		assistantsCurrentEvent = data.split(",");
+	        		
+	        		
+	        	}
+	        },
+	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	  });
+	  
+	
+	
+}
+
+
 
 /*
  * Shows a event with a jsonObject of a event (Domain Class).
@@ -179,6 +230,7 @@ function buildNewEventInMap(){
  * 
  * @author: Felipe
  */
+
 function showMarker(jsonMarker){
 	
 	
@@ -206,6 +258,7 @@ function showMarker(jsonMarker){
     	idCurrentEvent=jsonMarker.id;
     	
     	isAssistant();
+    	getAssistants();
     	
 		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
 					  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
@@ -227,8 +280,14 @@ function showMarker(jsonMarker){
 		}
 		
 		var href = "publicProfile?username="+ jsonMarker.user;
+		getAssistants();
+		showAssistants();
 		
-		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b>';
+		contentString += hrefAssistants;
+		
+		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b></p>';
+		
+		
 		
 		if(infowindow)
 			infowindow.close();
