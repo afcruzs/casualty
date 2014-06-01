@@ -29,6 +29,7 @@ class HomeController {
 	 * @author: Felipe
 	 */
 	def saveNewEvent(){
+		def theId;
 		try{
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 			
@@ -37,16 +38,23 @@ class HomeController {
 			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
 													parseDate(params.endTime, params.endHour),params.description,1, params.tags,
 													Double.parseDouble(params.latitude),
-													Double.parseDouble(params.longitude)) 
+													Double.parseDouble(params.longitude))
+			
+			
+			
 			
 			newEvent.addToAssistants(currentUser)
 			currentUser.addToEventsToAttend(newEvent)
-			currentUser.eventCreator.addToEvents( newEvent )
+			currentUser.eventCreator.addToEvents( newEvent ).save(flush: true)
+			
+			
+			while( !newEvent.save(flush: true) );
+			render newEvent.id
 			
 		}catch(Exception e){
-			render "Error"
+			render "Error"+e
 		}
-		render "Success"
+		
 		
 	}
 	
@@ -76,6 +84,8 @@ class HomeController {
 	
 	def isAssistant(){
 		try{
+			
+		System.out.println("parametro  "+params.idevent)
 		def eventForAttend = Event.get(params.idevent)	
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )			
 		if(currentUser in eventForAttend.assistants){

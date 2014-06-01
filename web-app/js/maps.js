@@ -131,6 +131,7 @@ function buildNewEventInMap(){
 		 "startHour" : start_hour,
 		 "endHour" : end_hour
 		 
+		 
 	 };
 	 
 	 console.log(newEvent);
@@ -140,18 +141,24 @@ function buildNewEventInMap(){
 	  * saveNewEvent de home y se le pasa newEvent
 	  * como parametro para guardar el evento en la DB.
 	  */
+
 	 jQuery.ajax({
 	        type:'POST', 
 	        data : newEvent,
 	        url:"saveNewEvent",
+	        async : false,
 	        success:function(data,textStatus){ 
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
+	        	lastEventId = data;
+	        	console.log(data);
 	        },
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
 	  });
 	  
 	 
+	 newEvent.id = lastEventId ;
+	 idCurrentEvent = lastEventId;
 	 showMarker(newEvent);
 	 $('#myModal').modal('hide');
 }
@@ -181,14 +188,11 @@ function showMarker(jsonMarker){
 	
 	
 	
-	
-
-	
-	
     var marker = new google.maps.Marker({
         position: location,
         map: map,
-        title: jsonMarker.title
+        title: jsonMarker.title,
+        testeo : jsonMarker.id
     });
 	
     /*
@@ -200,6 +204,7 @@ function showMarker(jsonMarker){
     	
     	currentMarker=marker;
     	idCurrentEvent=jsonMarker.id;
+    	
     	isAssistant();
     	
 		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
@@ -215,10 +220,10 @@ function showMarker(jsonMarker){
 		}
 		
 		if(!_isAssistant){
-			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn"> Asistir</button>'+'</p>';
+			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn btn-warning"> Asistir</button>'+'</p>';
 		}
 		else{
-			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn"> Ya no quiero asistir</button>'+'</p>';
+			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>'+'</p>';
 		}
 		
 		var href = "publicProfile?username="+ jsonMarker.user;
@@ -248,7 +253,7 @@ function aux(value){
 	console.log(_isAssistant)
 }
 function isAssistant(){
-	console.log(idCurrentEvent)
+	console.log("Impresion para asistente "+ idCurrentEvent);
 	jQuery.ajax({
         type:'POST', 
         async: false,
