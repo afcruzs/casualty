@@ -209,9 +209,22 @@ class HomeController {
 		   SecurityUtils.getSubject().getPrincipal() , names : nombresEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
 		
 	}
+	def groups(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def nombresGrupos="";
+		def descGrupos="";
+		for(group in currentUser.classGroup){
+			descGrupos=descGrupos + group.description + "@"
+			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
+			 
+		 }
+		
+		render( view: "groups",model : [user : currentUser , username :
+		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size()] )
+		
+	}
 	
-	
-	
+		
 	
 	def publicProfile(){
 		def username = params.username
