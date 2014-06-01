@@ -68,17 +68,19 @@ function initialize(events,u_name) {
 
 function showAssistants(){
 
-	hrefAssistants = '</p> Estas personas asistirán al evento: <b> ';
-	for(var i =0;i<assistantsCurrentEvent.length-1;i++){
+	hrefAssistants='';
+	if(assistantsCurrentEvent){
+		hrefAssistants = '</p> Estas personas asistirán al evento: <b> ';
+		for(var i =0;i<assistantsCurrentEvent.length-1;i++){
+			
+			hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[i] + ' >'+ assistantsCurrentEvent[i]   + ', </a>';
+			console.log(assistantsCurrentEvent[i] );
+		}
+		hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[assistantsCurrentEvent.length-1] + ' >'+ assistantsCurrentEvent[assistantsCurrentEvent.length-1]   + ' </a>';
 		
-		hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[i] + ' >'+ assistantsCurrentEvent[i]   + ', </a>';
-		console.log(assistantsCurrentEvent[i] );
-	}
-	hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[assistantsCurrentEvent.length-1] + ' >'+ assistantsCurrentEvent[assistantsCurrentEvent.length-1]   + ' </a>';
-	
-	hrefAssistants +='</b></p>';
+		hrefAssistants +='</b></p>';
 
-	
+	}
 	
 }
 
@@ -199,10 +201,11 @@ function getAssistants(){
 	        success:function(data,textStatus){ 
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
+	        	if(data=="NoAssistants")
+	        		assistantsCurrentEvent = null;	
 	        	else{
+	        		
 	        		assistantsCurrentEvent = data.split(",");
-	        		
-	        		
 	        	}
 	        },
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
@@ -282,9 +285,11 @@ function showMarker(jsonMarker){
 		var href = "publicProfile?username="+ jsonMarker.user;
 		getAssistants();
 		showAssistants();
+	
 		
-		contentString += hrefAssistants;
 		
+		if(assistantsCurrentEvent)
+			contentString += hrefAssistants;
 		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b></p>';
 		
 		

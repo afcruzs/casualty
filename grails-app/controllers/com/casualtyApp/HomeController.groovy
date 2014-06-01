@@ -150,17 +150,22 @@ class HomeController {
 	
 	
 	def getAssistants(){
-
+		def StringBuilder assistants;
 		try{
 		def eventAssistants = Event.get(params.idevent).assistants;
-		def StringBuilder assistants = new StringBuilder();
+		assistants = new StringBuilder();
 		
 		for(User u in eventAssistants)
 			assistants.append(u.getShiroUser().getUsername()+ ",")
 		
-		assistants.setLength(assistants.length()-1)
-		System.out.println(assistants)
-		render assistants
+		if(assistants.length()>0){
+			assistants.setLength(assistants.length()-1)
+		}
+		
+		if(assistants.length()>0)
+			render assistants
+		else
+			render "NoAssistants" 
 			
 		}
 		catch(Exception e ){
