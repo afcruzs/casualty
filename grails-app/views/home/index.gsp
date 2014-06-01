@@ -65,7 +65,28 @@
               </li>
 			  <li class="divider-vertical"></li>
               <li class="active"><a href="#">Eventos</a></li>
-              <li><a href="#about">Grupos</a></li>
+              
+              
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="divider"></li>
+                  <li class="nav-header">Grupos</li>
+                  
+                  
+                  
+               
+			
+			<li><a href="#mylook" data-toggle="modal">Buscar</a></li>
+                  
+                  
+                  
+                  
+                  <li><a href="groups">Mis Grupos</a></li>                  
+                </ul>
+              </li>
+              
+              
               <li><a href="#contact">Contacto</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<b class="caret"></b></a>
@@ -83,7 +104,6 @@
   	</div>
 </div>
 
-<hr>
 		
 			<!-- create the modal-->
 				<div id="myModal" class="modal hide fade">
@@ -133,7 +153,41 @@
 						</div>
 					</div>
 			<!--end create the modal-->
-<hr>
+			
+			
+<!-- create the modal to look up-->
+	  
+	   <div id="mylook" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>Iniciar Busqueda</h3>
+				</div>
+				<div class="modal-body">
+				    <div class="row-fluid">
+				       <div class="span12">
+				   	      
+					   
+					    <form action="">
+      					<div class="input-append input-prepend">
+      					<label for="">Nombre del Grupo</label>
+        			    <input type="text" id = "nombre_grupo">
+        			    <span class="add-on">@</span>
+       					</div>
+       					<br>
+					      
+					      
+					   </div>
+					</div>	
+					
+				</div>
+				<div class="modal-footer">
+					<button tyoe="button" data-dismiss="modal" class="btn">Close</button>
+					<button tyoe="button" class="btn btn-primary">Send</button>
+				</div>
+			</div>
+
+<!--end create the modal-->
+
 
 
 
