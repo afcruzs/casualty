@@ -58,3 +58,22 @@ body{
 	height: 70%;
 	width: 100%;
 }
+
+#chatMessages {
+	
+    border: 1px solid #000;
+    height: 300px;
+    width: 90%;
+    overflow-y: auto;
+}
+#messageBox {
+    width: 90%;
+}
+.nickname {
+    color: #f00;
+    font-weight: bold;
+}
+.msg {
+    color: #444;
+    font-weight: normal;
+}

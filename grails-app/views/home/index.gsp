@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 	<!-- includes map javascript functions. -->
+	
+	<g:javascript src="chat.js" />
 	<g:javascript src="maps.js" />
+	
+	<!--<g:javascript library="jquery"/> -->
 	<!-- para que sirvan los botones desplegables y otras funcinalidades-->
  	<g:javascript src="jquery-1.11.1.min.js"/> 
  	<g:javascript src="bootstrap.min.js"/>
@@ -28,6 +32,7 @@
 	    
 	    
 	    
+	    
 	    <!-- Call to google maps api -->
 	    <script type="text/javascript"
 	      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC5hrTO3Yea1wH40Oolq1YQCzSjPdZYedI&sensor=false">
@@ -36,6 +41,7 @@
 	    
 	    <style>
 			.datepicker{z-index:1151;}
+			
 		</style>
 	    
 	    <!-- Para que sirva el el autocompletar -->
@@ -71,6 +77,7 @@
             <ul class="nav">
 			  <li class="divider-vertical"></li>
               <li class="active"><a href="#">Eventos</a></li>
+              
               
               
              <li class="dropdown">
@@ -152,39 +159,124 @@
 			<!--end create the modal-->
 			
 			
-<!-- create the modal to look up-->
-	  
-	   <div id="mylook" class="modal hide fade">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3>Iniciar Busqueda</h3>
-				</div>
-				<div class="modal-body">
-				    <div class="row-fluid">
-				       <div class="span12">
-				   	      
-					   
-					    <form action="">
-      					<div class="input-append input-prepend">
-      					<label for="">Nombre del Grupo</label>
-        			    <input type="text" id = "nombre_grupo">
-        			    <span class="add-on">@</span>
-       					</div>
-       					<br>
-					      
-					      
-					   </div>
-					</div>	
-					
-				</div>
-				<div class="modal-footer">
-					<button tyoe="button" data-dismiss="modal" class="btn">Close</button>
-					<button tyoe="button" class="btn btn-primary">Send</button>
-				</div>
-			</div>
+			<!-- create the modal to look up-->
+				  
+				   <div id="mylook" class="modal hide fade">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3>Iniciar Busqueda</h3>
+							</div>
+							<div class="modal-body">
+							    <div class="row-fluid">
+							       <div class="span12">
+							   	      
+								   
+								    <form action="">
+			      					<div class="input-append input-prepend">
+			      					<label for="">Nombre del Grupo</label>
+			        			    <input type="text" id = "nombre_grupo">
+			        			    <span class="add-on">@</span>
+			       					</div>
+			       					<br>
+								      
+								      
+								   </div>
+								</div>	
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" data-dismiss="modal" class="btn">Close</button>
+								<button type="button" class="btn btn-primary">Send</button>
+							</div>
+						</div>
+			
+			<!--end create the modal-->
+			
+			
+			<!-- chat modal-->
+				  
+				   <div id="chatModal" class="modal hide fade"  >
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3>Chat</h3>
+							</div>
+							<div class="modal-body">
+							   
+							<div id="chatMessages"></div>
+							<input type="text" id="messageBox" name="message" onkeypress="messageKeyPress(this,event);"/>
+							<div id="temp"></div>
+							<!-- Campo escondido para pasar variables entre js y html -->
+							<input type="hidden" name="eventId" id="eventId" />
+							
+							<script>
+								/*
+									Esto es todo el chat,
+									Se tienen los eventos de teclado para saber cuando el usuario
+									oprimio enter y asi enviar la peticion asincrona a que guarde
+									el mensaje en la DB.
 
-<!--end create the modal-->
+									Por otro lado pollMessages trae los mensajes de la DB (cada 300 ms)
+									y los muestra en el messagebox, se debe hacer rapido para que el usuario
+									no perciba retrasos y ademas que al traer los mensajes de manera lenta
+									se podrian quedar "pegados" mensajes de una conversacion pasada en la actual.
 
+									finalmente eventId es un input vacio que se pusa para conectar el id del evento
+									que se trae por javascript con este gsp y asi saber que mensajes traer.
+								*/
+							    function messageKeyPress(field,event) {
+							        var theCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+							        var message = $('#messageBox').val();
+							        var hiddenId = $('#eventId').val();
+							
+							        if (theCode == 13){
+								        console.log("like"+hiddenId);
+
+								        <g:remoteFunction action="submitMessage" params="'message='+message+'&idEvent='+hiddenId" update="temp"/>
+								        /*jQuery.ajax({type:'POST',
+									        data:'message='+message+'&idEvent='+hiddenId, 
+									        url:'/CausalityAppProject/home/submitMessage',
+									        success:function(data,textStatus){jQuery('#temp').html(data);},
+									        error:function(XMLHttpRequest,textStatus,errorThrown){}}
+								        );*/
+								        	
+							            $('#messageBox').val('');
+							            return false;
+							        } else {
+							            return true;
+							        }
+							    }
+							
+							    function retrieveLatestMessages() {
+							    	var hiddenId = $('#eventId').val();
+							    	if( hiddenId != "" ){
+
+							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId" update="chatMessages"/>
+
+								    	/*jQuery.ajax({type:'POST',data:'idEvent='+hiddenId, 
+									    	url:'/CausalityAppProject/home/retrieveLatestMessages',
+								    		success:function(data,textStatus){jQuery('#chatMessages').html(data);},
+								    		error:function(XMLHttpRequest,textStatus,errorThrown){}}
+						    			);*/
+									}
+							    	
+							    }
+							
+							    function pollMessages() {
+							        retrieveLatestMessages();
+							        setTimeout('pollMessages()', 300);
+							    }
+							
+							    pollMessages();
+							</script>
+							
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">Enviar Mensaje</button>
+							</div>
+						</div>
+			
+			<!--end create the modal-->
 
 
 

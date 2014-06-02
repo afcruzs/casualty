@@ -3,6 +3,7 @@ package com.casualtyApp
 import org.apache.shiro.SecurityUtils
 
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
 import com.sun.org.omg.CORBA.ExcDescriptionSeqHelper;
@@ -15,8 +16,22 @@ class HomeController {
 	
 	def index() {
 	
+	session.nickname = SecurityUtils.getSubject().getPrincipal()
 	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
 		   SecurityUtils.getSubject().getPrincipal() ] )
+	}
+	
+	def retrieveLatestMessages(long idEvent) {
+		
+		
+		def messages = Message.list().findAll({ it.event.id == idEvent })
+		[messages:messages.reverse()]
+	}
+
+	def submitMessage(String message, long idEvent) {
+		
+		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent)).save()
+		render "<script>retrieveLatestMessages()</script>"
 	}
 
 	def admin() {

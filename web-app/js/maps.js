@@ -215,6 +215,20 @@ function getAssistants(){
 	
 }
 
+function require(script) {
+    $.ajax({
+        url: script,
+        dataType: "script",
+        async: false,           // <-- This is the key
+        success: function () {
+            // all good...
+        },
+        error: function () {
+            throw new Error("Could not load script " + script);
+        }
+    });
+}
+
 
 
 /*
@@ -233,6 +247,7 @@ function getAssistants(){
  * 
  * @author: Felipe
  */
+
 
 function showMarker(jsonMarker){
 	
@@ -282,6 +297,7 @@ function showMarker(jsonMarker){
 			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>'+'</p>';
 		}
 		
+		
 		var href = "publicProfile?username="+ jsonMarker.user;
 		getAssistants();
 		showAssistants();
@@ -292,7 +308,7 @@ function showMarker(jsonMarker){
 			contentString += hrefAssistants;
 		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b></p>';
 		
-		
+		contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
 		
 		if(infowindow)
 			infowindow.close();
