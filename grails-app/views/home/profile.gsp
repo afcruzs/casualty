@@ -5,6 +5,8 @@
 <!-- para que sirvan los botones desplegables y otras funcinalidades-->
 <g:javascript src="jquery-1.11.1.min.js" />
 <g:javascript src="bootstrap.min.js" />
+<g:javascript src="bootstrap.file-input.js" />
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,7 +29,18 @@
 	href="${resource(dir:'bootstrap/ico', file:'apple-touch-icon-57-precomposed.png')}" />
 <link rel="shortcut icon"
 	href="${resource(dir:'bootstrap/ico', file:'favicon.png')}" />
+	
+	
+	<script type=text/javascript>
+		function x() {
+			console.log("xxx")
+			document.location.href ='updateProfile'
+		}
+</script>
 </head>
+
+
+
 
 <body>
 <body>
@@ -127,22 +140,35 @@
 				</div>
 			</div>
 		</div>
-
+		
+		
 		<div class="row-fluid">
+			<g:form id = "form1"  enctype="multipart/form-data">
 			<div class="span2">
 				<ul class="thumbnails">
-					<li class="span12"><a href="#" class="thumbnail"> 
-					<r:img
-								  file="fumaton.png" alt="" />
-
-					</a></li>
+					<li class="span12">
+						
+						
+						<g:if test="${user?.screenshot}"  >						
+								<g:link action="showImage">
+								  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/${user.id}">
+								</g:link>			
+						</g:if>
+						
+						</li>
 				</ul>
-				<a href="#" class="btn btn-success">Cargar Imagen</a>
+				<input type="file" id="screenshot" name="screenshot"   style="display:none"  >
+				
+				<a class="btn btn-primary" onclick="$('input[id=screenshot]').click();">Cargar imagen</a>
+				<hr>
+				<input type="submit" class="btn btn-primary" id="save" name="save"
+									value="  Guardar Imagen" 
+									onclick="this.form.action = 'updateProfile'" />
 			</div>
 			
 			<div class="span6">
 				<div class="well">
-					<g:form id = "form1">
+					
 
 						<label for="">Nombre</label>
 						<input type="text" name="name" value='${user.name}'>
@@ -217,7 +243,7 @@
 						<div class="row-fluid">
 							<div class="span9"></div>
 							<div class="span3">
-								<input type="submit" class="btn btn-primary"
+								<input type="submit" class="btn btn-primary" id="save" name="save"
 									value="Guardar Cambios"
 									onclick="this.form.action = 'updateProfile'" />
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
@@ -225,13 +251,15 @@
 
 
 						</div>
-					</g:form>
+					
 				</div>
 
 
 				<div class="span5">&nbsp;</div>
 			</div>
+			</g:form>
 		</div>
+		
 
 
 	</div>
@@ -266,12 +294,24 @@
 
 <script>
 	$().ready(function() {
-		$("a").tooltip({
+		/*$("#screenshot").onClick({
 			placement : "right",
 
-		});
+		});*/
 
 	})
+	
+	
+	$('input[id=screenshot]').change(function() {
+		
+				
+
+	});
+
+		
+	
+	//$("#photo").modal('show');
+	
 </script>
 </html>
 

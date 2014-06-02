@@ -13,6 +13,7 @@ import grails.converters.JSON
 class HomeController {
 	
 	def eventsService
+	public static String var="";
 	
 	def index() {
 	
@@ -253,6 +254,7 @@ class HomeController {
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def nombresEvent="";
 		def descEvent="";
+		this.var="";
 		for(event in currentUser.eventCreator.events){
 			 descEvent=descEvent + event.description + "@"
 			 nombresEvent=nombresEvent + event.title + "@"
@@ -283,6 +285,8 @@ class HomeController {
 	def publicProfile(){
 		def username = params.username
 		
+		
+		var=username.toString();
 		if( SecUser.findByUsername(username) != null ){
 			def currentUser = User.get( SecUser.findByUsername(username).id )
 			
@@ -295,7 +299,7 @@ class HomeController {
 			 }
 			
 			render( view: "publicProfile",model : [user : currentUser , username :
-				username , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
+				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
 		}else{
 			render( view: "publicGroup",model : [ groupName : username ] )
 			
@@ -308,20 +312,39 @@ class HomeController {
 	
 	def updateProfile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		
 		currentUser.biography=params.biography
 		currentUser.name=params.name
 		currentUser.lastName=params.lastName
 		currentUser.ubication=params.ubication
 		currentUser.emailUser=params.email
+		this.var="";
+		if(params.screenshot!=null &&  params.screenshot.getBytes().size()>0)
+			currentUser.screenshot =params.screenshot.getBytes()
 		
 		if(currentUser.save()){
-			redirect(controller: 'home', action: 'index' )
+			redirect(controller: 'home', action: 'profile' )
 		}else{
 			redirect(controller: 'home', action: 'index' )
 		}
 		
 		
+	}
+	
+	def initPage(){
+	}
+	
+	def showImage()  {
+		def currentUser
+		if(var.equals("")){
+			currentUser=User.get( SecUser.findByUsername( SecurityUtils.getSubject().getPrincipal()).id )
+		}else{
+			currentUser = User.get( SecUser.findByUsername(var).id )
+		}
+		def imagen = currentUser.screenshot
+		
+		
+		response.outputStream << currentUser.screenshot
+		response.outputStream.flush()
 	}
 	
 }

@@ -63,7 +63,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Causality</a>
+          <a class="brand" href="initPage">Causality</a>
           <ul class="nav">
           	  <li class="divider-vertical"></li>
               <li>

@@ -93,19 +93,25 @@
 		</div>
 
 		<div class="row-fluid">
+		<g:form id="form1">
 			<div class="span2">
 				<ul class="thumbnails">
-					<li class="span12"><a href="#" class="thumbnail"> <r:img
-								file="fumaton.png" alt="" />
-
+					<li class="span12"><a href="#" class="thumbnail">
+							
+						<g:if test="${user?.screenshot}" >						
+								<g:link action="showImage" id="${user.id}"  >
+								  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/${user.id} ">
+								</g:link>			
+						</g:if>
 					</a></li>
+
 				</ul>
 
 			</div>
 			
 			<div class="span6">
 				<div class="well">
-					<g:form id="form1">
+					
 
 						<label for=""><h3>Nombre</h3></label>
 						<p class="form-control-static">${user.name}</p>
@@ -167,8 +173,6 @@
 						<h3>
 							Eventos Recientes <br><small> última semana </small>
 						</h3>
-					</g:form>
-
 				</div>
 
 
@@ -176,6 +180,7 @@
 
 				<div class="span5">&nbsp;</div>
 			</div>
+		</g:form>
 		</div>
 
 
@@ -217,6 +222,12 @@
 		});
 
 	})
+	
+	$('input[id=screenshot]').change(function() {
+		
+				
+
+	});
 </script>
 </html>
 

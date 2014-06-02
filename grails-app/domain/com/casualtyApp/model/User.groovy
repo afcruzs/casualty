@@ -18,7 +18,7 @@ class User {
 	def String lastName
 	def String biography
 	def String ubication
-	
+	def byte[] screenshot
 	/*Un usuario puede crear cero o muchos eventos,
 	 * un usuario puede pertenecer a cero o a muchos grupos.
 	 * No se permite que la fecha de creacion sea anterior a la fecha actual
@@ -32,6 +32,8 @@ class User {
 	static constraints = {
 		 emailUser(nullable: false, blank: false, unique: false,email:true)
 		 eventCreator(nullable: true)
+		 screenshot(maxSize:1073741824)
+		 screenshot(nullable:true)
 		 isUnalConfirmed(nullable: false, blank: false, unique: false)
 		 createdAt(nullable: false, blank: false, unique: false,/*validator: { if (it?.compareTo(new Date()) < 0 )
 						 {
