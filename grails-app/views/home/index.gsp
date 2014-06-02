@@ -39,7 +39,7 @@
 		</style>
 	    
 	    <!-- Para que sirva el el autocompletar -->
-		<resource:include components="autoComplete" autoComplete="[skin: 'default']"/>
+		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
 	    
 	    
 	</head>
@@ -62,7 +62,7 @@
           	  <li class="divider-vertical"></li>
               <li>
               <g:form class="navbar-form">
-              	 <richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" style="width:500px;height:20px"/>
+				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" id="complete"/>
  				<!--  <input type="search" class="search-query" placeholder="Buscar"><!--puntas redondeadas-->
            	  </g:form>
               </li>
