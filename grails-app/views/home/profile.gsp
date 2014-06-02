@@ -31,12 +31,6 @@
 	href="${resource(dir:'bootstrap/ico', file:'favicon.png')}" />
 	
 	
-	<script type=text/javascript>
-		function x() {
-			console.log("xxx")
-			document.location.href ='updateProfile'
-		}
-</script>
 </head>
 
 
@@ -148,10 +142,10 @@
 				<ul class="thumbnails">
 					<li class="span12">
 						
-						
+						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
 						<g:if test="${user?.screenshot}"  >						
 								<g:link action="showImage">
-								  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/${user.id}">
+								  <img width="100%" height="100%" alt="img" src="${createLink(controller:'home', action:'showImage')}">
 								</g:link>			
 						</g:if>
 						

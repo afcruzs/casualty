@@ -100,7 +100,7 @@
 							
 						<g:if test="${user?.screenshot}" >						
 								<g:link action="showImage" id="${user.id}"  >
-								  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/${user.id} ">
+								  <img width="100%" height="100%" alt="img" src="${createLink(controller:'home', action:'showImage')}">
 								</g:link>			
 						</g:if>
 					</a></li>
