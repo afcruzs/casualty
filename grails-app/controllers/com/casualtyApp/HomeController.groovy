@@ -27,6 +27,7 @@ class HomeController {
 		
 		def messages = Message.list().findAll({ it.event.id == idEvent })
 		messages.sort{it.date}
+		
 		[messages:messages]
 	}
 

@@ -310,7 +310,7 @@ function showMarker(jsonMarker){
 		
 		//contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
 		var temp = "'"+jsonMarker.title+"'";
-		contentString+='<p>'+'<button   type="submit" onclick = "openChatModal(1,'+temp+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
+		contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+','+temp+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
 		
 		if(infowindow)
 			infowindow.close();
