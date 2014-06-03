@@ -1,0 +1,93 @@
+/**{ 
+	
+    font-size: 24px; 
+	font-family: "Times New Roman";
+} 
+
+
+
+.section{
+	
+	background-color: rgba(18, 66, 90, 0.3);
+	margin: 0 auto;
+	width: 90%;
+	height: 90%;
+	border: 1px solid #DDDDDD; 
+	
+}
+
+h1{
+	
+	margin: 0 auto;
+	width: 30%;
+	border: 1px solid #DDDDDD;
+	font-size: 1em;
+}
+
+nav{
+	
+	margin: 0 auto;
+	width: 50%;
+	height: 10%;
+	border: 1px solid #DDDDDD;
+	font-size: 1em;
+	
+}*/
+
+/*
+html {
+	border: 1px solid #DDDDDD;
+	height: 100%;
+	width: 100%;
+}*/
+/*
+body{
+
+	background: #D4D3D3;
+	height: 100%;
+	
+}*/
+
+#clickMe{
+	width: 20%;
+	margin: 0 auto;
+}
+
+#map_canvas { 
+	margin: 0 auto;
+	height: 70%;
+	width: 100%;
+}
+
+#chatMessages {
+	
+    border: 1px solid #000;
+    height: 300px;
+    width: 90%;
+    overflow-y: auto;
+}
+#messageBox {
+    width: 90%;
+}
+.nickname {
+    color: #f00;
+    font-weight: bold;
+}
+.msg {
+    color: #444;
+    font-weight: normal;
+}
+
+#myModal.modal {
+    max-height: 500px;
+	overflow-y: scroll;
+}
+
+.modal.dynamic {
+    position: absolute;
+    margin: 0 0 0 -280px;
+}
+
+
+
+

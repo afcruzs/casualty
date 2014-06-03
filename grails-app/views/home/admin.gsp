@@ -1,0 +1,1 @@
+<r:img  file="admin_dash.jpg" width="1105" height="621"/>
