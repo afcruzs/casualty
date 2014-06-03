@@ -272,9 +272,7 @@
 							
 								
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary">Enviar Mensaje</button>
-							</div>
+							
 						</div>
 			
 			<!--end create the modal-->
