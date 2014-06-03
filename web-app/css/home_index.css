@@ -78,6 +78,18 @@ body{
     font-weight: normal;
 }
 
+.chatTitle{
+	text-align: center;
+    color: #09609B;
+    
+    text-shadow:5px 5px 10px #A8DCFF;
+    
+
+
+    
+	
+}
+
 #myModal.modal {
     max-height: 500px;
 	overflow-y: scroll;
