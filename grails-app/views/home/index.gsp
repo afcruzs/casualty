@@ -68,8 +68,7 @@
           	  <li class="divider-vertical"></li>
               <li>
               <g:form class="navbar-form">
-				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" id="complete"/>
- 				<!--  <input type="search" class="search-query" placeholder="Buscar"><!--puntas redondeadas-->
+				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" onItemSelect="goToLocation(id)" />
            	  </g:form>
               </li>
           </ul>

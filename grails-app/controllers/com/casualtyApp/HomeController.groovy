@@ -213,34 +213,34 @@ class HomeController {
 		render jsonEvents as JSON
 	}
 	
-	
-	/*def getEvents(){
-		def events = Event.findAll()
-		def jsonEvents = []
-		for( Event e : events){
-			
-			jsonEvents.add( eventsService.eventToJSON(e) )
-		}
-		render jsonEvents as JSON	
-	 }*/
-	
 	/* Obtiene todos los eventos por nombre para autocompletar en el buscador utilizando
 	 * el plugin richui-0.8
 	 */
 	
 	def searchAJAX = {
 		def events = Event.findAllByTitleLike("%${params.query}%")
-
+		
 		//Create XML response
 		render(contentType: "text/xml") {
 		results() {
 			events.each { event ->
 			result(){
 					name(event.title)
+					id(event.id)
 					}
 				}
 			}
 		}
+	}
+
+	/*
+	 * Se obtiene un objeto JSON con el id del evento
+	 */
+	def getEventById(){
+		def jsonEvents = []
+		def event = Event.get(params.idEvent)
+		jsonEvents.add( eventsService.eventToJSON(event) )
+		render jsonEvents as JSON
 	}
 	
 	

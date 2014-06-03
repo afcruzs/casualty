@@ -477,3 +477,32 @@ function default_map_loader(){
     	
      });
 }
+
+
+/*
+ * @autor Maikol
+ * Ubica el mapa en el evento que seleciona en el buscador
+ */
+function goToLocation(idEvent){
+	
+	 var dataId = {"idEvent" : idEvent};
+	 
+	 jQuery.ajax({
+	        type:'POST', 
+	        data : dataId,
+	        url:"getEventById",
+	        success:function(data){
+	        		
+	        		var latitud = JSON.parse(data[0]).latitude;
+	        		var longitud = JSON.parse(data[0]).longitude;
+
+	 				map.setCenter(new google.maps.LatLng(latitud,longitud));
+	 				map.setZoom(21);
+
+	        },
+	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	  });
+
+	 console.log(idEvent);
+	
+}
