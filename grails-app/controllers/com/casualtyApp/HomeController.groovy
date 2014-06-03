@@ -26,7 +26,8 @@ class HomeController {
 		
 		
 		def messages = Message.list().findAll({ it.event.id == idEvent })
-		[messages:messages.reverse()]
+		messages.sort{it.date}
+		[messages:messages]
 	}
 
 	def submitMessage(String message, long idEvent) {

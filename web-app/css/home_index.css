@@ -70,10 +70,21 @@ body{
     width: 90%;
 }
 .nickname {
-    color: #f00;
-    font-weight: bold;
+    color: #67B238;    		
 }
 .msg {
     color: #444;
     font-weight: normal;
+}
+
+.chatTitle{
+	text-align: center;
+    color: #09609B;
+    
+    text-shadow:5px 5px 10px #A8DCFF;
+    
+
+
+    
+	
 }
