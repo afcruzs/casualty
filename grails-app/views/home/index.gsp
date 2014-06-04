@@ -151,6 +151,14 @@
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
 									
+									<label for="">Categoria</label>
+									<select id="categoria" name ="categoria" >
+										<option>Deportes</option>
+										<option>Ocio</option>
+										<option>Academico</option>
+										<option selected>Otro</option>
+									</select>
+
 									<br>
 									<label for="">Hora Final</label>
 									<input type="time" id="end_hour"><br>

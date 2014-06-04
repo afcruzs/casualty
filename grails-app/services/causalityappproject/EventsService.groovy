@@ -24,7 +24,7 @@ class EventsService {
 	
 	/*
 	 * Convierte un evento en un objeto JSON
-	 * con propiedades útiles como el nombre de usuario
+	 * con propiedades ï¿½tiles como el nombre de usuario
 	 * para ser mostrado en el mapa.
 	 *
 	 * @author: Felipe
@@ -40,6 +40,7 @@ class EventsService {
 				startTime e.getStartTime().toString()
 				endTime e.getEndTime().toString()
 				description e.getDescription()
+				categoryName e.category.name
 				latitude e.getLatitude()
 				longitude e.getLongitude()
 				user e.getEventCreator().getUser().getShiroUser().getUsername()
@@ -58,6 +59,7 @@ class EventsService {
 					startTime e.getStartTime().toString()
 					endTime e.getEndTime().toString()
 					description e.getDescription()
+					categoryName e.category.name
 					latitude e.getLatitude()
 					longitude e.getLongitude()
 					

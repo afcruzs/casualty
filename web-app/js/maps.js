@@ -28,6 +28,8 @@ var errorFlag=false;
 
 
 
+
+
 /*
  * Son variables globales �tiles
  * 
@@ -68,6 +70,8 @@ function initialize(events,u_name) {
 	lastupdate = (new Date()).getTime();
 	console.log(lastupdate);
 }
+
+
 
 
 function showAssistants(){
@@ -139,6 +143,8 @@ function buildNewEventInMap(){
 	var tags = $('#tags').val();
 	var d2 = $('#date2').val();
 	var d = $('#date').val();
+	var categoryName = $("#categoria option:selected").html();
+	console.log("Category "+ categoryName);
 	var start_hour = $('#start_hour').val();
 	var end_hour = $('#end_hour').val();
 	
@@ -154,6 +160,7 @@ function buildNewEventInMap(){
 		 "endTime" : d,
 		 "description" : desc,
 		 "tags" : tags,
+		 "categoryName" : categoryName,
 		 "latitude" : lati,
 		 "longitude" : longi,
 		 "user" : name,
@@ -292,7 +299,8 @@ function showMarker(jsonMarker){
 		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
 					  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
 					  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
-					  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: '
+					  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: '+
+					  '<p>Categoria: <i>'+ jsonMarker.categoryName +'</i></p> ' 
 		
 		var arrTags = jsonMarker.tags.split(",")
 		for( var i=0; i<arrTags.length; i++){

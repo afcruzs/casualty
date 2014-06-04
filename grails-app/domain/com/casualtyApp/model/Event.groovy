@@ -8,10 +8,10 @@ class Event {
 	def  Date startTime
 	def  Date endTime
 	def  String description
-	def  int category
 	def  String tags
 	def  Double latitude
 	def  Double longitude
+	def  EventCategory category 
 	
 	static belongsTo = [eventCreator:EventCreator]
 	static hasMany = [assistants: User]
@@ -27,7 +27,6 @@ class Event {
 		startTime(nullable: false, blank: false, unique: false)
 		endTime(nullable: false, blank: false, unique: false)
 		description(nullable: false, blank: false, unique: false, maxSize:800)
-		category(nullable: false, blank: false, unique: false)
 		tags(nullable: false, blank: false, unique: false)
 		latitude(nullable: false, blank: false, unique: false)
 		longitude(nullable: false, blank: false, unique: false)
@@ -45,13 +44,13 @@ class Event {
 	public String toString() {
 		return "Event title = " + title + "\nstartTime = " + startTime
 				+ "\nendTime = " + endTime + "\ndescription = " + description
-				+ "\ncategory = " + category + "\ntags = " + tags + "\nlatitude = "
+				+ "\ntags = " + tags + "\nlatitude = "
 				+ latitude + "\nlongitude = " + longitude + "]";
 	}
 
 	//constructor with all fields
 	public Event(String title, Date startTime,
-	Date endTime, String description, int category, String tags,
+	Date endTime, String description, String tags,EventCategory category,
 	Double latitude,Double longitude) {
 		super();
 
@@ -59,8 +58,8 @@ class Event {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.description = description;
-		this.category = category;
 		this.tags = tags;
+		this.category= category;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		

@@ -5,10 +5,12 @@ import org.apache.shiro.SecurityUtils
 import sun.security.ssl.Alerts;
 
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.EventCategory;
 import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
 import com.sun.org.omg.CORBA.ExcDescriptionSeqHelper;
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder.StringBuilder;
 
 import grails.converters.JSON
 
@@ -56,11 +58,11 @@ class HomeController {
 		def theId;
 		try{
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-			
-			
-			
+			def cat = EventCategory.findByName(params.categoryName)
+
 			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
-													parseDate(params.endTime, params.endHour),params.description,1, params.tags,
+													parseDate(params.endTime, params.endHour),params.description, params.tags,
+													cat, 
 													Double.parseDouble(params.latitude),
 													Double.parseDouble(params.longitude))
 			
@@ -76,11 +78,39 @@ class HomeController {
 			render newEvent.id
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			render "Error"+e
 		}
 		
 		
 	}
+	
+	
+	
+	/*
+	 * Funcion que sirve para pasar los nombres de las categorias existentes al modal de creación del evento
+	 *
+	 */
+	
+	def getCategories(){
+		try{
+			def categories = EventCategory.getAll()
+			def java.lang.StringBuilder categoriesString= new StringBuilder()()
+			for(EventCategory cat in categories)
+				categoriesString.append(cat.name+",")
+			categoriesString.setLength(categoriesString.length()-1)
+			render categoriesString
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
 	
 	/*
 	 * Funcion que sirve para agregar un usuario a la lista de personas que asistirán a un evento
