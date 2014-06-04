@@ -108,6 +108,16 @@
 </div>
 
 		
+		<!-- Create a custom alert for when the event has been deleted-->
+		<div id="customAlert" class="modal hide fade">
+				<div id="customAlert" class="donatoAlert donatoAlert-error">
+				<h4>Oops!!!</h4>
+				Lo sentimos, este evento fue borrado
+			</div>
+		</div>
+		<!-- end creating cutos alert -->
+		
+		
 			<!-- create the modal-->
 				<div id="myModal" class="modal hide fade">
 						<div class="modal-header">

@@ -2,6 +2,8 @@ package com.casualtyApp
 
 import org.apache.shiro.SecurityUtils
 
+import sun.security.ssl.Alerts;
+
 import com.casualtyApp.model.Event
 import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
@@ -15,11 +17,14 @@ class HomeController {
 	def eventsService
 	public static String var="";
 	
+	
 	def index() {
 	
 	session.nickname = SecurityUtils.getSubject().getPrincipal()
 	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
 		   SecurityUtils.getSubject().getPrincipal() ] )
+	   
+
 	}
 	
 	def retrieveLatestMessages(long idEvent) {
@@ -94,6 +99,7 @@ class HomeController {
 			render "Success"
 		}
 		catch(Exception e){
+			System.out.println("Error en attend event "+e)
 			render "Error"
 		}
 		
@@ -115,8 +121,9 @@ class HomeController {
 			render "No"
 			}
 		}
-		catch(Exception e){
-			render "Error"
+		catch(NullPointerException e){
+			System.out.println("Error en isAssistant "+e)
+			render "ErrorNull"
 		}
 		
 	}
@@ -130,7 +137,7 @@ class HomeController {
 		render "Success"
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			System.out.println("Error desatendiendo "+e)
 			render "Error"
 		}
 		
@@ -167,6 +174,9 @@ class HomeController {
 	}
 	
 	
+	/*
+	*Carga los asistentes a un evento dado su id
+	*/
 	def getAssistants(){
 		def StringBuilder assistants;
 		try{
@@ -186,10 +196,10 @@ class HomeController {
 			render "NoAssistants" 
 			
 		}
-		catch(Exception e ){
+		catch(NullPointerException e ){
 			
-			e.printStackTrace();
-			render "Error"
+			System.out.println("Error en los asistentes "+e)
+			render "ErrorNull"
 		}
 		
 	}
@@ -248,6 +258,63 @@ class HomeController {
 		println ("asdsaeloo")
 		redirect(controller: 'home', action: 'index' )
 		
+		
+	}
+	
+	//Envía emails a los asistentes al evento
+	def sendEmailToAssistants(idEvent){
+		
+		def Event deletedEvent = Event.get(idEvent)
+		def eventAssistants = deletedEvent.assistants
+		def String eventName = deletedEvent.title
+		for(User assistant in eventAssistants)
+		sendMail {
+			to assistant.emailUser
+			subject "Cancelación del evento:  "+ eventName 
+			body 'Hola '+ assistant.name + " decidimos enviarte este e-mail para informarte que el evento: "+eventName+" ha sido cancelado."
+		  }
+		
+		
+		
+	}
+	
+	//Borra el evento y llama a enviar emails
+	def deleteEvent(){
+		try{
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		sendEmailToAssistants(params.idevent)
+		Event.get(params.idevent).delete(flush: true);
+		}
+		catch(NullPointerException e){
+			render "ErrorNull"
+
+		}
+	}
+	
+	
+	//Revisa si dado el id de un evento el currentUser es el dueño.
+	def isOwner(){
+		try{
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def currentEvent = Event.get(params.idevent)
+		
+		//System.out.println(currentUser.eventCreator.events.get(params.idevent));
+		if(currentEvent.eventCreator.id == currentUser.eventCreator.id){
+			System.out.println("Si es el dueño")
+			render "Yes"
+		}
+		else
+			render "No"
+		
+		}
+		catch(NullPointerException x){
+	
+			System.out.println("Error en el owner "+ x);
+			render "ErrorNull"
+			
+		} 
+			
+			
 		
 	}
 	

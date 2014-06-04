@@ -22,6 +22,10 @@ var assistantsCurrentEvent;
 
 var hrefAssistants;
 
+var deleteEventButton='';
+
+var errorFlag=false;
+
 
 
 /*
@@ -199,8 +203,13 @@ function getAssistants(){
 	        url:"getAssistants",
 	        async : false,
 	        success:function(data,textStatus){ 
-	        	if( data == "Error" )
-	        		alert("Ha ocurrido un error");
+	        	if( data == "ErrorNull" )
+	        		if(!errorFlag){
+	        			$('#customAlert').modal('show'); 
+	        			errorFlag=true;
+	        			currentMarker.setMap(null);
+	        			}
+	        	
 	        	if(data=="NoAssistants")
 	        		assistantsCurrentEvent = null;	
 	        	else{
@@ -272,9 +281,11 @@ function showMarker(jsonMarker){
      */
     google.maps.event.addListener(marker, 'click', function() {
     	
+    	errorFlag=false;
     	currentMarker=marker;
     	idCurrentEvent=jsonMarker.id;
     	
+    	isOwner();
     	isAssistant();
     	getAssistants();
     	
@@ -291,12 +302,15 @@ function showMarker(jsonMarker){
 		}
 		
 		if(!_isAssistant){
-			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn btn-warning"> Asistir</button>'+'</p>';
+			
+		
+			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn btn-warning"> Asistir</button>';
 		}
 		else{
-			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>'+'</p>';
+			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>';
 		}
 		
+		contentString+=deleteEventButton+'</p>'
 		
 		var href = "publicProfile?username="+ jsonMarker.user;
 		getAssistants();
@@ -334,6 +348,37 @@ function aux(value){
 	_isAssistant=value;
 	console.log(_isAssistant)
 }
+
+
+function isOwner(){
+	console.log("is owner???:  ");
+	jQuery.ajax({
+        type:'POST', 
+        async: false,
+        data : { "idevent" : idCurrentEvent},
+        url:"isOwner",
+        success:function(data,textStatus){ 
+        	if( data == "ErrorNull" )
+        		if(!errorFlag){
+
+        			$('#customAlert').modal('show'); 
+        			errorFlag=true;
+        			currentMarker.setMap(null);
+        		}
+        	if( data == "Yes"){
+        		deleteEventButton= '<button   type="submit"  onclick = "deleteEvent()" class="btn btn-danger"> Eliminar</button>'
+        	}
+        	if( data =="No"){
+        		console.log("No es el dueño")
+        		deleteEventButton='';
+
+        	}
+   
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
+}
+
 function isAssistant(){
 	console.log("Impresion para asistente "+ idCurrentEvent);
 	jQuery.ajax({
@@ -342,8 +387,12 @@ function isAssistant(){
         data : { "idevent" : idCurrentEvent},
         url:"isAssistant",
         success:function(data,textStatus){ 
-        	if( data == "Error" )
-        		alert("Ha ocurrido un error");
+        	if( data == "ErrorNull" )
+        		if(!errorFlag){
+        			$('#customAlert').modal('show'); 
+        			errorFlag=true;
+        			currentMarker.setMap(null);
+        		}
         	if( data == "Yes"){
         		console.log("Es un asistente")
         		aux(true)
@@ -353,7 +402,7 @@ function isAssistant(){
         		aux(false)
         		
         	}
-        	
+   
         },
         error:function(XMLHttpRequest,textStatus,errorThrown){}
   });
@@ -372,9 +421,16 @@ function attendEvent(){
         url:"attendEvent",
         success:function(data,textStatus){ 
         	if( data == "Error" )
-        		alert("Ha ocurrido un error");
+        		if(!errorFlag){
+        			$('#customAlert').modal('show'); 
+        			errorFlag=true;
+        			infowindow.close();
+        			currentMarker.setMap(null);
+        			infowindow.close();
+        		}
         	if( data == "Success"){
         		console.log("Success")
+        		google.maps.event.trigger(currentMarker, 'click', {});
         	}
         },
         error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -382,7 +438,7 @@ function attendEvent(){
         }
   });
 
-	google.maps.event.trigger(currentMarker, 'click', {});
+	
 	
 }
 
@@ -397,16 +453,54 @@ function unAttendEvent(){
         url:"unAttendEvent",
         success:function(data,textStatus){ 
         	if( data == "Error" )
-        		alert("Ha ocurrido un error");
+        		if(!errorFlag){
+        			$('#customAlert').modal('show'); 
+        			errorFlag=true;
+        			infowindow.close();
+        			currentMarker.setMap(null);			
+        		}
+        	if( data == "Success"){
+        		console.log("Success")
+        		google.maps.event.trigger(currentMarker, 'click', {});
+        	}
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
+	
+	
+}
+
+
+
+
+
+function deleteEvent(){
+	
+
+	jQuery.ajax({
+        type:'POST',
+        data : { "idevent" : idCurrentEvent },
+        url:"deleteEvent",
+        success:function(data,textStatus){ 
+        	if( data == "ErrorNull" )
+        		if(!errorFlag){
+        			$('#customAlert').modal('show'); 
+        			errorFlag=true;
+        			currentMarker.setMap(null);
+        		}
         	if( data == "Success"){
         		console.log("Success")
         	}
         },
         error:function(XMLHttpRequest,textStatus,errorThrown){}
   });
-	google.maps.event.trigger(currentMarker, 'click', {});
+	
+	  infowindow.close();
+	  currentMarker.setMap(null);
+
 	
 }
+
 /*
  * Actualiza el mapa si no ha pasado mucho tiempo desde que
  * se actualizo la �ltima vez.
