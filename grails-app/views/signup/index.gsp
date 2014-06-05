@@ -44,8 +44,6 @@
               <li class="dropdown">
                 
                 </ul>
-              </li>
-            </ul>
           </div><!--/.nav-collapse -->
         </div>
   	</div>
@@ -87,14 +85,6 @@
 								          <td><input type="text" name="lastname" value="${lastname}" /></td>
 								        </tr>
 								        <tr>
-								          <td>Biografía:</td>
-								          <td><input type="text" name="biography" value="${biography}" /></td>
-								        </tr>
-								        <tr>
-								          <td>Ubicación:</td>
-								          <td><input type="text" name="ubication" value="${ubication}" /></td>
-								        </tr>
-								        <tr>
 								          <td>Contraseña:</td>
 								          <td><input type="password" name="password" value="" /></td>
 								        </tr>
@@ -107,8 +97,16 @@
 								          <td><input type="email" name="email" value="" /></td>
 								        </tr>
 								        <tr>
-								          <td />
-								          <td><input type="submit" value="Registrarse" onclick = "this.form.action = 'register'"/>
+								          <td>Ubicación:</td>
+								          <td><input type="text" name="ubication" value="${ubication}" /></td>
+								        </tr>
+								        <tr>
+								          <td>Biografía:</td>
+								          <td><textarea name="biography" rows="5" cols="10">${biography}</textarea></td>
+								        </tr>
+								        <tr>
+								          <td/>
+								          <td><input type="submit" value="Registrarse &raquo;" class="btn btn-success btn-large" onclick = "this.form.action = 'register'"/>
 								          </td>
 								        </tr>
 								      </tbody>
