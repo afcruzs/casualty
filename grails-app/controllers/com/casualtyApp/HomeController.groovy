@@ -10,11 +10,13 @@ import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
 import com.sun.org.omg.CORBA.ExcDescriptionSeqHelper;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder.StringBuilder;
 
 import grails.converters.JSON
 
 class HomeController {
+	
+	
+
 	
 	def eventsService
 	public static String var="";
@@ -47,6 +49,7 @@ class HomeController {
 	def admin() {
 	   //render "This page requires the logged in user to be an Administrator"
 	}
+	
 	
 	/*
 	 * Se salva el nuevo evento en la base de datos relacionandolo con
@@ -208,7 +211,7 @@ class HomeController {
 	*Carga los asistentes a un evento dado su id
 	*/
 	def getAssistants(){
-		def StringBuilder assistants;
+		def java.lang.StringBuilder assistants;
 		try{
 		def eventAssistants = Event.get(params.idevent).assistants;
 		assistants = new StringBuilder();

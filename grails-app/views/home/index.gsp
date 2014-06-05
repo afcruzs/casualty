@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 	<!-- includes map javascript functions. -->
 	
 	<g:javascript src="chat.js" />

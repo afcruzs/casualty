@@ -26,6 +26,10 @@ var deleteEventButton='';
 
 var errorFlag=false;
 
+var url = String(document.URL);
+
+
+
 
 
 
@@ -63,7 +67,7 @@ var lastEventId;
 function initialize(events,u_name) {
 	default_map_loader();	  
 	username = u_name;
-	
+	url= url.substring(0,url.indexOf("/home/"));
 	if( events != null )
 		showEvents(events);
 	
@@ -271,13 +275,13 @@ function showMarker(jsonMarker){
 	var location = new google.maps.LatLng(
 	jsonMarker.latitude,
 	jsonMarker.longitude );
-	
-	
+
 	
     var marker = new google.maps.Marker({
         position: location,
         map: map,
         title: jsonMarker.title,
+        icon:url+"/static/images/"+jsonMarker.categoryName + ".png",
         testeo : jsonMarker.id
     });
 	
@@ -299,8 +303,9 @@ function showMarker(jsonMarker){
 		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
 					  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
 					  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
-					  '<p>' + jsonMarker.description + '</p>' + '<p> Tags: '+
-					  '<p>Categoria: <i>'+ jsonMarker.categoryName +'</i></p> ' 
+					  '<p>' + jsonMarker.description + '</p>' + 
+					  '<p> Tags: '
+					  
 		
 		var arrTags = jsonMarker.tags.split(",")
 		for( var i=0; i<arrTags.length; i++){
@@ -308,7 +313,7 @@ function showMarker(jsonMarker){
 			if( i != arrTags.length - 1 )
 				contentString += ",";
 		}
-		
+		contentString+='</p><p>Categoria: <strong>'+ jsonMarker.categoryName +'</strong></p> '; 
 		if(!_isAssistant){
 			
 		
