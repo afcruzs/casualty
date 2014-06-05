@@ -298,7 +298,18 @@
 							        retrieveLatestMessages();
 							        setTimeout('pollMessages()', 300);
 							    }
-							
+
+							    function initModal(){
+							    	$('#chatModal').on('hidden', function () {
+							    	    /*
+							    	    	Bandera para que no haga ajax cuando
+							    	    	el chat esta cerrado.
+							    	    */
+							    	    $('#eventId').val('');  
+							    	})
+								}
+
+							    initModal();
 							    pollMessages();
 							</script>
 							

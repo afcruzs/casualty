@@ -96,16 +96,17 @@ body{
     font-weight: normal;
 }
 
+.dateMessage {
+    color: gray;
+    font-size:x-small;
+    
+}
+
 .chatTitle{
 	text-align: center;
     color: #09609B;
     
-    text-shadow:5px 5px 10px #A8DCFF;
-    
-
-
-    
-	
+    text-shadow:5px 5px 10px #A8DCFF;	
 }
 
 #myModal.modal {
