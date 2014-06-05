@@ -23,26 +23,37 @@ class HomeController {
 	
 	
 	def index() {
-	
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 	session.nickname = SecurityUtils.getSubject().getPrincipal()
 	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
-		   SecurityUtils.getSubject().getPrincipal() ] )
+		   SecurityUtils.getSubject().getPrincipal(), userId : currentUser.id ] )
 	   
 
 	}
 	
-	def retrieveLatestMessages(long idEvent) {
+	/*
+	 * Consigue los mensajes de el evento dado un id, ademas pasa a la vista el myId que representa
+	 * el id del user que esta manejando la vista.
+	 * 
+	 * Se asigna el nombre de usuario del creador de cada evento en cada mensaje para identificar
+	 * el creador.
+	 */
+	def retrieveLatestMessages(long idEvent, long myId) {
 		
 		
 		def messages = Message.list().findAll({ it.event.id == idEvent })
 		messages.sort{it.date}
+		messages.each{ it.setOwnerNickName( eventsService.getEventOwnerNickName( it.event ) ) }
 		
-		[messages:messages]
+		render( view  :"retrieveLatestMessages", model : [messages:messages, myId : myId ] )
 	}
 
-	def submitMessage(String message, long idEvent) {
+	/*
+	 * Guarda el mensaje en la DB y recarga los mensajes.
+	 */
+	def submitMessage(String message, long idEvent, long userId) {
 		
-		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent)).save()
+		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent), user : User.get(userId)).save()
 		render "<script>retrieveLatestMessages()</script>"
 	}
 

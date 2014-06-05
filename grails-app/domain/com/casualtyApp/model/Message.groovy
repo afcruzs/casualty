@@ -7,6 +7,12 @@ class Message {
     String message
 	
 	Event event
+	User user
+	
+	String ownerNickName
+	
+	static transients = ['ownerNickName']
+	
 
     static constraints = {
 

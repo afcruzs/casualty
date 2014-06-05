@@ -231,6 +231,7 @@
 							<div class="modal-body">
 							   
 							<div id="chatMessages"></div>
+							<br>
 							<input type="text" id="messageBox" name="message" onkeypress="messageKeyPress(this,event);"/>
 							<div id="temp"></div>
 							<!-- Campo escondido para pasar variables entre js y html -->
@@ -256,11 +257,13 @@
 							        var theCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
 							        var message = $('#messageBox').val();
 							        var hiddenId = $('#eventId').val();
+							        var myId = ${userId};
 							
 							        if (theCode == 13){
 								        console.log("like"+hiddenId);
 
-								        <g:remoteFunction action="submitMessage" params="'message='+message+'&idEvent='+hiddenId" update="temp"/>
+								        
+								        <g:remoteFunction action="submitMessage" params="'message='+message+'&idEvent='+hiddenId+'&userId='+myId" update="temp"/>
 								        /*jQuery.ajax({type:'POST',
 									        data:'message='+message+'&idEvent='+hiddenId, 
 									        url:'/CausalityAppProject/home/submitMessage',
@@ -277,9 +280,10 @@
 							
 							    function retrieveLatestMessages() {
 							    	var hiddenId = $('#eventId').val();
+							    	var myId = ${userId};
 							    	if( hiddenId != "" ){
 
-							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId" update="chatMessages"/>
+							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId+'&myId='+myId" update="chatMessages"/>
 
 								    	/*jQuery.ajax({type:'POST',data:'idEvent='+hiddenId, 
 									    	url:'/CausalityAppProject/home/retrieveLatestMessages',

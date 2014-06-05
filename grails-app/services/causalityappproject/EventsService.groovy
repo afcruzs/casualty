@@ -71,7 +71,16 @@ class EventsService {
 		
 				return builder.toString()
 		}
-		
-		
+	}
+	
+	/*
+	 * Devuelve el nombre de usuario (User o grupo) de un evento dado.
+	 * @author :Felipe
+	 */
+	def getEventOwnerNickName(Event e){
+		if(e.getEventCreator().getUser() != null )
+			return e.getEventCreator().getUser().getShiroUser().getUsername()
+		else
+			return e.getEventCreator().getClassGroup().getNameGroup()
 	}
 }

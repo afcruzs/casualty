@@ -34,11 +34,13 @@ class BootStrap {
 		def admin = new SecUser(username: "Admin", passwordHash: new Sha512Hash("password").toHex())
 		admin.addToRoles(adminRole)
 		admin.save()
-	   
+		
+
 		
 		def usuario11/*a*/ = new User(emailUser:'davanegaspr@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
 			, name : "Diego", lastName : "Vanegas", biography: "La biografia", ubication : "San Andres")
 		usuario11.save(flush:true,failOnError:true)
+
 		
 		
 		
