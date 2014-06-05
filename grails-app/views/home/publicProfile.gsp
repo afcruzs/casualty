@@ -96,14 +96,14 @@
 		<g:form id="form1">
 			<div class="span2">
 				<ul class="thumbnails">
-					<li class="span12"><a href="#" class="thumbnail">
+					<li class="span12">
 							
-						<g:if test="${user?.screenshot}" >						
-								<g:link action="showImage" id="${user.id}"  >
-								  <img width="100%" height="100%" alt="img" src="${createLink(controller:'home', action:'showImage')}">
+						<g:if test="${user?.screenshot}"  >						
+								<g:link action ='profile' >
+								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImage')}/${temp}">
 								</g:link>			
 						</g:if>
-					</a></li>
+					</li>
 
 				</ul>
 

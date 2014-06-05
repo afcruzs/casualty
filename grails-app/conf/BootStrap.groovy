@@ -1,6 +1,5 @@
 import org.apache.shiro.crypto.hash.Sha512Hash
 
-import sun.awt.OSInfo;
 
 import com.casualtyApp.model.ClassGroup
 import com.casualtyApp.model.Event

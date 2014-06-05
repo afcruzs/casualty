@@ -144,8 +144,8 @@
 						
 						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
 						<g:if test="${user?.screenshot}"  >						
-								<g:link action="showImage">
-								  <img width="100%" height="100%" alt="img" src="${createLink(controller:'home', action:'showImage')}">
+								<g:link action ='profile'>
+								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImage')}/${username}">
 								</g:link>			
 						</g:if>
 						
