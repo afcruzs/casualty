@@ -2878,6 +2878,7 @@ input[type="button"].btn-block {
   background-color: #c67605 \9;
 }
 .btn-danger {
+  margin : 10px;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #da4f49;
@@ -3328,6 +3329,29 @@ input[type="submit"].btn.btn-mini {
 .alert-block p + p {
   margin-top: 5px;
 }
+
+.donatoAlert{
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 0px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.donatoAlert-danger,
+.donatoAlert-error {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+}
+.donatoAlert-danger h4,
+.donatoAlert-error h4 {
+  color: #b94a48;
+}
+
 .nav {
   margin-left: 0;
   margin-bottom: 20px;
@@ -6308,7 +6332,7 @@ body {
 @media (min-width: 1200px) {
   /*body{color: red;}*/
 }
-/*Escritorio pequeño o una tablet*/
+/*Escritorio peque��o o una tablet*/
 @media (min-width: 768px) and (max-width: 1199px) {
   /*body{color: green;}*/
 }

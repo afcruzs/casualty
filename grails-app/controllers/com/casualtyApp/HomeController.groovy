@@ -2,7 +2,10 @@ package com.casualtyApp
 
 import org.apache.shiro.SecurityUtils
 
+import sun.security.ssl.Alerts;
+
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.EventCategory;
 import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
 import com.casualtyApp.model.User;
@@ -12,34 +15,52 @@ import grails.converters.JSON
 
 class HomeController {
 	
+	
+
+	
 	def eventsService
 	public static String var="";
 	
-	def index() {
 	
+	def index() {
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 	session.nickname = SecurityUtils.getSubject().getPrincipal()
 	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
-		   SecurityUtils.getSubject().getPrincipal() ] )
+		   SecurityUtils.getSubject().getPrincipal(), userId : currentUser.id ] )
+	   
+
 	}
 	
-	def retrieveLatestMessages(long idEvent) {
+	/*
+	 * Consigue los mensajes de el evento dado un id, ademas pasa a la vista el myId que representa
+	 * el id del user que esta manejando la vista.
+	 * 
+	 * Se asigna el nombre de usuario del creador de cada evento en cada mensaje para identificar
+	 * el creador.
+	 */
+	def retrieveLatestMessages(long idEvent, long myId) {
 		
 		
 		def messages = Message.list().findAll({ it.event.id == idEvent })
 		messages.sort{it.date}
+		messages.each{ it.setOwnerNickName( eventsService.getEventOwnerNickName( it.event ) ) }
 		
-		[messages:messages]
+		render( view  :"retrieveLatestMessages", model : [messages:messages, myId : myId ] )
 	}
 
-	def submitMessage(String message, long idEvent) {
+	/*
+	 * Guarda el mensaje en la DB y recarga los mensajes.
+	 */
+	def submitMessage(String message, long idEvent, long userId) {
 		
-		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent)).save()
+		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent), user : User.get(userId)).save()
 		render "<script>retrieveLatestMessages()</script>"
 	}
 
 	def admin() {
 	   //render "This page requires the logged in user to be an Administrator"
 	}
+	
 	
 	/*
 	 * Se salva el nuevo evento en la base de datos relacionandolo con
@@ -51,11 +72,11 @@ class HomeController {
 		def theId;
 		try{
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-			
-			
-			
+			def cat = EventCategory.findByName(params.categoryName)
+
 			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
-													parseDate(params.endTime, params.endHour),params.description,1, params.tags,
+													parseDate(params.endTime, params.endHour),params.description, params.tags,
+													cat, 
 													Double.parseDouble(params.latitude),
 													Double.parseDouble(params.longitude))
 			
@@ -71,11 +92,39 @@ class HomeController {
 			render newEvent.id
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			render "Error"+e
 		}
 		
 		
 	}
+	
+	
+	
+	/*
+	 * Funcion que sirve para pasar los nombres de las categorias existentes al modal de creación del evento
+	 *
+	 */
+	
+	def getCategories(){
+		try{
+			def categories = EventCategory.getAll()
+			def java.lang.StringBuilder categoriesString= new StringBuilder()()
+			for(EventCategory cat in categories)
+				categoriesString.append(cat.name+",")
+			categoriesString.setLength(categoriesString.length()-1)
+			render categoriesString
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
 	
 	/*
 	 * Funcion que sirve para agregar un usuario a la lista de personas que asistirán a un evento
@@ -94,6 +143,7 @@ class HomeController {
 			render "Success"
 		}
 		catch(Exception e){
+			System.out.println("Error en attend event "+e)
 			render "Error"
 		}
 		
@@ -115,8 +165,9 @@ class HomeController {
 			render "No"
 			}
 		}
-		catch(Exception e){
-			render "Error"
+		catch(NullPointerException e){
+			System.out.println("Error en isAssistant "+e)
+			render "ErrorNull"
 		}
 		
 	}
@@ -130,7 +181,7 @@ class HomeController {
 		render "Success"
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			System.out.println("Error desatendiendo "+e)
 			render "Error"
 		}
 		
@@ -167,8 +218,11 @@ class HomeController {
 	}
 	
 	
+	/*
+	*Carga los asistentes a un evento dado su id
+	*/
 	def getAssistants(){
-		def StringBuilder assistants;
+		def java.lang.StringBuilder assistants;
 		try{
 		def eventAssistants = Event.get(params.idevent).assistants;
 		assistants = new StringBuilder();
@@ -186,10 +240,10 @@ class HomeController {
 			render "NoAssistants" 
 			
 		}
-		catch(Exception e ){
+		catch(NullPointerException e ){
 			
-			e.printStackTrace();
-			render "Error"
+			System.out.println("Error en los asistentes "+e)
+			render "ErrorNull"
 		}
 		
 	}
@@ -248,6 +302,63 @@ class HomeController {
 		println ("asdsaeloo")
 		redirect(controller: 'home', action: 'index' )
 		
+		
+	}
+	
+	//Envía emails a los asistentes al evento
+	def sendEmailToAssistants(idEvent){
+		
+		def Event deletedEvent = Event.get(idEvent)
+		def eventAssistants = deletedEvent.assistants
+		def String eventName = deletedEvent.title
+		for(User assistant in eventAssistants)
+		sendMail {
+			to assistant.emailUser
+			subject "Cancelación del evento:  "+ eventName 
+			body 'Hola '+ assistant.name + " decidimos enviarte este e-mail para informarte que el evento: "+eventName+" ha sido cancelado."
+		  }
+		
+		
+		
+	}
+	
+	//Borra el evento y llama a enviar emails
+	def deleteEvent(){
+		try{
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		sendEmailToAssistants(params.idevent)
+		Event.get(params.idevent).delete(flush: true);
+		}
+		catch(NullPointerException e){
+			render "ErrorNull"
+
+		}
+	}
+	
+	
+	//Revisa si dado el id de un evento el currentUser es el dueño.
+	def isOwner(){
+		try{
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def currentEvent = Event.get(params.idevent)
+		
+		//System.out.println(currentUser.eventCreator.events.get(params.idevent));
+		if(currentEvent.eventCreator.id == currentUser.eventCreator.id){
+			System.out.println("Si es el dueño")
+			render "Yes"
+		}
+		else
+			render "No"
+		
+		}
+		catch(NullPointerException x){
+	
+			System.out.println("Error en el owner "+ x);
+			render "ErrorNull"
+			
+		} 
+			
+			
 		
 	}
 	

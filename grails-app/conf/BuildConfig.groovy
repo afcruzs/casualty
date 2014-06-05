@@ -48,6 +48,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
+		
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
@@ -61,6 +62,8 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
 		
 		compile ":shiro:1.2.1"
+		
+		compile ":mail:1.0.5"
 		
     }
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 	<!-- includes map javascript functions. -->
 	
 	<g:javascript src="chat.js" />
@@ -108,6 +109,16 @@
 </div>
 
 		
+		<!-- Create a custom alert for when the event has been deleted-->
+		<div id="customAlert" class="modal hide fade">
+				<div id="customAlert" class="donatoAlert donatoAlert-error">
+				<h4>Oops!!!</h4>
+				Lo sentimos, este evento fue borrado
+			</div>
+		</div>
+		<!-- end creating cutos alert -->
+		
+		
 			<!-- create the modal-->
 				<div id="myModal" class="modal hide fade">
 						<div class="modal-header">
@@ -141,6 +152,14 @@
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
 									
+									<label for="">Categoria</label>
+									<select id="categoria" name ="categoria" >
+										<option>Deportes</option>
+										<option>Ocio</option>
+										<option>Academico</option>
+										<option selected>Otro</option>
+									</select>
+
 									<br>
 									<label for="">Hora Final</label>
 									<input type="time" id="end_hour"><br>
@@ -212,6 +231,7 @@
 							<div class="modal-body">
 							   
 							<div id="chatMessages"></div>
+							<br>
 							<input type="text" id="messageBox" name="message" onkeypress="messageKeyPress(this,event);"/>
 							<div id="temp"></div>
 							<!-- Campo escondido para pasar variables entre js y html -->
@@ -237,11 +257,13 @@
 							        var theCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
 							        var message = $('#messageBox').val();
 							        var hiddenId = $('#eventId').val();
+							        var myId = ${userId};
 							
 							        if (theCode == 13){
 								        console.log("like"+hiddenId);
 
-								        <g:remoteFunction action="submitMessage" params="'message='+message+'&idEvent='+hiddenId" update="temp"/>
+								        
+								        <g:remoteFunction action="submitMessage" params="'message='+message+'&idEvent='+hiddenId+'&userId='+myId" update="temp"/>
 								        /*jQuery.ajax({type:'POST',
 									        data:'message='+message+'&idEvent='+hiddenId, 
 									        url:'/CausalityAppProject/home/submitMessage',
@@ -258,9 +280,10 @@
 							
 							    function retrieveLatestMessages() {
 							    	var hiddenId = $('#eventId').val();
+							    	var myId = ${userId};
 							    	if( hiddenId != "" ){
 
-							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId" update="chatMessages"/>
+							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId+'&myId='+myId" update="chatMessages"/>
 
 								    	/*jQuery.ajax({type:'POST',data:'idEvent='+hiddenId, 
 									    	url:'/CausalityAppProject/home/retrieveLatestMessages',
@@ -275,7 +298,18 @@
 							        retrieveLatestMessages();
 							        setTimeout('pollMessages()', 300);
 							    }
-							
+
+							    function initModal(){
+							    	$('#chatModal').on('hidden', function () {
+							    	    /*
+							    	    	Bandera para que no haga ajax cuando
+							    	    	el chat esta cerrado.
+							    	    */
+							    	    $('#eventId').val('');  
+							    	})
+								}
+
+							    initModal();
 							    pollMessages();
 							</script>
 							

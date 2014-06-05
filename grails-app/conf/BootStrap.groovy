@@ -1,7 +1,10 @@
 import org.apache.shiro.crypto.hash.Sha512Hash
 
+import sun.awt.OSInfo;
+
 import com.casualtyApp.model.ClassGroup
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.EventCategory
 import com.casualtyApp.model.EventCreator
 import com.casualtyApp.model.SecRole
 import com.casualtyApp.model.SecUser
@@ -31,30 +34,51 @@ class BootStrap {
 		def admin = new SecUser(username: "Admin", passwordHash: new Sha512Hash("password").toHex())
 		admin.addToRoles(adminRole)
 		admin.save()
-	   
+		
+
 		
 		def usuario11/*a*/ = new User(emailUser:'davanegaspr@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
 			, name : "Diego", lastName : "Vanegas", biography: "La biografia", ubication : "San Andres")
 		usuario11.save(flush:true,failOnError:true)
+
 		
-		def ev = new Event('Yoga en la UN ',new Date(),new Date(),'Relajate con Yoga en la UN, es gratis.',1,"Jugar,correr,yoga",4.6348317,-74.0820247)
+		
+		
+		def EventCategory deportes = new EventCategory("Deportes", "Categoria relacionada con deportes y actividad física");
+		def EventCategory ocio = new EventCategory("Ocio", "Categoria relacionada con juegos de azar, actividades ludicas, etc.");
+		def EventCategory academico = new EventCategory("Academico", "Categoria relacionada con temas academicos como: estudiar, dar clases, hacer debates, etc");
+		def EventCategory otro = new EventCategory("Otro", "Categoria relacionada con todas las demas cosas");
+		
+
+		deportes.save(flush:true)
+		ocio.save(flush:true)
+		academico.save(flush:true)
+		otro.save(flush:true)
+		
+		def ev = new Event('Yoga en la UN ',new Date(),new Date(),'Relajate con Yoga en la UN, es gratis.',"Jugar,correr,yoga",ocio,4.6348317,-74.0820247)
 		
 		ev.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(ev)
 		usuario11.eventCreator.addToEvents( ev )
 		
 		
-		Event eventoMarcha = new Event('Marcha a la 30',new Date(),new Date(),'Marcha en apoyo al paro agrario',1,"Marcha,campesinos",4.6356794,-74.0825153)
+		Event eventoMarcha = new Event('Marcha a la 30',new Date(),new Date(),'Marcha en apoyo al paro agrario',"Marcha,campesinos",otro,4.6356794,-74.0825153)
+		
 		eventoMarcha.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoMarcha)
 		usuario11.eventCreator.addToEvents( eventoMarcha )
 		
-		Event eventoToque = new Event('Toque al aire libre.',new Date(),new Date(),'Toque al aire libre organizado por la facultad de artes.',1,"Toque, musica, arte",4.635862,-74.0826558)
+		
+		
+		Event eventoToque = new Event('Toque al aire libre.',new Date(),new Date(),'Toque al aire libre organizado por la facultad de artes.',"Toque, musica, arte", ocio,4.635862,-74.0826558)
+		
 		eventoToque.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoToque)
 		usuario11.eventCreator.addToEvents( eventoToque )
 		
-		Event eventoLibro = new Event('Dona un libro.',new Date(),new Date(),'Donacion de libros para jovenes de bachillerato, dona los libros que ya no uses.',1,"Educacion, libros",4.6352444,-74.082923)
+		
+		Event eventoLibro = new Event('Dona un libro.',new Date(),new Date(),'Donacion de libros para jovenes de bachillerato, dona los libros que ya no uses.',"Educacion, libros", academico,4.6352444,-74.082923)
+		
 		eventoLibro.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoLibro)
 		usuario11.eventCreator.addToEvents( eventoLibro )
@@ -73,7 +97,8 @@ class BootStrap {
 		//println e.getEventCreator().getUser()
 		
 		
-		def Evento11 = new Event('Competencia de natacion',new Date(),new Date(),'vive la emocion de la competencia y gana muchos premios',2,"Nadar,saltar",4.6362093,-74.0830734)
+		def Evento11 = new Event('Competencia de natacion',new Date(),new Date(),'vive la emocion de la competencia y gana muchos premios',"Nadar,saltar", deportes,4.6362093,-74.0830734)
+		Evento11.category = deportes;
 		Evento11.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(Evento11)
 		grupo11.eventCreator.addToEvents(Evento11)
