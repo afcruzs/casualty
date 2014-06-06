@@ -5,9 +5,15 @@
 	<!-- para que sirvan los botones desplegables y otras funcinalidades-->
  	<g:javascript src="jquery-1.11.1.min.js"/> 
  	<g:javascript src="bootstrap.min.js"/>
+ 	
+ 	<!-- para que sirva el captcha -->
+ 	<g:javascript src="jquery-1.3.2.js"/>
+    <g:javascript src="ui.core.js"/>
+    <g:javascript src="ui.sortable.js"/>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'captcha.css')}" />
   <link rel="stylesheet" type="text/css" href="${resource(dir:'bootstrap/css', file:'style.css')}" />
   <link rel="stylesheet" href="${resource(dir:'bootstrap/font-awesome/css', file:'font-awesome.min.css')}" /><!-- para que no se pixeleen los iconos -->
   <meta name="viewport" content="width=device-width, initial-escale=1.0" /><!-- para que sirva el responsive en todos los dispositivos -->
@@ -18,8 +24,6 @@
   <link rel="apple-touch-icon-precomposed" href="${resource(dir:'bootstrap/ico', file:'apple-touch-icon-57-precomposed.png')}"/>
   <link rel="shortcut icon" href="${resource(dir:'bootstrap/ico', file:'favicon.png')}"/>
 </head>
-
-<body>
 
 <body>
 
@@ -105,9 +109,35 @@
 								          <td><textarea name="biography" rows="5" cols="10">${biography}</textarea></td>
 								        </tr>
 								        <tr>
-								          <td/>
-								          <td><input type="submit" value="Registrarse &raquo;" class="btn btn-success btn-large" onclick = "this.form.action = 'register'"/>
-								          </td>
+								        	<td></td>
+												<td>
+												<div class="row-fluid">
+												 <div class="span8"></div>
+												  <div class="span2">
+														<div class="captcha_wrap">
+										                    <div class="captcha">
+																	Arrastre para ordenar
+										                    </div>
+										                    <ul id="sortable">
+										                        <li class="captchaItem">1</li>
+										                        <li class="captchaItem">2</li>
+										                        <li class="captchaItem">3</li>
+										                        <li class="captchaItem">4</li>
+										                        <li class="captchaItem">5</li>
+										                        <li class="captchaItem">6</li>
+										                    </ul>
+										                </div>
+									                </div>
+									                <div class="span2"></div>
+								                </div>
+								                </td>
+								        </tr>
+								        <tr>
+								         	<td>&nbsp;</td>
+								        </tr>
+								        <tr>
+								          <td></td>
+								          <td><input type="submit" value="Registrarse &raquo;" class="btn btn-success btn-large" onclick = "this.form.action = 'register'" id="formsubmit"/>
 								        </tr>
 								      </tbody>
 								    </table>
@@ -121,25 +151,77 @@
 		 <div class="span2"></div>
   	</div>
   </div>
+</div>
   <!-- fin container -->
   
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
   </g:if>
   
-       <!-- inicio footer -->
+     <!-- inicio footer -->
       <footer>
       	<div class="row-fluid">
       		<div class="span12">&nbsp;</div>
       		<div class="span12">
-        		<p class="pull-right"><a href="#">Back to top</a></p>
-        		<p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        		<p class="pull-right"><a href="#">Volver al inicio</a></p>
+        		<p>&copy; 2014 Casuality, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
        		 </div>
        		 <div class="span12">&nbsp;</div>
         </div>
       </footer>
 	 <!-- fin footer -->
- </div>
+
 </body>
+
+<script type="text/javascript">
+            (
+            function($){
+
+                $.fn.shuffle = function() {
+                    return this.each(function(){
+                        var items = $(this).children();
+
+                        return (items.length)
+                            ? $(this).html($.shuffle(items,$(this)))
+                        : this;
+                    });
+                }
+
+                $.fn.validate = function() {
+                    var res = false;
+                    this.each(function(){
+                        var arr = $(this).children();
+                        res =    ((arr[0].innerHTML=="1")&&
+                            (arr[1].innerHTML=="2")&&
+                            (arr[2].innerHTML=="3")&&
+                            (arr[3].innerHTML=="4")&&
+                            (arr[4].innerHTML=="5")&&
+                            (arr[5].innerHTML=="6"));
+                    });
+                    return res;
+                }
+
+                $.shuffle = function(arr,obj) {
+                    for(
+                    var j, x, i = arr.length; i;
+                    j = parseInt(Math.random() * i),
+                    x = arr[--i], arr[i] = arr[j], arr[j] = x
+                );
+                    if(arr[0].innerHTML=="1") obj.html($.shuffle(arr,obj))
+                    else return arr;
+                }
+
+            })(jQuery);
+
+            $(function() {
+                $("#sortable").sortable();
+                $("#sortable").disableSelection();
+                $("#sortable").shuffle();
+
+                $("#formsubmit").click(function(){
+                    ($("#sortable").validate()) ? alert("Si, usted es humano!") : alert("Captcha invalido, acaso es Diego? jaja!");
+                });
+            });
+</script>
 
 </html>
