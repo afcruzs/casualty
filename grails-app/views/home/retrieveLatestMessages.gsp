@@ -1,4 +1,4 @@
-<input type="hidden" name="lastDate" id="lastDate" />
+<input type="hidden" name="lastMessageId" id="lastMessageId" />
 <g:each in="${messages}" var="message">
     <div>
     	
@@ -23,7 +23,14 @@
     	
     	
     	<div class ="dateMessage" >${message.date}</div>
-    	
+    	<script>
+		var msgId = $('#lastMessageId').val( ${message.id} );
+		
+		</script>
     	
     </div>
 </g:each>
+<script>
+	var msgId = $('#messageId').val($('#lastMessageId').val());
+		
+</script>

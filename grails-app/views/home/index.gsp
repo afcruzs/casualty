@@ -234,8 +234,9 @@
 							<br>
 							<input type="text" id="messageBox" name="message" onkeypress="messageKeyPress(this,event);"/>
 							<div id="temp"></div>
-							<!-- Campo escondido para pasar variables entre js y html -->
+							<!-- Campos escondidos para pasar variables entre js y html -->
 							<input type="hidden" name="eventId" id="eventId" />
+							<input type="hidden" name="messageId" id="messageId"  />
 							
 							
 							<script>
@@ -280,10 +281,12 @@
 							
 							    function retrieveLatestMessages() {
 							    	var hiddenId = $('#eventId').val();
+							    	var msgId = $('#messageId').val();
 							    	var myId = ${userId};
 							    	if( hiddenId != "" ){
-
-							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId+'&myId='+myId" update="chatMessages"/>
+							    		
+						
+							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId+'&myId='+myId+'&lastMessageId='+msgId" asynchronous = "false" onSuccess="jQuery('#chatMessages').html(jQuery('#chatMessages').html()+data)"/>
 
 								    	/*jQuery.ajax({type:'POST',data:'idEvent='+hiddenId, 
 									    	url:'/CausalityAppProject/home/retrieveLatestMessages',
@@ -300,12 +303,16 @@
 							    }
 
 							    function initModal(){
+							    	$('#eventId').val(0);
+							    	$('#chatMessages').val('');    
 							    	$('#chatModal').on('hidden', function () {
 							    	    /*
 							    	    	Bandera para que no haga ajax cuando
 							    	    	el chat esta cerrado.
 							    	    */
-							    	    $('#eventId').val('');  
+							    	    $('#chatMessages').html('');  
+							    	    $('#eventId').val(0);
+								    	 
 							    	})
 								}
 

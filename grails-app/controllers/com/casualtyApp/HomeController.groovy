@@ -31,10 +31,10 @@ class HomeController {
 	 * Se asigna el nombre de usuario del creador de cada evento en cada mensaje para identificar
 	 * el creador.
 	 */
-	def retrieveLatestMessages(long idEvent, long myId) {
+	def retrieveLatestMessages(long idEvent, long myId, long lastMessageId ) {
 		
 		
-		def messages = Message.list().findAll({ it.event.id == idEvent })
+		def messages = Message.list().findAll({ it.event.id == idEvent && it.id > lastMessageId })
 		messages.sort{it.date}
 		messages.each{ it.setOwnerNickName( eventsService.getEventOwnerNickName( it.event ) ) }
 		
