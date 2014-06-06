@@ -102,6 +102,25 @@ class BootStrap {
 		usuario11.addToEventsToAttend(Evento11)
 		grupo11.eventCreator.addToEvents(Evento11)
 					
+		
+		/*se creo un usuario pertenecientes a otro grupo, para poderlo cargar en la inerface
+		 * de busqueda de grupos
+		 *  @author: Diego
+		 * */
+	
+		
+		
+		def usuario22 = new User(emailUser:'faarodriguezbe@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
+			, name : "Fabian", lastName : "Rodriguez", biography: "La biografia", ubication : "Bogota")
+		usuario22.save(flush:true,failOnError:true)
+		
+		
+		def grupo22 = new ClassGroup(nameGroup:'GrupoTenistas',description:'campeonatos',createAt: new Date(),userType:3,eventCreator : new EventCreator())
+		grupo22.save(flush:true,failOnError:true)
+		
+		grupo22.addToUser(usuario22)
+					
+		
     }
     def destroy = {
     }

@@ -199,13 +199,16 @@
 							       <div class="span12">
 							   	      
 								   
-								    <form action="">
-			      					<div class="input-append input-prepend">
-			      					<label for="">Nombre del Grupo</label>
-			        			    <input type="text" id = "nombre_grupo">
-			        			    <span class="add-on">@</span>
-			       					</div>
-			       					<br>
+								
+			      					  
+          <ul class="nav">
+          	  <li class="divider-vertical"></li>
+              <li>
+              <g:form class="navbar-form">
+				<richui:autoComplete name="group" action="${createLinkTo('dir': 'home/lookAJAX')}" onItemSelect="goToLocation(id)" />
+           	  </g:form>
+              </li>
+          </ul>
 								      
 								      
 								   </div>

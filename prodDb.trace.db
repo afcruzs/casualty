@@ -190,3 +190,63 @@ alter table event drop constraint FK5C6729A87BFB685 [90057-164]
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:724)
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "CLASS_GROUP" no encontrada
+Table "CLASS_GROUP" not found; SQL statement:
+alter table class_group drop constraint FKE6EC08F8DD15E614 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "EVENT" no encontrada
+Table "EVENT" not found; SQL statement:
+alter table event drop constraint FK5C6729A87BFB685 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "EVENT" no encontrada
+Table "EVENT" not found; SQL statement:
+alter table event drop constraint FK5C6729ADD15E614 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "EVENT_ASSISTANTS" no encontrada
+Table "EVENT_ASSISTANTS" not found; SQL statement:
+alter table event_assistants drop constraint FK11CF081A6F7454B [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "EVENT_ASSISTANTS" no encontrada
+Table "EVENT_ASSISTANTS" not found; SQL statement:
+alter table event_assistants drop constraint FK11CF081AF6F2C9E9 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "MESSAGE" no encontrada
+Table "MESSAGE" not found; SQL statement:
+alter table message drop constraint FK38EB00076F7454B [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "MESSAGE" no encontrada
+Table "MESSAGE" not found; SQL statement:
+alter table message drop constraint FK38EB0007F6F2C9E9 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "SEC_ROLE_PERMISSIONS" no encontrada
+Table "SEC_ROLE_PERMISSIONS" not found; SQL statement:
+alter table sec_role_permissions drop constraint FK103984692BCE198E [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "SEC_USER_PERMISSIONS" no encontrada
+Table "SEC_USER_PERMISSIONS" not found; SQL statement:
+alter table sec_user_permissions drop constraint FKBF3983ED0F8DD6E [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "SEC_USER_ROLES" no encontrada
+Table "SEC_USER_ROLES" not found; SQL statement:
+alter table sec_user_roles drop constraint FK3E2705F7D0F8DD6E [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "SEC_USER_ROLES" no encontrada
+Table "SEC_USER_ROLES" not found; SQL statement:
+alter table sec_user_roles drop constraint FK3E2705F72BCE198E [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "USER" no encontrada
+Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCBA000EF0E [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "USER" no encontrada
+Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCBDD15E614 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "USER_CLASS_GROUP" no encontrada
+Table "USER_CLASS_GROUP" not found; SQL statement:
+alter table user_class_group drop constraint FK89ECFA84E3931678 [42102-164]
+06-06 11:48:00 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "USER_CLASS_GROUP" no encontrada
+Table "USER_CLASS_GROUP" not found; SQL statement:
+alter table user_class_group drop constraint FK89ECFA84F6F2C9E9 [42102-164]

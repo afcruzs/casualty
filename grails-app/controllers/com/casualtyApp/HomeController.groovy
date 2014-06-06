@@ -3,6 +3,7 @@ package com.casualtyApp
 import org.apache.shiro.SecurityUtils
 
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.ClassGroup
 import com.casualtyApp.model.EventCategory;
 import com.casualtyApp.model.Message
 import com.casualtyApp.model.SecUser;
@@ -280,6 +281,23 @@ class HomeController {
 		}
 	}
 
+	def lookAJAX = {
+		def groups = ClassGroup.findAllByNameGroupLike("%${params.query}%")
+		
+		//Create XML response
+		render(contentType: "text/xml") {
+		results() {
+			groups.each { group ->
+			result(){
+					name(group.getNameGroup())
+					id(group.id)
+					}
+				}
+			}
+		}
+	}
+	
+	
 	/*
 	 * Se obtiene un objeto JSON con el id del evento
 	 */
