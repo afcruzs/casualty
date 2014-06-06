@@ -77,7 +77,7 @@
             <g:if test="${flash.message}">
    				 <div class="message text-center">
 							<div class="alert alert-error">
-								<button tupe="button" class="close" data-dismiss="alert">&times;</button><!--equis para cerrar-->
+								<button type="button" class="close" data-dismiss="alert">&times;</button><!--equis para cerrar-->
 								<h4>Alert!!!</h4>
 								${flash.message}
 							</div>

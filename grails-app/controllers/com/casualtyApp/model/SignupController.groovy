@@ -26,7 +26,7 @@ class SignupController {
 			// Make sure the passwords match
 			if (params.password != params.password2) {
 				flash.message = "Passwords do not match"
-				redirect(action:'index')
+				redirect(controller: 'auth', action: "index")
 			}
 
 			// Passwords match. Let's attempt to save the user

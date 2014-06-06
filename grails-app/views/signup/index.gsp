@@ -58,6 +58,25 @@
 <div class="container">
 	<div class="span12">&nbsp;</div>
 	<div class="span12">&nbsp;</div>
+	
+	<div class="row-fluid">
+			<!-- inicio alerta -->
+			<div class="span4">&nbsp;</div>
+			<div class="span4">
+            <g:if test="${flash.message}">
+   				 <div class="message text-center">
+							<div class="alert alert-error">
+								<button type="button" class="close" data-dismiss="alert">&times;</button><!--equis para cerrar-->
+								<h4>Alert!!!</h4>
+								${flash.message}
+							</div>
+						</div>
+  			</g:if>
+  			</div>
+  			<div class="span4">&nbsp;</div>
+  			<!-- fin alerta -->
+	</div>
+	
 	<div class="row-fluid">
 	<div class="span2"></div>
 		<div class="span8">
@@ -153,10 +172,7 @@
   </div>
 </div>
   <!-- fin container -->
-  
-  <g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-  </g:if>
+
   
      <!-- inicio footer -->
       <footer>
