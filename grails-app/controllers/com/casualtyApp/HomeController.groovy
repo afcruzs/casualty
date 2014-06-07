@@ -336,6 +336,10 @@ class HomeController {
 	//Borra el evento y llama a enviar emails
 	def deleteEvent(){
 		try{
+			
+
+		Message.executeUpdate("delete from Message where EVENT_ID=:id ",[id: params.idevent])
+		
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		sendEmailToAssistants(params.idevent)
 		Event.get(params.idevent).delete(flush: true);
