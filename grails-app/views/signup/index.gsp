@@ -235,7 +235,7 @@
                 $("#sortable").shuffle();
 
                 $("#formsubmit").click(function(){
-                    ($("#sortable").validate()) ? alert("Si, usted es humano!") : alert("Captcha invalido, acaso es Diego? jaja!");
+                    ($("#sortable").validate()) ? alert("Si, usted es humano!") : alert("Captcha invalido!");
                 });
             });
 </script>
