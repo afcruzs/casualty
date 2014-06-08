@@ -53,7 +53,7 @@
 	
 
 <!-- when the load is done initialize the map. -->
-<body onload="initialize(${events},'${username}')" >
+<body onload="initialize(${events},'${username}',getDate())" >
 <script>
 
 function showLoading(XMLHttpRequest){
@@ -160,7 +160,7 @@ function closeLoading(){
 									<label for="">Fecha de inicio</label>
 									
 									<div class="input-append date" id="d2" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
-									  <input class="span5" size="55" type="text" value="02-05-2014" id = "date2">
+									  	<input class="span10" type="text" value="02-05-2014" id = "date2">
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
 									<!-- <input type="date" id="date2"><br>-->
@@ -172,7 +172,7 @@ function closeLoading(){
 									<!--  <input type="date" id="date"><br>-->
 									
 									<div class="input-append date" id="d" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
-									  <input class="span5" size="55" type="text" value="02-05-2014" id="date">
+									  <input class="span10"  type="text" value="02-05-2014" id="date">
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
 									
@@ -407,7 +407,26 @@ function closeLoading(){
 	
 	<!-- fin actually loads the map -->
 	
-	
+	<script>
+		function getDate(){
+			fecha = new Date();
+			console.log("xd");
+			var a=fecha.getDate();
+			var b=fecha.getMonth();
+			if(a<10){
+				a="0"+a;
+			}
+			if(b<10){
+				b="0"+b;
+			}
+			var cad = a +"-" +b +"-" +fecha.getFullYear();
+
+			//valor.value =""+fecha.getDate+"-"+fecha.getFullYear()+"";
+			document.getElementById('date2').value = cad;
+			document.getElementById('date').value = cad;
+			//$("#d").val(new Date().toISOString().substring(0, 10));
+		}
+		</script>
 	
 	<script>
 		$().ready(function(){
@@ -416,7 +435,25 @@ function closeLoading(){
 			//jQuery('#date2').datepicker();	
 			//$('.datepicker').datepicker()
 
-			
+			/*$("#myModal").on("show",function(){
+					fecha = new Date();
+					console.log("xd");
+					var a=fecha.getDate();
+					var b=fecha.getMonth();
+					if(a<10){
+						a="0"+a;
+					}
+					if(b<10){
+						b="0"+b;
+					}
+					var cad = a +"-" +b +"-" +fecha.getFullYear();
+	
+					//valor.value =""+fecha.getDate+"-"+fecha.getFullYear()+"";
+					document.getElementById('date2').value = cad;
+					document.getElementById('date').value = cad;
+					//valor.value =cad;
+	
+				})*/
 			
 
 			$('#d2').datepicker().on('changeDate', function (ev) {
