@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -155,7 +154,7 @@
 								         	<td>&nbsp;</td>
 								        </tr>
 								        <tr>
-								          <td></td>
+								          <td><input type="hidden" name="captcha" id="isCaptcha" value=""/></td>
 								          <td><input type="submit" value="Registrarse &raquo;" class="btn btn-success btn-large" onclick = "this.form.action = 'register'" id="formsubmit"/>
 								        </tr>
 								      </tbody>
@@ -235,7 +234,8 @@
                 $("#sortable").shuffle();
 
                 $("#formsubmit").click(function(){
-                    ($("#sortable").validate()) ? alert("Si, usted es humano!") : alert("Captcha invalido!");
+                	var acepted = ($("#sortable").validate());
+   					document.getElementById("isCaptcha").value = acepted;
                 });
             });
 </script>

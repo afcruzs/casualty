@@ -7,16 +7,58 @@ import org.apache.shiro.SecurityUtils
 
 class SignupController {
 
-    def index() {
+	def index() {
 		SecUser user = new SecUser()
 		[user: user]
 	}
 	
 	def register(){
+		
+		/*
+		 * @autor Maikol
+		 * chequea todos los posibles errores a la hora de registrarse
+		 */
+
+		if(params.captcha.equals("false")){
+
+			flash.message = "Captcha ivalido"
+			redirect(action:'index')
+		
+		}else if(params.username.equals("")){
+				
+			flash.message = "Debe colocar un nombre de usuaio"
+			redirect(action:'index')
+		
+		}else if(params.name.equals("")){
+				
+			flash.message = "Debe colocar su nombre"
+			redirect(action:'index')
+		
+		}else if(params.lastname.equals("")){
+				
+			flash.message = "Debe colocar su apellido"
+			redirect(action:'index')
+		
+		}else if(params.password.equals("")){
+				
+			flash.message = "Debe colocar una contrasena"
+			redirect(action:'index')
+		
+		}else if(params.email.equals("")){
+				
+			flash.message = "Debe colocar un correo electronico"
+			redirect(action:'index')
+		
+		}else if(params.ubication.equals("")){
+				
+			flash.message = "Debe colocar su ubicacion"
+			redirect(action:'index')
+		
+		}else{
 		// Check to see if the username already exists
 		def user = SecUser.findByUsername(params.username)
 		if (user) {
-			flash.message = "User already exists '${params.username}'"
+			flash.message = "Intente con otro usuario : '${params.username}' ya existe"
 			redirect(action:'index')
 		}
 		
@@ -25,8 +67,8 @@ class SignupController {
 
 			// Make sure the passwords match
 			if (params.password != params.password2) {
-				flash.message = "Passwords do not match"
-				redirect(controller: 'auth', action: "index")
+				flash.message = "Las contrasenas no coinciden"
+				redirect(action: "index")
 			}
 
 			// Passwords match. Let's attempt to save the user
@@ -47,10 +89,10 @@ class SignupController {
 					
 					//save user info in User instance
 					
-					def userInfo = new User(emailUser:params.email,createdAt: new Date(), 
-						isUnalConfirmed:isUnalConfirmed(params.email),shiroUser:user, 
-						eventCreator : new EventCreator(), name : params.name, 
-						lastName : params.lastname, biography: params.biography, 
+					def userInfo = new User(emailUser:params.email,createdAt: new Date(),
+						isUnalConfirmed:isUnalConfirmed(params.email),shiroUser:user,
+						eventCreator : new EventCreator(), name : params.name,
+						lastName : params.lastname, biography: params.biography,
 						ubication : params.ubication)
 					
 					userInfo.save()
@@ -62,11 +104,12 @@ class SignupController {
 					redirect(controller: 'home', action: 'index' )
 				}
 				else {
+					//creo que nunca entrara aqui
 					redirect(controller: 'auth', action: 'index')
 				}
 			}
 		}
-		
+	  }
 	}
 	
 	def loginaux(){
@@ -76,7 +119,7 @@ class SignupController {
 	/*
 	 * Permite establecer si elcorreo suministrado
 	 * es unal.edu.co.
-	 * 
+	 *
 	 * @author: Felipe
 	 */
 	def isUnalConfirmed(String email){
