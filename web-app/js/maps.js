@@ -75,6 +75,13 @@ function initialize(events,u_name) {
 }
 
 
+function showLoading(){
+	$('#customAlert2').modal('show');
+}
+
+function closeLoading(){
+	$('#customAlert2').modal('hide');
+}
 
 
 function showAssistants(){
@@ -182,20 +189,20 @@ function buildNewEventInMap(){
 	  */
 
 	 jQuery.ajax({
-		 	beforeSend: showLoading,
+		 	 
 	        type:'POST', 
 	        data : newEvent,
 	        url:"saveNewEvent",
 	        async : false,
 	        success:function(data,textStatus){
-	        	closeLoading();
+	        	 
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
 	        	else{
 	        		lastEventId = data;
 	        	}
 	        },
-	        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
+	        error:function(XMLHttpRequest,textStatus,errorThrown){   }
 	  });
 	  
 	 
@@ -210,13 +217,13 @@ function getAssistants(){
 	
 
 	 jQuery.ajax({
-		 	beforeSend: showLoading,
+		 	 
 	        type:'POST', 
 	        data : { "idevent" : idCurrentEvent},
 	        url:"getAssistants",
 	        async : false,
 	        success:function(data,textStatus){ 
-	        	closeLoading();
+	        	 
 	        	if( data == "ErrorNull" )
 	        		if(!errorFlag){
 	        			$('#customAlert').modal('show'); 
@@ -231,7 +238,7 @@ function getAssistants(){
 	        		assistantsCurrentEvent = data.split(",");
 	        	}
 	        },
-	        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
+	        error:function(XMLHttpRequest,textStatus,errorThrown){   }
 	  });
 	  
 	
@@ -295,67 +302,86 @@ function showMarker(jsonMarker){
      */
     google.maps.event.addListener(marker, 'click', function() {
     	
+    	showLoading();
+    	window.setTimeout(function() {
     	
-    	errorFlag=false;
-    	currentMarker=marker;
-    	idCurrentEvent=jsonMarker.id;
-    	
-    	isOwner();
-    	isAssistant();
-    	getAssistants();
-    	
-		var contentString = '<h2>'+jsonMarker.title+'</h2>'+
-					  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
-					  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
-					  '<p>' + jsonMarker.description + '</p>' + 
-					  '<p> Tags: '
-					  
-		
-		var arrTags = jsonMarker.tags.split(",")
-		for( var i=0; i<arrTags.length; i++){
-			contentString += '<strong> '+arrTags[i]+'</strong>';
-			if( i != arrTags.length - 1 )
-				contentString += ",";
-		}
-		contentString+='</p><p>Categoria: <strong>'+ jsonMarker.categoryName +'</strong></p> '; 
-		if(!_isAssistant){
+	    	errorFlag=false;
+	    	currentMarker=marker;
+	    	idCurrentEvent=jsonMarker.id;
+	    	
+	    	isOwner();
+	    	isAssistant();
+	    	getAssistants();
+	    	
+	    	
+	    	
+			var contentString = '<h2>'+jsonMarker.title+'</h2>'+
+						  '<p>Inicia: <i>'+ jsonMarker.startTime + '</i></p>' +
+						  '<p>Termina: <i>'+ jsonMarker.endTime +'</i></p> ' +
+						  '<p>' + jsonMarker.description + '</p>' + 
+						  '<p> Tags: '
+						  
 			
+			var arrTags = jsonMarker.tags.split(",")
+			for( var i=0; i<arrTags.length; i++){
+				contentString += '<strong> '+arrTags[i]+'</strong>';
+				if( i != arrTags.length - 1 )
+					contentString += ",";
+			}
+			contentString+='</p><p>Categoria: <strong>'+ jsonMarker.categoryName +'</strong></p> '; 
+			if(!_isAssistant){
+				
+			
+				contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn btn-warning"> Asistir</button>';
+			}
+			else{
+				contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>';
+			}
+			
+			contentString+=deleteEventButton+'</p>'
+			
+			var href = "publicProfile?username="+ jsonMarker.user;
+			getAssistants();
+			showAssistants();
 		
-			contentString+='<p>'+'<button   type="submit"  onclick = "attendEvent()" class="btn btn-warning"> Asistir</button>';
-		}
-		else{
-			contentString+='<p>'+'<button   type="submit"  onclick = "unAttendEvent()" class="btn btn-info"> Ya no quiero asistir</button>';
-		}
-		
-		contentString+=deleteEventButton+'</p>'
-		
-		var href = "publicProfile?username="+ jsonMarker.user;
-		getAssistants();
-		showAssistants();
+			
+			
+			if(assistantsCurrentEvent)
+				contentString += hrefAssistants;
+			contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b></p>';
+			
+			//contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
+			var temp = "'"+jsonMarker.title+"'";
+			contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+','+temp+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
+			
+			
+			
+			
+			if(infowindow)
+				infowindow.close();
+			
+			infowindow = new google.maps.InfoWindow({
+			content: contentString,
+			maxWidth : 350
+			});
 	
-		
-		
-		if(assistantsCurrentEvent)
-			contentString += hrefAssistants;
-		contentString += '</p>' + 'Creado por: <b> ' + '<a href="' + href + '" >'+ jsonMarker.user + '</a></b></p>';
-		
-		//contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
-		var temp = "'"+jsonMarker.title+"'";
-		contentString+='<p>'+'<button   type="submit" onclick = "openChatModal('+jsonMarker.id+','+temp+')"  class="btn btn-success">Abrir Chat</button>'+'</p>';
-		
-		if(infowindow)
-			infowindow.close();
-		
-		infowindow = new google.maps.InfoWindow({
-		content: contentString,
-		maxWidth : 350
-		});
-
-		
-		
-    	infowindow.open(map,marker);
-        if (map.getStreetView().getVisible())
-        	infowindow.open(map.getStreetView(), marker)
+			
+			
+	    	infowindow.open(map,marker);
+	        if (map.getStreetView().getVisible())
+	        	infowindow.open(map.getStreetView(), marker)
+	        	
+	        
+        	google.maps.event.addListener(infowindow, 'domready', function() {
+        		closeLoading();
+        	});
+	       
+	        
+	        
+	        return false;
+    	});	
+    	
+    	
         
      });
     	
@@ -373,13 +399,13 @@ function closeCurrentMarker(){
 function isOwner(){
 	//console.log("is owner???:  ");
 	jQuery.ajax({
-		beforeSend: showLoading,
+		 
         type:'POST', 
         async: false,
         data : { "idevent" : idCurrentEvent},
         url:"isOwner",
         success:function(data,textStatus){ 
-        	closeLoading();
+        	 
         	if( data == "ErrorNull" )
         		if(!errorFlag){
 
@@ -397,20 +423,20 @@ function isOwner(){
         	}
    
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
+        error:function(XMLHttpRequest,textStatus,errorThrown){   }
   });
 }
 
 function isAssistant(){
 	//console.log("Impresion para asistente "+ idCurrentEvent);
 	jQuery.ajax({
-		beforeSend: showLoading,
+		 
         type:'POST', 
         async: false,
         data : { "idevent" : idCurrentEvent},
         url:"isAssistant",
         success:function(data,textStatus){ 
-        	closeLoading();
+        	 
         	if( data == "ErrorNull" )
         		if(!errorFlag){
         			$('#customAlert').modal('show'); 
@@ -428,7 +454,7 @@ function isAssistant(){
         	}
    
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
+        error:function(XMLHttpRequest,textStatus,errorThrown){   }
   });
 	
 }
@@ -436,34 +462,43 @@ function isAssistant(){
 function attendEvent(){
 	
 	
-//	console.log(idCurrentEvent)
+	showLoading();
 	
-	jQuery.ajax({
-		beforeSend: showLoading,
-        type:'POST', 
-        async: false,
-        data : { "idevent" : idCurrentEvent },
-        url:"attendEvent",
-        success:function(data,textStatus){ 
-        	console.log("acabamos...");
-        	closeLoading();
-        	if( data == "Error" )
-        		if(!errorFlag){
-        			$('#customAlert').modal('show'); 
-        			errorFlag=true;
-        			infowindow.close();
-        			currentMarker.setMap(null);
-        			infowindow.close();
-        		}
-        	if( data == "Success"){
-        		//console.log("Success")
-        		google.maps.event.trigger(currentMarker, 'click', {});
-        	}
-        },
-        error:function(XMLHttpRequest,textStatus,errorThrown){
-        	closeLoading();
-        }
-  });
+	 window.setTimeout(function() {
+		 
+		 jQuery.ajax({
+			 
+		        type:'POST', 
+		        async: false,
+		        data : { "idevent" : idCurrentEvent },
+		        url:"attendEvent",
+		        success:function(data,textStatus){ 
+		        	
+		        	closeLoading();
+		        	 
+		        	if( data == "Error" )
+		        		if(!errorFlag){
+		        			$('#customAlert').modal('show'); 
+		        			errorFlag=true;
+		        			infowindow.close();
+		        			currentMarker.setMap(null);
+		        			infowindow.close();
+		        		}
+		        	if( data == "Success"){
+		        		//console.log("Success")
+		        		google.maps.event.trigger(currentMarker, 'click', {});
+		        	}
+		        },
+		        error:function(XMLHttpRequest,textStatus,errorThrown){
+		        	 
+		        }
+		  });
+		 
+		 
+		 return false;
+	 });
+	
+	
 
 	
 	
@@ -473,28 +508,37 @@ function unAttendEvent(){
 	
 	//console.log(idCurrentEvent)
 	
-	jQuery.ajax({
-		beforeSend: showLoading,
-        type:'POST',
-        async: false,
-        data : { "idevent" : idCurrentEvent },
-        url:"unAttendEvent",
-        success:function(data,textStatus){
-        	closeLoading();
-        	if( data == "Error" )
-        		if(!errorFlag){
-        			$('#customAlert').modal('show'); 
-        			errorFlag=true;
-        			infowindow.close();
-        			currentMarker.setMap(null);			
-        		}
-        	if( data == "Success"){
-        		//console.log("Success")
-        		google.maps.event.trigger(currentMarker, 'click', {});
-        	}
-        },
-        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
-  });
+	showLoading();
+	
+	window.setTimeout(function() {
+	
+			jQuery.ajax({
+				 
+		        type:'POST',
+		        async: false,
+		        data : { "idevent" : idCurrentEvent },
+		        url:"unAttendEvent",
+		        success:function(data,textStatus){
+		        	
+		        	closeLoading();
+		        	
+		        	if( data == "Error" )
+		        		if(!errorFlag){
+		        			$('#customAlert').modal('show'); 
+		        			errorFlag=true;
+		        			infowindow.close();
+		        			currentMarker.setMap(null);			
+		        		}
+		        	if( data == "Success"){
+		        		//console.log("Success")
+		        		google.maps.event.trigger(currentMarker, 'click', {});
+		        	}
+		        },
+		        error:function(XMLHttpRequest,textStatus,errorThrown){  closeLoading();  }
+		  });
+		
+		return false;
+	});
 	
 	
 }
@@ -505,31 +549,36 @@ function unAttendEvent(){
 
 function deleteEvent(){
 	
-
-	jQuery.ajax({
-		beforeSend: showLoading,
-        type:'POST',
-        data : { "idevent" : idCurrentEvent },
-        url:"deleteEvent",
-        success:function(data,textStatus){ 
-        	closeLoading();
-        	if( data == "ErrorNull" )
-        		if(!errorFlag){
-        			$('#customAlert').modal('show'); 
-        			errorFlag=true;
-        			currentMarker.setMap(null);
-        		}
-        	if( data == "Success"){
-        		//console.log("Success")
-        	}
-        },
-        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
-  });
+	showLoading();
 	
-	  infowindow.close();
-	  currentMarker.setMap(null);
-
+	 window.setTimeout(function() {
 	
+
+		jQuery.ajax({
+			 
+		        type:'POST',
+		        data : { "idevent" : idCurrentEvent },
+		        url:"deleteEvent",
+		        success:function(data,textStatus){ 
+		        	 closeLoading();
+		        	if( data == "ErrorNull" )
+		        		if(!errorFlag){
+		        			$('#customAlert').modal('show'); 
+		        			errorFlag=true;
+		        			currentMarker.setMap(null);
+		        		}
+		        	if( data == "Success"){
+		        		//console.log("Success")
+		        	}
+		        },
+		        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading();  }
+		 });
+			
+		 infowindow.close();
+		 currentMarker.setMap(null);
+
+		 return false;
+	 });
 }
 
 /*

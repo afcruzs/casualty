@@ -54,17 +54,6 @@
 
 <!-- when the load is done initialize the map. -->
 <body onload="initialize(${events},'${username}',getDate())" >
-<script>
-
-function showLoading(XMLHttpRequest){
-//	$('#customAlert2').modal('show');
-}
-
-function closeLoading(){
-	//$('#customAlert2').modal('hide');
-	
-}
-</script>
 
 <!-- inicio menu -->
 <div class="navbar navbar-fixed-top">
@@ -133,9 +122,7 @@ function closeLoading(){
 		<!-- Modal de cargando -->
 		<div id="customAlert2"  class="modal hide">
 				
-				<div class="progress progress-striped active">
-				  <div class="bar" style="width: 40%;"></div>
-				</div>
+				<img width="100%" height="100%" alt="img"  src="http://jimpunk.net/Loading/wp-content/uploads/loading1.gif">
 			
 		</div>
 
