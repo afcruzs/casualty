@@ -33,7 +33,6 @@ var url = String(document.URL);
 
 
 
-
 /*
  * Son variables globales �tiles
  * 
@@ -72,7 +71,7 @@ function initialize(events,u_name) {
 		showEvents(events);
 	
 	lastupdate = (new Date()).getTime();
-	console.log(lastupdate);
+	//console.log(lastupdate);
 }
 
 
@@ -86,7 +85,7 @@ function showAssistants(){
 		for(var i =0;i<assistantsCurrentEvent.length-1;i++){
 			
 			hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[i] + ' >'+ assistantsCurrentEvent[i]   + ', </a>';
-			console.log(assistantsCurrentEvent[i] );
+			//console.log(assistantsCurrentEvent[i] );
 		}
 		hrefAssistants += '<a href=publicProfile?username=' + assistantsCurrentEvent[assistantsCurrentEvent.length-1] + ' >'+ assistantsCurrentEvent[assistantsCurrentEvent.length-1]   + ' </a>';
 		
@@ -111,17 +110,17 @@ function loadMarkerTest(){
 		};
 	
 	
-    console.log(event);
+  //  console.log(event);
    showMarker(event);
     
 }
 
 function showEvents(events){
 	for( var i=0; i<events.length; i++){
-		console.log( events[i] );
+	//	console.log( events[i] );
 		showMarker( events[i] );	
 		lastEventId = events[i].id;
-		console.log( "TheId",lastEventId );
+	//	console.log( "TheId",lastEventId );
 	}
 } 
 
@@ -148,7 +147,7 @@ function buildNewEventInMap(){
 	var d2 = $('#date2').val();
 	var d = $('#date').val();
 	var categoryName = $("#categoria option:selected").html();
-	console.log("Category "+ categoryName);
+	//console.log("Category "+ categoryName);
 	var start_hour = $('#start_hour').val();
 	var end_hour = $('#end_hour').val();
 	
@@ -174,7 +173,7 @@ function buildNewEventInMap(){
 		 
 	 };
 	 
-	 console.log(newEvent);
+	// console.log(newEvent);
 	 
 	 /*
 	  * Por medio de AJAX se logra llamar el metodo
@@ -183,18 +182,20 @@ function buildNewEventInMap(){
 	  */
 
 	 jQuery.ajax({
+		 	beforeSend: showLoading,
 	        type:'POST', 
 	        data : newEvent,
 	        url:"saveNewEvent",
 	        async : false,
-	        success:function(data,textStatus){ 
+	        success:function(data,textStatus){
+	        	closeLoading();
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
 	        	else{
 	        		lastEventId = data;
 	        	}
 	        },
-	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
 	  });
 	  
 	 
@@ -209,11 +210,13 @@ function getAssistants(){
 	
 
 	 jQuery.ajax({
+		 	beforeSend: showLoading,
 	        type:'POST', 
 	        data : { "idevent" : idCurrentEvent},
 	        url:"getAssistants",
 	        async : false,
 	        success:function(data,textStatus){ 
+	        	closeLoading();
 	        	if( data == "ErrorNull" )
 	        		if(!errorFlag){
 	        			$('#customAlert').modal('show'); 
@@ -228,7 +231,7 @@ function getAssistants(){
 	        		assistantsCurrentEvent = data.split(",");
 	        	}
 	        },
-	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
 	  });
 	  
 	
@@ -291,6 +294,7 @@ function showMarker(jsonMarker){
      * tambi�n lo abr� alli.
      */
     google.maps.event.addListener(marker, 'click', function() {
+    	
     	
     	errorFlag=false;
     	currentMarker=marker;
@@ -359,18 +363,23 @@ function showMarker(jsonMarker){
 
 function aux(value){
 	_isAssistant=value;
-	console.log(_isAssistant)
+	//console.log(_isAssistant)
 }
 
+function closeCurrentMarker(){
+	currentMarker.setMap(null);
+}
 
 function isOwner(){
-	console.log("is owner???:  ");
+	//console.log("is owner???:  ");
 	jQuery.ajax({
+		beforeSend: showLoading,
         type:'POST', 
         async: false,
         data : { "idevent" : idCurrentEvent},
         url:"isOwner",
         success:function(data,textStatus){ 
+        	closeLoading();
         	if( data == "ErrorNull" )
         		if(!errorFlag){
 
@@ -382,24 +391,26 @@ function isOwner(){
         		deleteEventButton= '<button   type="submit"  onclick = "deleteEvent()" class="btn btn-danger"> Eliminar</button>'
         	}
         	if( data =="No"){
-        		console.log("No es el dueño")
+        		//console.log("No es el dueño")
         		deleteEventButton='';
 
         	}
    
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){}
+        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
   });
 }
 
 function isAssistant(){
-	console.log("Impresion para asistente "+ idCurrentEvent);
+	//console.log("Impresion para asistente "+ idCurrentEvent);
 	jQuery.ajax({
+		beforeSend: showLoading,
         type:'POST', 
         async: false,
         data : { "idevent" : idCurrentEvent},
         url:"isAssistant",
         success:function(data,textStatus){ 
+        	closeLoading();
         	if( data == "ErrorNull" )
         		if(!errorFlag){
         			$('#customAlert').modal('show'); 
@@ -407,17 +418,17 @@ function isAssistant(){
         			currentMarker.setMap(null);
         		}
         	if( data == "Yes"){
-        		console.log("Es un asistente")
+        		//console.log("Es un asistente")
         		aux(true)
         	}
         	if( data =="No"){
-        		console.log("No es un asistente")
+        		//console.log("No es un asistente")
         		aux(false)
         		
         	}
    
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){}
+        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
   });
 	
 }
@@ -425,14 +436,17 @@ function isAssistant(){
 function attendEvent(){
 	
 	
-	console.log(idCurrentEvent)
+//	console.log(idCurrentEvent)
 	
 	jQuery.ajax({
+		beforeSend: showLoading,
         type:'POST', 
         async: false,
         data : { "idevent" : idCurrentEvent },
         url:"attendEvent",
         success:function(data,textStatus){ 
+        	console.log("acabamos...");
+        	closeLoading();
         	if( data == "Error" )
         		if(!errorFlag){
         			$('#customAlert').modal('show'); 
@@ -442,12 +456,12 @@ function attendEvent(){
         			infowindow.close();
         		}
         	if( data == "Success"){
-        		console.log("Success")
+        		//console.log("Success")
         		google.maps.event.trigger(currentMarker, 'click', {});
         	}
         },
         error:function(XMLHttpRequest,textStatus,errorThrown){
-        	
+        	closeLoading();
         }
   });
 
@@ -457,14 +471,16 @@ function attendEvent(){
 
 function unAttendEvent(){
 	
-	console.log(idCurrentEvent)
+	//console.log(idCurrentEvent)
 	
 	jQuery.ajax({
+		beforeSend: showLoading,
         type:'POST',
         async: false,
         data : { "idevent" : idCurrentEvent },
         url:"unAttendEvent",
-        success:function(data,textStatus){ 
+        success:function(data,textStatus){
+        	closeLoading();
         	if( data == "Error" )
         		if(!errorFlag){
         			$('#customAlert').modal('show'); 
@@ -473,11 +489,11 @@ function unAttendEvent(){
         			currentMarker.setMap(null);			
         		}
         	if( data == "Success"){
-        		console.log("Success")
+        		//console.log("Success")
         		google.maps.event.trigger(currentMarker, 'click', {});
         	}
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){}
+        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
   });
 	
 	
@@ -491,10 +507,12 @@ function deleteEvent(){
 	
 
 	jQuery.ajax({
+		beforeSend: showLoading,
         type:'POST',
         data : { "idevent" : idCurrentEvent },
         url:"deleteEvent",
         success:function(data,textStatus){ 
+        	closeLoading();
         	if( data == "ErrorNull" )
         		if(!errorFlag){
         			$('#customAlert').modal('show'); 
@@ -502,10 +520,10 @@ function deleteEvent(){
         			currentMarker.setMap(null);
         		}
         	if( data == "Success"){
-        		console.log("Success")
+        		//console.log("Success")
         	}
         },
-        error:function(XMLHttpRequest,textStatus,errorThrown){}
+        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading(); }
   });
 	
 	  infowindow.close();
@@ -532,7 +550,7 @@ function deleteEvent(){
 function updateMapIfNeeded(){
 	var currentTime = (new Date());
 	if( currentTime.getTime() - lastupdate > 3000 ){
-		console.log("update",currentTime - lastupdate);
+		//console.log("update",currentTime - lastupdate);
 		lastupdate = currentTime;
 		jQuery.ajax({
 	        type:'POST', 
@@ -543,7 +561,7 @@ function updateMapIfNeeded(){
 	        		showMarker( JSON.parse(data[i]) ); 
 	        	}
 	        },
-	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	        error:function(XMLHttpRequest,textStatus,errorThrown){ }
 	  });
 	}
 		
@@ -571,7 +589,7 @@ function default_map_loader(){
     	lati = event.latLng.lat();
         longi = event.latLng.lng();
         
-    	$('#myModal').modal('show');        
+        $('#myModal').modal('show');        
      });
     
 
@@ -610,6 +628,6 @@ function goToLocation(idEvent){
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
 	  });
 
-	 console.log(idEvent);
+	// console.log(idEvent);
 	
 }

@@ -18,8 +18,8 @@ class HomeController {
 
 	def index() {
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-	session.nickname = SecurityUtils.getSubject().getPrincipal()
-	   render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
+		session.nickname = SecurityUtils.getSubject().getPrincipal()
+	    render( view: "index", model : [ events: eventsService.getFirstEvents(), username :
 		   SecurityUtils.getSubject().getPrincipal(), userId : currentUser.id ] )
 	   
 
@@ -34,12 +34,20 @@ class HomeController {
 	 */
 	def retrieveLatestMessages(long idEvent, long myId, long lastMessageId ) {
 		
-		
-		def messages = Message.list().findAll({ it.event.id == idEvent && it.id > lastMessageId })
-		messages.sort{it.date}
-		messages.each{ it.setOwnerNickName( eventsService.getEventOwnerNickName( it.event ) ) }
-		
-		render( view  :"retrieveLatestMessages", model : [messages:messages, myId : myId ] )
+		if( Event.get(idEvent) != null ){
+			try{
+				def messages = Message.list().findAll({ it.event.id == idEvent && it.id > lastMessageId })
+				messages.sort{it.date}
+				messages.each{ it.setOwnerNickName( eventsService.getEventOwnerNickName( it.event ) ) }
+				
+				render( view  :"retrieveLatestMessages", model : [messages:messages, myId : myId ] )
+			}catch( NullPointerException ex ){
+				render "DeletedEvent"
+			}
+			
+		}else{
+			render "DeletedEvent"
+		}
 	}
 
 	/*
@@ -137,7 +145,7 @@ class HomeController {
 			render "Success"
 		}
 		catch(Exception e){
-			System.out.println("Error en attend event "+e)
+			//System.out.println("Error en attend event "+e)
 			render "Error"
 		}
 		
@@ -148,19 +156,19 @@ class HomeController {
 	def isAssistant(){
 		try{
 			
-		System.out.println("parametro  "+params.idevent)
+		//System.out.println("parametro  "+params.idevent)
 		def eventForAttend = Event.get(params.idevent)	
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )			
 		if(currentUser in eventForAttend.assistants){
 			render "Yes"
-			System.out.println("Es un asistente")
+			//System.out.println("Es un asistente")
 			}
 		else{
 			render "No"
 			}
 		}
 		catch(NullPointerException e){
-			System.out.println("Error en isAssistant "+e)
+			//System.out.println("Error en isAssistant "+e)
 			render "ErrorNull"
 		}
 		
@@ -175,7 +183,7 @@ class HomeController {
 		render "Success"
 		}
 		catch(Exception e){
-			System.out.println("Error desatendiendo "+e)
+			//System.out.println("Error desatendiendo "+e)
 			render "Error"
 		}
 		
@@ -236,7 +244,7 @@ class HomeController {
 		}
 		catch(NullPointerException e ){
 			
-			System.out.println("Error en los asistentes "+e)
+			//System.out.println("Error en los asistentes "+e)
 			render "ErrorNull"
 		}
 		
@@ -359,7 +367,7 @@ class HomeController {
 		
 		//System.out.println(currentUser.eventCreator.events.get(params.idevent));
 		if(currentEvent.eventCreator.id == currentUser.eventCreator.id){
-			System.out.println("Si es el dueño")
+			//System.out.println("Si es el dueño")
 			render "Yes"
 		}
 		else
@@ -368,7 +376,7 @@ class HomeController {
 		}
 		catch(NullPointerException x){
 	
-			System.out.println("Error en el owner "+ x);
+			//System.out.println("Error en el owner "+ x);
 			render "ErrorNull"
 			
 		} 

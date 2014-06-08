@@ -54,6 +54,17 @@
 
 <!-- when the load is done initialize the map. -->
 <body onload="initialize(${events},'${username}')" >
+<script>
+
+function showLoading(XMLHttpRequest){
+//	$('#customAlert2').modal('show');
+}
+
+function closeLoading(){
+	//$('#customAlert2').modal('hide');
+	
+}
+</script>
 
 <!-- inicio menu -->
 <div class="navbar navbar-fixed-top">
@@ -119,8 +130,21 @@
 		<!-- end creating cutos alert -->
 		
 		
+		<!-- Modal de cargando -->
+		<div id="customAlert2"  class="modal hide">
+				
+				<div class="progress progress-striped active">
+				  <div class="bar" style="width: 40%;"></div>
+				</div>
+			
+		</div>
+
+		
+
+		
+		
 			<!-- create the modal-->
-				<div id="myModal" class="modal hide fade">
+				<div id="myModal" class="modal hide">
 						<div class="modal-header">
 
 							<button type="button" class="close" data-dismiss="modal">salir</button>
@@ -238,7 +262,7 @@
 							<input type="text" id="messageBox" name="message" onkeypress="messageKeyPress(this,event);"/>
 							<div id="temp"></div>
 							<!-- Campos escondidos para pasar variables entre js y html -->
-							<input type="hidden" name="eventId" id="eventId" />
+							<input type="hidden" name="eventId" id="eventId" value="LEL" />
 							<input type="hidden" name="messageId" id="messageId"  />
 							
 							
@@ -281,6 +305,22 @@
 							            return true;
 							        }
 							    }
+
+								/*
+									Si el controller retorna que el evento no existe
+									se debe de cerrar el chat, mostar un mensaje de alerta
+									y cerrar el marker actual.
+								*/
+							    function handleMessages(data){
+								    if(data != "DeletedEvent")
+							    		jQuery('#chatMessages').html(jQuery('#chatMessages').html()+data);
+								    else{
+								    	hiddenId = "";
+								    	$('#customAlert').modal('show'); 
+								    	$('#chatModal').modal('hide');
+								    	closeCurrentMarker();
+									}
+								}
 							
 							    function retrieveLatestMessages() {
 							    	var hiddenId = $('#eventId').val();
@@ -288,8 +328,12 @@
 							    	var myId = ${userId};
 							    	if( hiddenId != "" ){
 							    		
-						
-							    		<g:remoteFunction action="retrieveLatestMessages" params="'idEvent='+hiddenId+'&myId='+myId+'&lastMessageId='+msgId" asynchronous = "false" onSuccess="jQuery('#chatMessages').html(jQuery('#chatMessages').html()+data)"/>
+										
+							    		<g:remoteFunction action="retrieveLatestMessages" 
+								    		params="'idEvent='+hiddenId+'&myId='+myId+'&lastMessageId='+msgId" 
+									    	asynchronous = "false" 
+										    onSuccess="handleMessages(data)"
+										/>
 
 								    	/*jQuery.ajax({type:'POST',data:'idEvent='+hiddenId, 
 									    	url:'/CausalityAppProject/home/retrieveLatestMessages',
@@ -301,12 +345,13 @@
 							    }
 							
 							    function pollMessages() {
+								    
 							        retrieveLatestMessages();
 							        setTimeout('pollMessages()', 300);
 							    }
 
 							    function initModal(){
-							    	$('#eventId').val(0);
+							    	$('#eventId').val('');
 							    	$('#chatMessages').val('');    
 							    	$('#chatModal').on('hidden', function () {
 							    	    /*
@@ -314,7 +359,7 @@
 							    	    	el chat esta cerrado.
 							    	    */
 							    	    $('#chatMessages').html('');  
-							    	    $('#eventId').val(0);
+							    	    $('#eventId').val('');
 								    	 
 							    	})
 								}
