@@ -120,16 +120,11 @@
 		
 		
 		<!-- Modal de cargando -->
-		<div id="customAlert2"  class="modal hide">
-				
-				<center>
-				<h2>Cargando...</h2>
-				
-				<g:img dir="images" file="loading_gif.gif"/>
-				</center>
-				
-				
-			
+		<div id="customAlert2" class="modal hide">
+				<center><h2>Cargando...</h2></center>
+				<section class="spinner-2">
+		        <div class="spinner"></div>
+		      </section>
 		</div>
 
 		
