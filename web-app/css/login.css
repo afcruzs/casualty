@@ -1,0 +1,64 @@
+
+*{ 
+	
+    font-size: 24px; 
+	font-family: "Times New Roman";
+} 
+
+h1{
+	
+	margin: 100 auto;
+	width: 30%;
+	//border: 1px solid #DDDDDD;
+	font-size: 4em;
+}
+
+body{
+	
+	background-image: url(../images/fond.jpg);
+
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+}
+
+.section{
+	
+	background-color: rgba(18, 66, 90, 0.3);
+	margin: 50 auto;
+	width: 90%;
+	height: 90%;
+	border: 1px solid #DDDDDD; 
+	
+}
+
+.message{
+	
+	//border: 1px solid #DDDDDD;
+	width: 27.5%;
+	margin: 0 auto;
+	color: #E20613;
+
+}
+
+.form{
+	
+	margin: 0 auto;
+    //border: 1px solid #DDDDDD; 
+    width: 32%;
+  	//border-radius:10px; 
+	
+}
+
+
+input { 
+	
+	color: #187EB2; 
+	background: #CECECE; 
+	border: 1px solid #FFFFFF;
+	border-radius: 10px;
+	
+} 
+	
