@@ -368,9 +368,6 @@
 <!-- fin menu -->
 
 
-			
-
-
 			<!-- actually loads the map -->
 			
 			<div id="map_canvas"></div> 
