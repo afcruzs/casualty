@@ -109,8 +109,11 @@ class BootStrap {
 		 * */
 	
 		
+		def admin22 = new SecUser(username: "fabian", passwordHash: new Sha512Hash("password").toHex())
+		admin22.addToRoles(adminRole)
+		admin22.save()
 		
-		def usuario22 = new User(emailUser:'faarodriguezbe@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin, eventCreator : new EventCreator()
+		def usuario22 = new User(emailUser:'faarodriguezbe@unal.edu.co',createdAt: new Date(), isUnalConfirmed:true,shiroUser:admin22, eventCreator : new EventCreator()
 			, name : "Fabian", lastName : "Rodriguez", biography: "La biografia", ubication : "Bogota")
 		usuario22.save(flush:true,failOnError:true)
 		
