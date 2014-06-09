@@ -65,5 +65,8 @@ grails.project.dependency.resolution = {
 		
 		compile ":mail:1.0.5"
 		
+		runtime ':facebook-sdk:0.6.4'
+		
+		
     }
 }

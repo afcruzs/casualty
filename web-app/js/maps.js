@@ -548,37 +548,30 @@ function unAttendEvent(){
 
 
 function deleteEvent(){
-	
-	showLoading();
-	
-	 window.setTimeout(function() {
-	
 
-		jQuery.ajax({
-			 
-		        type:'POST',
-		        data : { "idevent" : idCurrentEvent },
-		        url:"deleteEvent",
-		        success:function(data,textStatus){ 
-		        	 closeLoading();
-		        	if( data == "ErrorNull" )
-		        		if(!errorFlag){
-		        			$('#customAlert').modal('show'); 
-		        			errorFlag=true;
-		        			currentMarker.setMap(null);
-		        		}
-		        	if( data == "Success"){
-		        		//console.log("Success")
-		        	}
-		        },
-		        error:function(XMLHttpRequest,textStatus,errorThrown){ closeLoading();  }
-		 });
-			
-		 infowindow.close();
-		 currentMarker.setMap(null);
-
-		 return false;
+	jQuery.ajax({
+		 
+	        type:'POST',
+	        data : { "idevent" : idCurrentEvent },
+	        url:"deleteEvent",
+	        success:function(data,textStatus){ 
+	        	 
+	        	if( data == "ErrorNull" )
+	        		if(!errorFlag){
+	        			$('#customAlert').modal('show'); 
+	        			errorFlag=true;
+	        			currentMarker.setMap(null);
+	        		}
+	        	if( data == "Success"){
+	        		//console.log("Success")
+	        	}
+	        },
+	        error:function(XMLHttpRequest,textStatus,errorThrown){ }
 	 });
+		
+	 infowindow.close();
+	 currentMarker.setMap(null);
+
 }
 
 /*

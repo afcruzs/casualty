@@ -105,3 +105,8 @@ mail {
   }
 }
 
+grails.plugin.facebooksdk.app.id = 549942435114756
+grails.plugin.facebooksdk.app.permissions = ['email','public_profile','user_friends']
+grails.plugin.facebooksdk.app.secret = '806459a215fb5012ed3e3ed4fd73dc68'
+grails.plugin.facebooksdk.customSelector = 'jQuery'
+
