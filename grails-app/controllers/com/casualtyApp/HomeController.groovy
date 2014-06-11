@@ -3,6 +3,7 @@ package com.casualtyApp
 import org.apache.shiro.SecurityUtils
 
 import com.casualtyApp.model.Event
+import com.casualtyApp.model.EventCreator
 import com.casualtyApp.model.ClassGroup
 import com.casualtyApp.model.EventCategory;
 import com.casualtyApp.model.Message
@@ -462,6 +463,23 @@ class HomeController {
 		}else{
 			redirect(controller: 'home', action: 'index' )
 		}
+		
+		
+	}
+	
+	def updateGroups(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		//print params.nameGroup
+		//print currentUser
+		//print params.descripcionGroup
+		
+		def newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		newGroup.save(flush:true,failOnError:true)
+		
+		newGroup.addToUser(currentUser)
+		
+	
+		redirect(controller: 'home', action: 'groups' )
 		
 		
 	}

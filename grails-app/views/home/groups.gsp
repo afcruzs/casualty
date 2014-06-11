@@ -206,10 +206,10 @@
 						<h4>Crear Grupo</h4>
                         
 						<label for="">Nombre</label>
-						<input type="text" name="name">
+						<input type="text" name="nameGroup">
 		
 		                <label for="">Descripción</label>
-						<textarea class="form-control" name="biography" rows="7"></textarea>
+						<textarea class="form-control" name="descripcionGroup" rows="7"></textarea>
 		
 					
 						<div class="row-fluid">
@@ -217,7 +217,7 @@
 							<div class="span3">
 								<input type="submit" class="btn btn-primary"
 									value="Crear"
-									onclick="this.form.action = 'updateProfile'" />
+									onclick="this.form.action = 'updateGroups'" />
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
 							</div>
 						
