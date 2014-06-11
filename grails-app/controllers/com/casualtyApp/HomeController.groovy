@@ -483,4 +483,13 @@ class HomeController {
 		response.outputStream.flush()
 	}
 	
+	def help(){
+		
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		session.nickname = SecurityUtils.getSubject().getPrincipal()
+		render( view: "help", model : [username : SecurityUtils.getSubject().getPrincipal() ] )
+		
+	}
+	
+	
 }

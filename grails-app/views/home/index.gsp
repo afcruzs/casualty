@@ -99,7 +99,7 @@
                   <li class="divider"></li>
                   <li class="nav-header">Perfil</li>
                   <li><a href="profile">Mi Perfil</a></li>
-                  <li><a href="#">Configuración</a></li>                  
+                  <li><a href="help">Ayuda</a></li>                  
                 </ul>
               </li>
             </ul>
