@@ -123,67 +123,24 @@
 
 	<!-- inicio container -->
 <body
-	onload="initialize('${user}','${username}','${names}','${desc}','${tam}','${description }','${nameGroup}','${cond}')">
+	onload="initialize('${user}','${username}','${group}')">
 
-	<div class="container">
-
-
-		<div id="Modal" class="modal hide">
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal">salir</button>
-
-				<h4 class="text-center">Cambio de contraseña</h4>
-				<div class="row-fluid">
-
-
-					<div class="span12">
-
-						<label for="">contraseña anterior</label>
-						<input type="text" name="vieja" >
-						<label for="">nueva contraseña</label>
-						<input type="text" name="nueva" >
-
-
-					</div>
-
-
-				</div>
-
-
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">
-					Volver</button>
-				<input type="submit" data-dismiss="modal" class="btn btn-primary"
-									value="Guardar" onclick="action = 'changePassword'" />				
-
-			</div>
-		</div>
-
-
-
-
-
+	
 		<div class="span12">&nbsp;</div>
 		<div class="span12">&nbsp;</div>
-		<div class="row-fluid">
-			<div class="span8">
-				<div class="page-header">
-					<h4>Información de Mis Grupos</h4>
-				</div>
-			</div>
-		</div>
+		
+		
 
 		<div class="row-fluid">
+			<div class="span3">
+			</div>
 		<g:form id = "form1" enctype="multipart/form-data">
 			<div class="span2">
 				<ul class="thumbnails">
 						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
 							<g:if test="${cond==true}">					
-								<g:link action ='loadImage'>
-								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImageGroup')}">
+								<g:link action ='groups'>
+								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImageGroupModify')}/${group.nameGroup}">
 								</g:link>
 							</g:if>	
 							<g:else>
@@ -202,28 +159,26 @@
 					<hr>
 					<input type="submit" class="btn btn-primary" id="save" name="save"
 						value="  Guardar Imagen Grupo"
-						onclick="this.form.action = 'loadImage'" />	
+						onclick="this.form.action = 'modifyImage'" />	
 				
 			</div>
 			
-			<div class="span6">
+			<div class="span3">
 				<div class="well">
 					
-						<h4>Crear Grupo</h4>
-                        
 						<label for="">Nombre</label>
-						<input type="text" name="nameGroup" id='nameGroup' value ='${nameGroup}' >
+						<input type="text" name="nameGroup" id="nameGroup" value ='${group.nameGroup}' >
 		
 		                <label for="">Descripción</label>
-						<textarea class="form-control" name="descripcionGroup" rows="7">${description}</textarea>
+						<textarea class="form-control" name="descripcionGroup" id="descripcionGroup" rows="7">${group.description}</textarea>
 		
-					
+						<hr>
 						<div class="row-fluid">
-							<div class="span9"></div>
+							<div class="span1"></div>
 							<div class="span3">
 								<input type="submit" class="btn btn-primary"
-									value="Crear"
-									onclick="this.form.action = 'updateGroups'" />
+									value="Guardar Cambios"
+									onclick="this.form.action = 'modifyImage'" />
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
 							</div>
 						
@@ -231,47 +186,7 @@
 						<hr>
 
 
-						<div class="accordion" id="main">
-							<div class="accordion-group">
-								<div class="accordion-heading">
-									<a href="#com1" class="accordion-toggle" data-toggle="collapse"
-										data-parent="#main">Mis Grupos</a>
-								</div>
-
-								<div id="com1" class="accordion-body collapse">
-									<div class="accordion-inner">
-
-										<div class="accordion" id="main2">
-											<div class="accordion-group">
-											
-											<script>
-												var veces=0;
-												var k = "${tam}";
-												var cadNames = "${names}";
-												var splitNames=cadNames.split("@");
-												var cadDesc = "${desc}";
-												var splitDesc = cadDesc.split("@");
-												document.write("<ul class='nav nav-list well'>");
-												while (veces<k){	
-													document.write("<li>")
-													document.write("<a href='updateGroupCreator?nameGroup="+splitNames[veces]+"'>"+splitNames[veces]+"</a>")
-													document.write("</li>")
-													
-													veces++;
-												}
-												document.write("</ul>");
-												
-											</script>
-											
-											</div>
-
-										</div>
-
-
-									</div>
-								</div>
-							</div>
-						</div>
+						
 
 
 

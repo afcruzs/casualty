@@ -276,7 +276,7 @@
 							</div>
 						</div>
 
-
+						
 
 						<hr>
 						<label for="">Ubicación</label> <input type="text"

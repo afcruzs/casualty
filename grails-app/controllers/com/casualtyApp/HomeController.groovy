@@ -397,7 +397,6 @@ class HomeController {
 		for(event in currentUser.eventCreator.events){
 			 descEvent=descEvent + event.description + "@"
 			 nombresEvent=nombresEvent + event.title + "@"
-			 
 		 }
 		
 		render( view: "profile",model : [user : currentUser , username :
@@ -406,24 +405,116 @@ class HomeController {
 	}
 	
 	
-	def groups(){
-		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		def nombresGrupos="";
-		def descGrupos="";
-		ClassGroupTemp=null;
-		for(group in currentUser.classGroup){
-			descGrupos=descGrupos + group.description + "@"
-			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
-			 
-		 }
+
+	def publicProfile(){
+		def username = params.username
 		
-		render( view: "groups",model : [user : currentUser , username :
-		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size(),cond : false] )
+		
+		if( SecUser.findByUsername(username) != null ){
+			def currentUser = User.get( SecUser.findByUsername(username).id )
+			
+			def namesEvent="";
+			def descEvent="";
+			for(event in currentUser.eventCreator.events){
+				 descEvent=descEvent + event.description + "@"
+				 namesEvent=namesEvent + event.title + "@"
+				 
+			 }
+			
+			render( view: "publicProfile",model : [user : currentUser , username :
+				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username] )
+		}else{
+			render( view: "publicGroup",model : [ groupName : username ] )
+			
+		}
 	}
 	
 	
+	
+
+	def updateProfile(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		currentUser.biography=params.biography
+		currentUser.name=params.name
+		currentUser.lastName=params.lastName
+		currentUser.ubication=params.ubication
+		currentUser.emailUser=params.email
+		
+		if(params.screenshot!=null &&  params.screenshot.getBytes().size()>0)
+			currentUser.screenshot =params.screenshot.getBytes()
+		
+		if(currentUser.save()){
+			redirect(controller: 'home', action: 'profile' )
+		}else{
+			redirect(controller: 'home', action: 'index' )
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	/**
+	 * guarda un grupo en la DB asociado a un usuario
+	 * 
+	 * */
+	
+	
+	
+	
+	
+	def updateGroups(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		print params.nameGroup
+		def newGroup;
+		if(ClassGroupTemp!=null){
+			newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		}else{
+			newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		}
+		
+		newGroup.save(flush:true)
+		
+		newGroup.addToUser(currentUser)
+		
+	
+		redirect(controller: 'home', action: 'groups' )
+		
+		
+	}
+	
+	
+	def publicGroup(){
+	
+			
+			
+		}
+	
+	
+	
+	
+	def updateGroupCreator(){
+		
+		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def cond=true
+		if(currentGroup.screenshot==null){
+			cond=false
+		}else{
+		}
+		
+		render( view: "modifyGroup",model : [user : currentUser , username :
+		   SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+		
+		
+	}
+	
+	
+	
 	/*
-	 *Carga la imagen de un grupo antes de ser creado 
+	 *Carga la imagen de un grupo antes de ser creado
 	 *
 	 * */
 	
@@ -449,87 +540,57 @@ class HomeController {
 		
 		render( view: "groups",model : [user : currentUser , username :
 		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos ,
-		    tam : currentUser.classGroup.size(),description : description , nameGroup : name, cond : cond] )
-	}
-	
-		
-	
-	def publicProfile(){
-		def username = params.username
-		
-		
-		if( SecUser.findByUsername(username) != null ){
-			def currentUser = User.get( SecUser.findByUsername(username).id )
-			
-			def namesEvent="";
-			def descEvent="";
-			for(event in currentUser.eventCreator.events){
-				 descEvent=descEvent + event.description + "@"
-				 namesEvent=namesEvent + event.title + "@"
-				 
-			 }
-			
-			render( view: "publicProfile",model : [user : currentUser , username :
-				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username] )
-		}else{
-			render( view: "publicGroup",model : [ groupName : username ] )
-			
-		}
-	}
-	
-	def publicGroup(){
-
+			tam : currentUser.classGroup.size(),description : description , nameGroup : name, cond : cond] )
 	}
 	
 	
-	def updateProfile(){
+	def groups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		currentUser.biography=params.biography
-		currentUser.name=params.name
-		currentUser.lastName=params.lastName
-		currentUser.ubication=params.ubication
-		currentUser.emailUser=params.email
+		def nombresGrupos="";
+		def descGrupos="";
+		ClassGroupTemp=null;
+		for(group in currentUser.classGroup){
+			descGrupos=descGrupos + group.description + "@"
+			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
+			 
+		 }
 		
-		if(params.screenshot!=null &&  params.screenshot.getBytes().size()>0)
-			currentUser.screenshot =params.screenshot.getBytes()
-		
-		if(currentUser.save()){
-			redirect(controller: 'home', action: 'profile' )
-		}else{
-			redirect(controller: 'home', action: 'index' )
-		}
-		
-		
+		render( view: "groups",model : [user : currentUser , username :
+		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size(),cond : false] )
 	}
 	
-	/**
-	 * guarda un grupo en la DB asociado a un usuario
-	 * 
-	 * */
-	def updateGroups(){
+	def modifyImage(){
+		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		print params.nameGroup
-		def newGroup;
-		if(ClassGroupTemp!=null){
-			newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
-		}else{
-			newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		def cond=true
+		
+		currentGroup.nameGroup = params.nameGroup
+		currentGroup.description = params.descripcionGroup
+		
+		if(params.screenshot!=null &&  params.screenshot.getBytes().size()>0){
+			currentGroup.screenshot = params.screenshot.getBytes()
 		}
-		print newGroup.screenshot
-		newGroup.save(flush:true,failOnError:true)
 		
-		newGroup.addToUser(currentUser)
-		
-	
-		redirect(controller: 'home', action: 'groups' )
+		if(currentGroup.save()){
+			render( view: "modifyGroup",model : [user : currentUser , username :
+				SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+		}else{
+			print("error")
+			render( view: "modifyGroup",model : [user : currentUser , username :
+				SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+		}
 		
 		
 	}
+	
 	
 	def initPage(){
 		
 		
 	}
+	
+	
+	
 	
 	def showImage()  {
 		def currentUser
@@ -547,10 +608,13 @@ class HomeController {
 	
 	
 	def showImageGroup()  {
-		def currentUser
-		
-		
 		response.outputStream << ClassGroupTemp.screenshot
+		response.outputStream.flush()
+	}
+	
+	def showImageGroupModify()  {
+		def currentGroup = ClassGroup.findByNameGroup(params.id)
+		response.outputStream << currentGroup.screenshot
 		response.outputStream.flush()
 	}
 	
