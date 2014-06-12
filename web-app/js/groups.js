@@ -14,7 +14,8 @@ function joinToGroup(theGroup){
         success:function(data,textStatus){ 
         	if( data != "ERROR"){
         		//alert('Usted se ha unido a ' + theGroup + ' satisfactoriamente.');
-        		location.reload();
+        		location.reload();  
+        	
         	}
         	
         },

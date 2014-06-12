@@ -468,6 +468,7 @@ class HomeController {
 			if(theGroup.screenshot == null)
 				cond=false
 				
+			
 			def inGroup = theGroup.user.contains(currentUser)
 			
 			
