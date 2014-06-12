@@ -132,14 +132,14 @@
 		
 
 		<div class="row-fluid">
-			<div class="span3">
+			<div class="span2">
 			</div>
 		<g:form id = "form1" enctype="multipart/form-data">
 			<div class="span2">
 				<ul class="thumbnails">
 						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
-							<g:if test="${cond==true}">					
-								<g:link action ='index'>
+							<g:if test="${group?.screenshot}">					
+								<g:link action ='groups'>
 								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImageGroupModify')}/${group.nameGroup}">
 								</g:link>
 							</g:if>	
@@ -150,35 +150,55 @@
 								
 											
 				</ul>
-				<hr>
-				
+				<input type="hidden" name="idGroup" id="idGroup" value="${group.id}" />
+				<div class="span12">&nbsp;</div>
+				<input type="file" id="screenshot" name="screenshot"
+						style="display: none"> 
+						<a class="btn btn-success" onclick="$('input[id=screenshot]').click();"><i class="fa fa-arrow-up"></i>
+							Cargar imagen
+						</a>
+					<div class="span12">&nbsp;</div>
+					<input type="submit" class="btn btn-primary" id="save" name="save"
+						value="ver Imagen"
+						onclick="this.form.action = 'modifyImage'" />	
 				
 			</div>
 			
 			<div class="span3">
 				<div class="well">
 					
-						<label for="">Nombre</label>
-						<p class=form-control-static>'${group.nameGroup}' </p>
-						<label for="">Descripción</label>
+						<label for=""><h3>Nombre</h3></label>
+						<p class=form-control-static>${group.nameGroup}</p>
+						<label for=""><h3>Descripción</h3></label>
 						<div class="well">
 							<p>${group.description}</p>
 						</div>
+		                
+		
 						<hr>
+								</div>
+
+
 				</div>
-			</div>
+			
+					
+							
+				
 					</g:form>
 				</div>
 
 	<!-- Fin container -->
 
 
-<g:if test="${inGroup == true}">
+	<g:if test="${inGroup == true}">
      <button  onclick = "leaveGroup('${group.nameGroup}')" class="btn btn-warning">Abandonar Grupo</button>
 </g:if>
 <g:else>
      <button  onclick = "joinToGroup('${group.nameGroup}')" class="btn btn-info"> Unirse a Grupo</button>
 </g:else>
+
+
+	
 
 
 </body>
