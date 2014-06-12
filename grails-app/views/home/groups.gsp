@@ -34,7 +34,6 @@
 </head>
 
 <body>
-<body>
 	<!-- inicio menu -->
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -85,6 +84,9 @@
 	</div>
 
 	<!-- Fin menu -->
+	
+	
+	
 <!-- create the modal to look up-->
 				  
 				   <div id="mylook" class="modal hide fade">
@@ -122,8 +124,7 @@
 			<!--end create the modal-->
 
 	<!-- inicio container -->
-<body
-	onload="initialize('${user}','${username}','${names}','${desc}','${tam}','${description }','${nameGroup}','${cond}')">
+<body>
 
 	<div class="container">
 
@@ -207,8 +208,26 @@
 			</div>
 			
 			<div class="span6">
+				<div class="row-fluid">
+						<!-- inicio alerta -->
+						<div class="span3">&nbsp;</div>
+						<div class="span6">
+			            <g:if test="${flash.message}">
+			   				 <div class="message text-center">
+										<div class="alert alert-success">
+											<button type="button" class="close" data-dismiss="alert">&times;</button><!--equis para cerrar-->
+											<!--  <h4>Alert!!!</h4> -->
+											${flash.message}
+										</div>
+									</div>
+			  			</g:if>
+			  			</div>
+			  			<div class="span3">&nbsp;</div>
+			  			<!-- fin alerta -->
+				</div>
+			
 				<div class="well">
-					
+							
 						<h4>Crear Grupo</h4>
                         
 						<label for="">Nombre</label>
@@ -251,6 +270,8 @@
 												var splitNames=cadNames.split("@");
 												var cadDesc = "${desc}";
 												var splitDesc = cadDesc.split("@");
+											
+													
 												document.write("<ul class='nav nav-list well'>");
 												while (veces<k){	
 													document.write("<li>")
@@ -278,21 +299,23 @@
 						<hr>
 						
 						</div>
+						</div>
+
+					</div>
 					</g:form>
 				</div>
 
 		</div>
 
 
-	</div>
-
-</div>
+	
 
 	<!-- Fin container -->
 
 
 	<!-- inicio footer -->
 	<footer>
+	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">&nbsp;</div>
 
@@ -307,6 +330,7 @@
 			</div>
 			<div class="span12">&nbsp;</div>
 
+		</div>
 		</div>
 	</footer>
 	<!-- fin footer -->

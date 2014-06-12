@@ -123,7 +123,7 @@
 
 	<!-- inicio container -->
 <body
-	onload="initialize('${user}','${username}','${group}')">
+	onload="initialize('${user}','${username}','${group}','${cond}')">
 
 	
 		<div class="span12">&nbsp;</div>
@@ -132,13 +132,13 @@
 		
 
 		<div class="row-fluid">
-			<div class="span3">
+			<div class="span2">
 			</div>
 		<g:form id = "form1" enctype="multipart/form-data">
 			<div class="span2">
 				<ul class="thumbnails">
 						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
-							<g:if test="${cond==true}">					
+							<g:if test="${group?.screenshot}">					
 								<g:link action ='groups'>
 								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImageGroupModify')}/${group.nameGroup}">
 								</g:link>
@@ -150,20 +150,24 @@
 								
 											
 				</ul>
-				<hr>
+				<input type="hidden" name="idGroup" id="idGroup" value="${group.id}" />
+				<div class="span12">&nbsp;</div>
 				<input type="file" id="screenshot" name="screenshot"
 						style="display: none"> 
-						<a class="btn btn-primary" onclick="$('input[id=screenshot]').click();">
+						<a class="btn btn-success" onclick="$('input[id=screenshot]').click();"><i class="fa fa-arrow-up"></i>
 							Cargar imagen
 						</a>
-					<hr>
+					<div class="span12">&nbsp;</div>
 					<input type="submit" class="btn btn-primary" id="save" name="save"
 						value="ver Imagen"
 						onclick="this.form.action = 'modifyImage'" />	
 				
 			</div>
 			
-			<div class="span3">
+			<div class="span4">
+			
+					
+							
 				<div class="well">
 					
 						<label for="">Nombre</label>
@@ -171,8 +175,7 @@
 		
 		                <label for="">Descripción</label>
 						<textarea class="form-control" name="descripcionGroup" id="descripcionGroup" rows="7">${group.description}</textarea>
-		
-						<hr>
+						<div class="span12">&nbsp;</div>
 						<div class="row-fluid">
 							<div class="span1"></div>
 							<div class="span3">
@@ -182,32 +185,20 @@
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
 							</div>
 						
-						
-						<hr>
+						</div>
+						</div>
 
 
-						
-
-
-
-						<hr>
-						
 						</div>
 					</g:form>
 				</div>
-
-		</div>
-
-
-	</div>
-
-</div>
 
 	<!-- Fin container -->
 
 
 	<!-- inicio footer -->
 	<footer>
+	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">&nbsp;</div>
 
@@ -222,6 +213,7 @@
 			</div>
 			<div class="span12">&nbsp;</div>
 
+		</div>
 		</div>
 	</footer>
 	<!-- fin footer -->
