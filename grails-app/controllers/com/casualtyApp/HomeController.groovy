@@ -432,7 +432,16 @@ class HomeController {
 			render( view: "publicProfile",model : [user : currentUser , username :
 				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username] )
 		}else{
-			render( view: "publicGroup",model : [ groupName : username ] )
+		
+			def currentGroup = ClassGroup.findByNameGroup(params.username)
+			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+			def cond=true
+			if(currentGroup.screenshot==null){
+				cond=false
+			}
+			render( view: "publicGroup",model : [user : currentUser , username :
+			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+			//render( view: "publicGroup",model : [ groupName : username ] )
 			
 		}
 	}
@@ -500,11 +509,9 @@ class HomeController {
 	}
 	
 	
-	def publicGroup(){
-	
-			
-			
-		}
+	def publicGroup(){	
+			print ("hola care cola")
+	}
 	
 	
 	
@@ -516,7 +523,6 @@ class HomeController {
 		def cond=true
 		if(currentGroup.screenshot==null){
 			cond=false
-		}else{
 		}
 		
 		render( view: "modifyGroup",model : [user : currentUser , username :
