@@ -439,8 +439,12 @@ class HomeController {
 			if(currentGroup.screenshot==null){
 				cond=false
 			}
+			
+			
+			def inGroup = currentGroup.user.contains(currentUser)
+			
 			render( view: "publicGroup",model : [user : currentUser , username :
-			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond, inGroup : inGroup] )
 			//render( view: "publicGroup",model : [ groupName : username ] )
 			
 		}
@@ -452,7 +456,9 @@ class HomeController {
 	 */
 	def publicGroupProxy(){
 		
+		
 		def theGroup = ClassGroup.get(params.id)
+		
 		
 		
 		
@@ -462,11 +468,13 @@ class HomeController {
 			if(theGroup.screenshot == null)
 				cond=false
 				
-			render( view: "publicGroup",model : [user : currentUser , username :
-					SecurityUtils.getSubject().getPrincipal() , group : theGroup, cond : cond] )
+			def inGroup = theGroup.user.contains(currentUser)
 			
-		}else 
-			render( view: "index" )
+			
+			render( view: "publicGroup",model : [user : currentUser , username :
+					SecurityUtils.getSubject().getPrincipal() , group : theGroup, cond : cond, inGroup : inGroup] )
+			
+		}else render( view: "index" )
 	
 			
 	}
@@ -683,6 +691,16 @@ class HomeController {
 		
 		if( theGroup != null ){
 			theGroup.addToUser(currentUser)
+			render "Success"
+		}else render "ERROR"
+	}
+	
+	def leaveGroup(){
+		ClassGroup theGroup = ClassGroup.findByNameGroup(params.groupName)
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		
+		if( theGroup != null ){
+			theGroup.removeFromUser(currentUser)
 			render "Success"
 		}else render "ERROR"
 	}

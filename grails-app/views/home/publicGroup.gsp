@@ -171,7 +171,15 @@
 				</div>
 
 	<!-- Fin container -->
-<button  onclick = "joinToGroup('${group.nameGroup}')" class="btn btn-info"> Unirse a Grupo</button>
+
+
+<g:if test="${inGroup == true}">
+     <button  onclick = "leaveGroup('${group.nameGroup}')" class="btn btn-warning">Abandonar Grupo</button>
+</g:if>
+<g:else>
+     <button  onclick = "joinToGroup('${group.nameGroup}')" class="btn btn-info"> Unirse a Grupo</button>
+</g:else>
+
 
 </body>
 
