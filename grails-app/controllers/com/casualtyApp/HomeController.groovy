@@ -79,7 +79,8 @@ class HomeController {
 		try{
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 			def cat = EventCategory.findByName(params.categoryName)
-
+			
+						
 			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
 													parseDate(params.endTime, params.endHour),params.description, params.tags,
 													cat, 
@@ -88,10 +89,17 @@ class HomeController {
 			
 			
 			
+			if( params.selectedGroup.equals("No") ){
+				newEvent.addToAssistants(currentUser)
+				currentUser.addToEventsToAttend(newEvent)
+				currentUser.eventCreator.addToEvents( newEvent ).save(flush: true)
+			}else{
+				def groupCreator = ClassGroup.findByNameGroup(params.selectedGroup)
+				newEvent.addToAssistants(currentUser)
+				currentUser.addToEventsToAttend(newEvent)
+				groupCreator.eventCreator.addToEvents( newEvent ).save(flush: true)
+			}
 			
-			newEvent.addToAssistants(currentUser)
-			currentUser.addToEventsToAttend(newEvent)
-			currentUser.eventCreator.addToEvents( newEvent ).save(flush: true)
 			
 			
 			while( !newEvent.save(flush: true) );
@@ -628,5 +636,9 @@ class HomeController {
 		
 	}
 	
+	def getUserGroups(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		render currentUser.classGroup as JSON
+	}
 	
 }
