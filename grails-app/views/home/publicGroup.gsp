@@ -167,9 +167,9 @@
 			<div class="span3">
 				<div class="well">
 					
-						<label for="">Nombre</label>
+						<label for=""><h3>Nombre</h3></label>
 						<p class=form-control-static>${group.nameGroup}</p>
-						<label for="">Descripción</label>
+						<label for=""><h3>Descripción</h3></label>
 						<div class="well">
 							<p>${group.description}</p>
 						</div>
