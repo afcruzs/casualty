@@ -123,7 +123,7 @@
 
 	<!-- inicio container -->
 <body
-	onload="initialize('${user}','${username}','${ names}','${desc }','${tam}')">
+	onload="initialize('${user}','${username}','${names}','${desc}','${tam}','${description }','${nameGroup}','${cond}')">
 
 	<div class="container">
 
@@ -177,39 +177,45 @@
 		</div>
 
 		<div class="row-fluid">
+		<g:form id = "form1" enctype="multipart/form-data">
 			<div class="span2">
-		
+				<ul class="thumbnails">
 						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
-						<g:if test="${user?.screenshot}"  >						
-								<g:link action ='profile'>
-								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImage')}/${username}">
-								</g:link>			
-						</g:if>
-						
-						
-					
-					
-				    <div class="row-fluid">
-					    <li class="span6"><a href="#"> 
-					    <p class="">${username}</p>
-				        </a></li>
-				        <li class="span6"><a href="profile"> 
-					    <p class="">Editar perfil</p>
-				        </a></li>
-				     </div>	
+							<g:if test="${cond==true}">					
+								<g:link action ='loadImage'>
+								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImageGroup')}/${image}">
+								</g:link>
+							</g:if>	
+							<g:else>
+								<r:img file="fotoVacia.jpg" alt="" />
+							</g:else>							
+								
+								
+											
 				</ul>
+				<hr>
+				<input type="file" id="screenshot" name="screenshot"
+						style="display: none"> 
+						<a class="btn btn-primary" onclick="$('input[id=screenshot]').click();">
+							Cargar imagen
+						</a>
+					<hr>
+					<input type="submit" class="btn btn-primary" id="save" name="save"
+						value="  Guardar Imagen Grupo"
+						onclick="this.form.action = 'loadImage'" />	
+				
 			</div>
 			
 			<div class="span6">
 				<div class="well">
-					<g:form id = "form1">
+					
 						<h4>Crear Grupo</h4>
                         
 						<label for="">Nombre</label>
-						<input type="text" name="nameGroup">
+						<input type="text" name="nameGroup" value ='${nameGroup}' >
 		
 		                <label for="">Descripción</label>
-						<textarea class="form-control" name="descripcionGroup" rows="7"></textarea>
+						<textarea class="form-control" name="descripcionGroup" rows="7">${description}</textarea>
 		
 					
 						<div class="row-fluid">
@@ -241,21 +247,20 @@
 											<script>
 												var veces=0;
 												var k = "${tam}";
-												var cadNames = "${names}"
-												var splitNames=cadNames.split("@")
-												var cadDesc = "${desc}"
-												var splitDesc = cadDesc.split("@")
-												
+												var cadNames = "${names}";
+												var splitNames=cadNames.split("@");
+												var cadDesc = "${desc}";
+												var splitDesc = cadDesc.split("@");
+												document.write("<ul class='nav nav-list well'>");
 												while (veces<k){	
-																	
-													document.write("<div class='accordion-heading'>");
-													document.write("<a href='#"+veces+"'class='accordion-toggle' data-toggle='collapse' data-parent='#main2'>"+splitNames[veces]+"</a>");
-													document.write("</div>");
-													document.write("<div id='"+veces+"'class='accordion-body collapse'>");
-													document.write("<div class='accordion-inner'>"+ splitDesc[veces] +"</div>");
-													document.write("</div>");
+													document.write("<li>")
+													document.write("<a href='"+veces+"'>"+splitNames[veces]+"</a>")
+													document.write("</li>")
+													
 													veces++;
 												}
+												document.write("</ul>");
+												
 											</script>
 											
 											</div>

@@ -7,6 +7,7 @@ class User {
 	 * se eliminaron los constructores ya que su funcion de ingreso de datos tambien es construido por el GORM
 	 * @author: Diego
 	 */	
+	
 	def  String emailUser
 	def  Date createdAt
 	def  boolean isUnalConfirmed

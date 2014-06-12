@@ -99,8 +99,14 @@
 		<div class="row-fluid">
 			<div class="span2">
 				<ul class="thumbnails">
-					<li class="span12"><a href="#" class="thumbnail"> 
-					<r:img file="fumaton.png" alt="" />
+					<g:if test="${user?.screenshot}"  >						
+								<g:link action ='profile' >
+								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImage')}/${temp}">
+								</g:link>			
+								</g:if>
+								<g:else>
+									<r:img file="fotoVacia.jpg" alt="" />
+								</g:else>
 
 					</a></li>
 				</ul>

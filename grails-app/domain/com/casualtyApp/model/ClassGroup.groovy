@@ -9,7 +9,7 @@ class ClassGroup{
 	def String description
 	def Date createAt
 	def int userType
-	
+	def byte[] screenshot;
 	def EventCreator eventCreator
 	
 	static belongsTo = User
@@ -25,6 +25,8 @@ class ClassGroup{
 		description(nullable: false, blank: false,unique: false,maxSize:800)
 		   createAt(nullable: false, blank: false, unique: false)
 		   userType(nullable: false, blank: false, unique: false)
+		   screenshot(maxSize:1073741824)
+		   screenshot(nullable:true)
 	}
 	
 		

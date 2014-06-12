@@ -16,6 +16,9 @@ import grails.converters.JSON
 class HomeController {
 	
 	def eventsService
+	static def ClassGroupTemp;
+	
+	
 
 	def index() {
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
@@ -407,6 +410,7 @@ class HomeController {
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def nombresGrupos="";
 		def descGrupos="";
+		ClassGroupTemp=null;
 		for(group in currentUser.classGroup){
 			descGrupos=descGrupos + group.description + "@"
 			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
@@ -414,8 +418,38 @@ class HomeController {
 		 }
 		
 		render( view: "groups",model : [user : currentUser , username :
-		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size()] )
+		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size(),cond : false] )
+	}
+	
+	
+	/*
+	 *Carga la imagen de un grupo antes de ser creado 
+	 *
+	 * */
+	
+	def loadImage(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		def nombresGrupos="";
+		def descGrupos="";
+		def description =params.descripcionGroup
+		def name =params.nameGroup
+		def cond=false
 		
+		if(params.screenshot!=null &&  params.screenshot.getBytes().size()>0){
+			ClassGroupTemp = new ClassGroup(nameGroup:"a" ,description:"a",createAt: new Date(),userType:4,eventCreator : new EventCreator())
+			ClassGroupTemp.screenshot = params.screenshot.getBytes()
+			cond=true
+		}
+		
+		for(group in currentUser.classGroup){
+			descGrupos=descGrupos + group.description + "@"
+			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
+			 
+		 }
+		
+		render( view: "groups",model : [user : currentUser , username :
+		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos ,
+		    tam : currentUser.classGroup.size(),description : description , nameGroup : name, cond : cond] )
 	}
 	
 		
@@ -447,6 +481,7 @@ class HomeController {
 
 	}
 	
+	
 	def updateProfile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		currentUser.biography=params.biography
@@ -467,13 +502,20 @@ class HomeController {
 		
 	}
 	
+	/**
+	 * guarda un grupo en la DB asociado a un usuario
+	 * 
+	 * */
 	def updateGroups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		//print params.nameGroup
-		//print currentUser
-		//print params.descripcionGroup
-		
-		def newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		print params.nameGroup
+		def newGroup;
+		if(ClassGroupTemp!=null){
+			newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		}else{
+			newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
+		}
+		print newGroup.screenshot
 		newGroup.save(flush:true,failOnError:true)
 		
 		newGroup.addToUser(currentUser)
@@ -500,6 +542,18 @@ class HomeController {
 		response.outputStream << currentUser.screenshot
 		response.outputStream.flush()
 	}
+	
+	
+	
+	
+	def showImageGroup()  {
+		def currentUser
+		
+		
+		response.outputStream << ClassGroupTemp.screenshot
+		response.outputStream.flush()
+	}
+	
 	
 	def help(){
 		

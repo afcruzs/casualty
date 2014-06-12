@@ -29,10 +29,11 @@
 	href="${resource(dir:'bootstrap/ico', file:'apple-touch-icon-57-precomposed.png')}" />
 <link rel="shortcut icon"
 	href="${resource(dir:'bootstrap/ico', file:'favicon.png')}" />
-	
-	    <!-- Para que sirva el el autocompletar -->
-		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
-	
+
+<!-- Para que sirva el el autocompletar -->
+<resource:include components="autoComplete"
+	autoComplete="[skin: 'custom']" />
+
 </head>
 
 
@@ -58,18 +59,17 @@
 						<li></li>
 						<li class="divider-vertical"></li>
 						<li class="active"><a href="index">Eventos</a></li>
-						
-						    
-             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li class="divider"></li>
-                  <li class="nav-header">Grupos</li>
-					<li><a href="#mylook" data-toggle="modal">Buscar</a></li>         
-                  <li><a href="groups">Mis Grupos</a></li>                  
-                </ul>
-              </li>
-						
+
+
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Grupos<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="divider"></li>
+								<li class="nav-header">Grupos</li>
+								<li><a href="#mylook" data-toggle="modal">Buscar</a></li>
+								<li><a href="groups">Mis Grupos</a></li>
+							</ul></li>
+
 						<li><a href="#contact">Contacto</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> ${username}<b class="caret"></b>
@@ -91,43 +91,43 @@
 	</div>
 
 	<!-- Fin menu -->
-	
-<!-- create the modal to look up-->
-				  
-				   <div id="mylook" class="modal hide fade">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3>Iniciar Busqueda</h3>
-							</div>
-							<div class="modal-body">
-							    <div class="row-fluid">
-							       <div class="span12">
-							   	      
-								   
-								
-			      					  
-          <ul class="nav">
-          	  <li class="divider-vertical"></li>
-              <li>
-              <g:form class="navbar-form">
-				<richui:autoComplete name="group" action="${createLinkTo('dir': 'home/lookAJAX')}" onItemSelect="goToLocation(id)" />
-           	  </g:form>
-              </li>
-          </ul>
-								      
-								      
-								   </div>
-								</div>	
-								
-							</div>
-							<div class="modal-footer">
-								<button type="button" data-dismiss="modal" class="btn">Close</button>
-								<button type="button" class="btn btn-primary">Send</button>
-							</div>
-						</div>
-			
-			<!--end create the modal-->
-			
+
+	<!-- create the modal to look up-->
+
+	<div id="mylook" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3>Iniciar Busqueda</h3>
+		</div>
+		<div class="modal-body">
+			<div class="row-fluid">
+				<div class="span12">
+
+
+
+
+					<ul class="nav">
+						<li class="divider-vertical"></li>
+						<li><g:form class="navbar-form">
+								<richui:autoComplete name="group"
+									action="${createLinkTo('dir': 'home/lookAJAX')}"
+									onItemSelect="goToLocation(id)" />
+							</g:form></li>
+					</ul>
+
+
+				</div>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" data-dismiss="modal" class="btn">Close</button>
+			<button type="button" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+
+	<!--end create the modal-->
+
 
 	<!-- inicio container -->
 <body
@@ -147,10 +147,9 @@
 
 					<div class="span12">
 
-						<label for="">contraseña anterior</label>
-						<input type="text" name="vieja" >
-						<label for="">nueva contraseña</label>
-						<input type="text" name="nueva" >
+						<label for="">contraseña anterior</label> <input type="text"
+							name="vieja"> <label for="">nueva contraseña</label> <input
+							type="text" name="nueva">
 
 
 					</div>
@@ -165,7 +164,7 @@
 				<button type="button" class="btn" data-dismiss="modal">
 					Volver</button>
 				<input type="submit" data-dismiss="modal" class="btn btn-primary"
-									value="Guardar" onclick="action = 'changePassword'" />				
+					value="Guardar" onclick="action = 'changePassword'" />
 
 			</div>
 		</div>
@@ -183,42 +182,44 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		<div class="row-fluid">
-			<g:form id = "form1"  enctype="multipart/form-data">
-			<div class="span2">
-				<ul class="thumbnails">
-					<li class="span12">
-						
-						<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
-						<g:if test="${user?.screenshot}"  >						
-								<g:link action ='profile'>
-								  <img width="100%" height="100%" alt="img"  src="${createLink(controller:'home', action:'showImage')}/${username}">
-								</g:link>			
-						</g:if>
-						
-						</li>
-				</ul>
-				<input type="file" id="screenshot" name="screenshot"   style="display:none"  >
-				
-				<a class="btn btn-primary" onclick="$('input[id=screenshot]').click();">Cargar imagen</a>
-				<hr>
-				<input type="submit" class="btn btn-primary" id="save" name="save"
-									value="  Guardar Imagen" 
-									onclick="this.form.action = 'updateProfile'" />
-			</div>
-			
-			<div class="span6">
-				<div class="well">
-					
 
-						<label for="">Nombre</label>
-						<input type="text" name="name" value='${user.name}'>
-						<label for="">Apellidos</label>
-						<input type="text" name="lastName" value='${user.lastName}'>
-						<label for="">Email</label>
-						<input type="text" name="email" value='${user.emailUser}'>
+
+		<div class="row-fluid">
+			<g:form id="form1" enctype="multipart/form-data">
+				<div class="span2">
+					<ul class="thumbnails">
+						<li class="span12">
+							<!--  <img width="100%" height="100%" alt="img" src="http://localhost:8080/CausalityAppProject/home/showImage/">-->
+							<g:if test="${user?.screenshot}">
+								<g:link action='profile'>
+									<img width="100%" height="100%" alt="img"
+										src="${createLink(controller:'home', action:'showImage')}/${username}">
+								</g:link>
+							</g:if>
+							<g:else>
+								<r:img file="fotoVacia.jpg" alt="" />
+							</g:else>
+						</li>
+					</ul>
+					
+					<input type="file" id="screenshot" name="screenshot"
+						style="display: none"> <a class="btn btn-primary"
+						onclick="$('input[id=screenshot]').click();">Cargar imagen</a>
+					<hr>
+					<input type="submit" class="btn btn-primary" id="save" name="save"
+						value="  Guardar Imagen"
+						onclick="this.form.action = 'updateProfile'" />
+				</div>
+
+				<div class="span6">
+					<div class="well">
+
+
+						<label for="">Nombre</label> <input type="text" name="name"
+							value='${user.name}'> <label for="">Apellidos</label> <input
+							type="text" name="lastName" value='${user.lastName}'> <label
+							for="">Email</label> <input type="text" name="email"
+							value='${user.emailUser}'>
 						<hr>
 
 
@@ -234,27 +235,37 @@
 
 										<div class="accordion" id="main2">
 											<div class="accordion-group">
-											
-											<script>
+
+												<script>
 												var veces=0;
 												var k = "${tam}";
 												var cadNames = "${names}"
-												var splitNames=cadNames.split("@")
-												var cadDesc = "${desc}"
-												var splitDesc = cadDesc.split("@")
-												
-												while (veces<k){	
-																	
-													document.write("<div class='accordion-heading'>");
-													document.write("<a href='#"+veces+"'class='accordion-toggle' data-toggle='collapse' data-parent='#main2'>"+splitNames[veces]+"</a>");
-													document.write("</div>");
-													document.write("<div id='"+veces+"'class='accordion-body collapse'>");
-													document.write("<div class='accordion-inner'>"+ splitDesc[veces] +"</div>");
-													document.write("</div>");
-													veces++;
-												}
-											</script>
-											
+												var splitNames=cadNames.split("@");
+												var cadDesc = "${desc}";
+													var splitDesc = cadDesc.split("@");
+
+													while (veces < k) {
+
+														document
+																.write("<div class='accordion-heading'>");
+														document
+																.write("<a href='#"+veces+"'class='accordion-toggle' data-toggle='collapse' data-parent='#main2'>"
+																		+ splitNames[veces]
+																		+ "</a>");
+														document
+																.write("</div>");
+														document
+																.write("<div id='"+veces+"'class='accordion-body collapse'>");
+														document
+																.write("<div class='accordion-inner'>"
+																		+ splitDesc[veces]
+																		+ "</div>");
+														document
+																.write("</div>");
+														veces++;
+													}
+												</script>
+
 											</div>
 
 										</div>
@@ -268,9 +279,8 @@
 
 
 						<hr>
-						<label for="">Ubicación</label>
-						<input type="text" name="ubication" value='${user.ubication}'>
-						<label for="">Biografia</label>
+						<label for="">Ubicación</label> <input type="text"
+							name="ubication" value='${user.ubication}'> <label for="">Biografia</label>
 						<textarea class="form-control" name="biography" rows="3">'${user.biography}'</textarea>
 
 						<label for="">Nombre de usuario</label>
@@ -280,29 +290,29 @@
 						<br>
 						<!--<a href="#myModal" class="btn btn-success">cambio de
 							contraseña</a>-->
-						
-						<!--</form>-->						
+
+						<!--</form>-->
 						<br>
 						<div class="row-fluid">
 							<div class="span9"></div>
 							<div class="span3">
-								<input type="submit" class="btn btn-primary" id="save" name="save"
-									value="Guardar Cambios"
+								<input type="submit" class="btn btn-primary" id="save"
+									name="save" value="Guardar Cambios"
 									onclick="this.form.action = 'updateProfile'" />
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
 							</div>
 
 
 						</div>
-					
+
+					</div>
+
+
+					<div class="span5">&nbsp;</div>
 				</div>
-
-
-				<div class="span5">&nbsp;</div>
-			</div>
 			</g:form>
 		</div>
-		
+
 
 
 	</div>
@@ -343,18 +353,12 @@
 		});*/
 
 	})
-	
-	
+
 	$('input[id=screenshot]').change(function() {
-		
-				
 
 	});
 
-		
-	
 	//$("#photo").modal('show');
-	
 </script>
 </html>
 
