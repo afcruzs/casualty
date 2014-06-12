@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>This is test</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-escale=1.0"><!--para que sirva el resposive en todos los dispositivos-->
+	<!--<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">-->
+	<!--para los iconos sin pexelar-->
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<!--algunos cambios segun el dispositivo-->
+	<style type="text/css">
+		/*este es una especie de if media query*/
+		/*Escritorio*/
+		@media(min-width: 1200px){
+			body{/*color: red;*/}
+		}
+		/*Escritorio pequeño o una tablet*/
+		@media(min-width: 768px) and (max-width: 1199px){
+			body{/*color: green;*/}
+		}
+		/*Tablet o un Smartphone*/
+		@media(min-width: 481px) and (max-width: 767px){
+			body{/*color: blue;*/}
+		}
+		/*Smartphone*/
+		@media(max-width: 480px){
+			body{/*color: yellow;*/}
+		}
+		.text-big{
+			font-size: 300px;
+			line-height: 320px;
+		}
+	</style>
+</head>
+<body>
+<div class="container"><!--centrar-->
+
+	<div class="row-fluid">
+		<div class="span12">&nbsp;</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h1>Slide</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span2">&nbsp;</div>
+
+		<div class="span8">
+			<div id="myslide" class="carousel slide">
+				<!--para colocar los punticos-->
+				<ol class="carousel-indicators">
+					<li data-target="#myslide" data-slide-to="1" class="active"></li>
+					<li data-target="#myslide" data-slide-to="2"></li>
+					<li data-target="#myslide" data-slide-to="3"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active"><!--esta inicialmente-->
+						<img src="img/3.jpg" alt="">
+						<div class="carousel-caption">
+							<h4>This is a test</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi eveniet distinctio repudiandae eius? Cupiditate, quisquam, voluptas, nostrum ducimus repellat maiores similique incidunt laborum voluptatum numquam sapiente possimus alias non.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="img/4.jpg" alt="">
+						<div class="carousel-caption">
+							<h4>This is a test</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum deserunt nihil sequi distinctio suscipit laborum amet dolorum modi. Ex quisquam consectetur ipsam voluptas architecto beatae molestias blanditiis asperiores accusantium quae.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="img/5.jpg" alt="">
+						<div class="carousel-caption">
+							<h4>This is a test</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, aliquid, nisi, eligendi, voluptate perferendis accusamus beatae rem facere distinctio id a autem magni impedit? Odit eligendi molestias eius natus nihil!</p>
+						</div>
+					</div>
+				</div>
+				<a href="#myslide" data-slide="prev" class="carousel-control left">&lsaquo;</a>
+				<a href="#myslide" data-slide="next" class="carousel-control right">&rsaquo;</a>
+			</div>
+			<a href="#" class="btn" id="ejemplo">Slide final</a><!--boton para parar-->
+		</div>
+
+		<div class="span2">&nbsp;</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">&nbsp;</div>
+	</div>
+
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h1>Acordeon</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="accordion" id="main">
+
+				<div class="accordion-group">
+
+					<div class="accordion-heading">
+						<a href="#com1" class="accordion-toggle" data-toggle="collapse" data-parent="#main" >This is a component 1</a>
+					</div>
+					<div id="com1" class="accordion-body collapse in"><!--el "in" para que inicie abierto-->
+						<div class="accordion-inner">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo veritatis repudiandae maiores eos magni necessitatibus libero. Maxime, quasi consequuntur sed error quaerat est voluptas. Ut, facilis vitae excepturi voluptatibus ad.
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a href="#com2" class="accordion-toggle" data-toggle="collapse" data-parent="#main">This is a component 2</a>
+					</div>
+					<div id="com2" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, quaerat recusandae nobis fugit quae ducimus est asperiores laudantium sit quam! Quisquam, eaque labore totam minus officia repudiandae quis quo necessitatibus!
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a href="#com3" class="accordion-toggle" data-toggle="collapse" data-parent="#main">This is a component 3</a>
+					</div>
+					<div id="com3" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, eius voluptas iusto illo consequatur magni libero atque adipisci saepe omnis illum porro excepturi neque? Quisquam unde aliquam ipsum molestiae iure.
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<!--selecciona varios-->
+			<div class="btn-group" data-toggle="buttons-checkbox">
+				<button type="button" class="btn btn-primary">test</button>
+				<button type="button" class="btn btn-primary">test</button>
+				<button type="button" class="btn btn-primary">test</button>
+			</div>
+
+			<hr>
+			<!--selecciona uno-->
+			<div class="btn-group" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary">test</button>
+				<button type="button" class="btn btn-primary">test</button>
+				<button type="button" class="btn btn-primary">test</button>
+			</div>
+
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<a href="#" class="btn myPop">This is a popOver</a>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<a href="#" title="Hola soy un tooltip">This is test 1</a> <br>
+			<a href="#" title="Hola soy un tooltip">This is test 2</a> <br>
+			<a href="#" title="Hola soy un tooltip">This is test 3</a> <br>
+		</div>
+	</div>
+
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h1>Tabs</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+			<li><a data-toggle="tab" href="#about">About</a></li>
+			<li><a data-toggle="tab" href="#contact">Contact</a></li>
+			<li><a data-toggle="tab" href="#profile">Profile</a></li>
+		</ul>
+			
+			
+			<div class="tab-content">
+				<div id="home" class="tab-pane active">
+					<h1>Home</h1>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, minus reiciendis iusto blanditiis quae tenetur </div>
+				<div id="about" class="tab-pane">
+					<h1>About</h1>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad, aliquam, minus similique explicabo us placeat.</div>
+				<div id="contact" class="tab-pane">
+					<h1>Contact</h1>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, optio, repudiandae dolor fugiat excepturi debitis molestias omnis.</div>
+				<div id="profile" class="tab-pane">
+					<h1>Profile</h1>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, aliquid, provident, maxime optio consequatur nesciunt et.</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div id="myModal" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>This is title modal</h3>
+				</div>
+				<div class="modal-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor natus repellat modi quasi minima! Voluptatum, rerum, quidem, dolorum, alias veniam deleniti culpa placeat tempore voluptatibus maxime illo adipisci minima assumenda?</p>
+				</div>
+				<div class="modal-footer">
+					<button tyoe="button" data-dismiss="modal" class="btn">Close</button>
+					<button tyoe="button" class="btn btn-primary">Send</button>
+				</div>
+			</div>
+			<a href="#myModal" data-toggle="modal" class="btn">Modal</a>
+
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row-fluid">
+		<div class="span3">
+			<p class="text-right text-error">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, velit, suscipit eius ad provident iste eum doloremque ratione aliquam eos delectus</p>
+			<p class="text-left text-warning">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, velit, suscipit eius ad provident iste eum doloremque ratione aliquam eos delectus</p>
+			<p class="text-center text-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, velit, suscipit eius ad provident iste eum doloremque ratione aliquam eos delectus</p>
+			<p class="text-success">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, velit, suscipit eius ad provident iste eum doloremque ratione aliquam eos delectus</p>
+			<p class="muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, velit, suscipit eius ad provident iste eum doloremque ratione aliquam eos delectus</p>
+		</div>
+		<div class="span3">
+			<h1>This is a test <small>This test</small></h1>
+		</div>
+		<div class="span3">
+			<div class="well">
+				<p>This is test</p>
+			</div>
+			<div class="well well-large">
+				<p>This is test</p>
+			</div>
+			<div class="well well-small">
+				<p>This is test</p>
+			</div>
+		</div>
+		<div class="span3">
+			<!--arregla el contenedor-->
+			<div class="clearfix" style="border: 2px dotted #000"> 	
+				<div class="well pull-right">A</div>
+				<div class="well pull-left">B</div>
+			</div>
+			<ul class="inline">
+				<li><a href="">This 1</a></li>
+				<li><a href="">This 2</a></li>
+				<li><a href="">This 3</a></li>
+				<li><a href="">This 4</a></li>
+			</ul>
+
+		<!--hide y show para no dejar ver o dejar ver el well-->
+		<div class="well hide">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, ipsa perferendis cum assumenda iusto. Minima, suscipit provident aspernatur eaque voluptatibus iure error iusto illum consequatur optio. Ducimus iure sunt impedit.</div>
+
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Listado de registros</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="media">
+			<a href="" class="pull-left">
+				<img style="width: 80px" src="img/5.jpg" alt="" class="media-object">
+			</a>
+			<div class="media-body">
+					<h4 class="media-headig">This is title</h4>
+					<p>This is a test of media jajaja</p>
+					<p>This is a test of media jajaja</p>
+				</div>
+			</div>
+			<div class="media">
+			<a href="" class="pull-left">
+				<img style="width: 80px" src="img/5.jpg" alt="" class="media-object">
+			</a>
+			<div class="media-body">
+					<h4 class="media-headig">This is title</h4>
+					<p>This is a test of media jajaja</p>
+					<p>This is a test of media jajaja</p>
+				</div>
+			</div>
+			<div class="media">
+			<a href="" class="pull-left">
+				<img style="width: 80px" src="img/5.jpg" alt="" class="media-object">
+			</a>
+			<div class="media-body">
+					<h4 class="media-headig">This is title</h4>
+					<p>This is a test of media jajaja</p>
+					<p>This is a test of media jajaja</p>
+				</div>
+			</div>
+		</div>
+		<div class="span4"></div>
+		<div class="span4"></div>
+	</div>
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Barras de progreso</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="progress progress-striped active"><!--barra en forma de sebra-->
+				<div class="bar" style="width:70%"></div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="progress progress-info progress-striped">
+				<div class="bar" style="width:60%"></div>
+			</div>
+			<div class="progress progress-success progress-striped">
+				<div class="bar" style="width:50%"></div>
+			</div>
+			<div class="progress progress-warning progress-striped">
+				<div class="bar" style="width:40%"></div>
+			</div>
+			<div class="progress progress-danger progress-striped">
+				<div class="bar" style="width:30%"></div>
+			</div>
+		</div>
+		<div class="span4"></div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Alerta</h1>
+			</div>
+
+		<div class="row-flui">
+		<div class="span3">
+			<div class="alert">
+			<button tupe="button" class="close" data-dismiss="alert">&times;</button><!--equis para cerrar-->
+				<h4>Alert!!!</h4>
+				This a test
+			</div>
+		</div>
+		<div class="span3">
+			<div class="alert alert-success">
+				<h4>Success!!!</h4>
+				This a test
+			</div>
+		</div>
+		<div class="span3">
+		
+			<div class="alert alert-info">
+				<h4>Info!!!</h4>
+				This a test
+			</div>
+		</div>
+		
+		<div class="span3">
+		
+			<div class="alert alert-error">
+				<h4>Error!!!</h4>
+				This a test
+			</div>
+		</div>
+		
+	</div>
+
+		</div>
+	</div>
+
+	
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Thumbnails</h1>
+			</div>
+
+			<ul class="thumbnails">
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+				<li class="span2"><a href="#" class="thumbnail"><img src="img/5.jpg" alt=""></a></li>
+			</ul>
+		
+		<hr>
+
+	<il class="thumbnails">
+		<li class="span3">
+			<div class="thumbnail">
+				<img src="img/5.jpg" alt="">
+				<div class="caption text-center">
+					<h3>Item1</h3>
+					<p>"This is a test"</p>
+					<p>This is test</p>
+				</div>
+			</div>
+		</li>
+		<li class="span3">
+			<div class="thumbnail">
+				<img src="img/5.jpg" alt="">
+				<div class="caption text-center">
+					<h3>Item2</h3>
+					<p>"This is a test"</p>
+					<p>This is test</p>
+				</div>
+			</div>
+		</li>
+		<li class="span3">
+			<div class="thumbnail">
+				<img src="img/5.jpg" alt="">
+				<div class="caption text-center">
+					<h3>Item3</h3>
+					<p>"This is a test"</p>
+					<p>This is test</p>
+				</div>
+			</div>
+		</li>
+		<li class="span3">
+			<div class="thumbnail">
+				<img src="img/5.jpg" alt="">
+				<div class="caption text-center">
+					<h3>Item4</h3>
+					<p>"This is a test"</p>
+					<p>This is test</p>
+				</div>
+			</div>
+		</li>
+	</il>
+
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h1>Labels and badges -notification</h1>
+			</div>
+			
+		<span class="label">Ejemplp</span>
+		<span class="label label-important">Ejemplo</span>
+		<span class="label label-info">Ejemplo</span>
+		<span class="label label-warning">Ejemplo</span>
+		<span class="label label-success">Ejemplo</span>
+		<span class="label label-inverse">Ejemplo</span>
+
+		<hr>
+		<!--para hacer notificaciones-->
+		<span class="badge">1</span>
+		<span class="badge badge-important">2</span>
+		<span class="badge badge-info">3</span>
+		<span class="badge badge-warning">4</span>
+		<span class="badge badge-success">5</span>
+		<span class="badge badge-inverse">6</span>
+
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h1>Listas-Pagination</h1>
+			</div>
+
+			<div class="pager">
+				<ul>
+					<li class="disabled previous"><a href="#">&larr;First</a></li>
+					<li class"active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li class="next"><a href="#">Last &rarr;</a></li>
+				</ul>
+			</div>
+			<hr>
+			<div class="pagination pagination-large pagination-centered">
+				<ul>
+					<li class="disabled"><a href="#">First</a></li>
+					<li class"active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">Last</a></li>
+				</ul>
+			</div>
+			<hr>
+			<div class="pagination pagination-right">
+				<ul>
+					<li class="disabled"><a href="#">First</a></li>
+					<li class"active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">Last</a></li>
+				</ul>
+			</div>
+			<hr>
+			<div class="pagination pagination-small">
+				<ul>
+					<li class="disabled"><a href="#">First</a></li>
+					<li class"active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">Last</a></li>
+				</ul>
+			</div>
+						<hr>
+			<div class="pagination pagination-mini">
+				<ul>
+					<li class="disabled"><a href="#">First</a></li>
+					<li class"active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">Last</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Breadcrums</h1>
+			</div>
+
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a> <span class="divider">/</span></li>
+				<li><a href="#">User</a> <span class="divider">/</span></li>
+				<li class="active">Admin</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Menus</h1>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="navbar navbar-inverse"><!--Fijo en la parte navbar-fixed-top o abajo navbar-fixed-bottom-->
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="#" class="brand">My App</a>
+				<ul class="nav pull-right"><!--alineado a la derecha-->
+					<li><a href="#">Home</a></li>
+					<li class="active"><a href="#">Contact</a></li>
+					<li><a href="#">Blog</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">About</a></li>
+				</ul>
+				<form action="" class="navbar-search pull-right"><!--Horizontal-->
+					<input type="text" class="search-query" placeholder="Buscar"><!--puntas 	redondeadas-->
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h1>Listas</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<ul class="nav nav-pills">
+				<li class="active"><a href="#">Test 1</a></li>
+				<li><a href="#">Test 2</a></li>
+				<li><a href="#">Test 3</a></li>
+				<li class="disabled"><a href="#">Test 4</a></li>
+			</ul>
+
+			<hr>
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#">Test 1</a></li>
+				<li><a href="#">Test 2</a></li>
+				<li><a href="#">Test 3</a></li>
+				<li class="disabled"><a href="#">Test 4</a></li>
+			</ul>
+
+			<hr>
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#">Test 1</a></li>
+				<li><a href="#">Test 2</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-togle" data-toggle="dropdown">
+					Test 3
+					<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">@codigofacilito</a></li>
+						<li><a href="#">@codigofacilito</a></li>
+						<li><a href="#">@codigofacilito</a></li>
+						<li><a href="#">@codigofacilito</a></li>
+					</ul>
+				</li>
+				<li class="disabled"><a href="#">Test 4</a></li>
+			</ul>
+		</div>
+		<div class="span4">
+			<ul class="nav nav-list well"><!--lista vertical-->
+				<li><a href="#"><i class="fa fa-user"></i> codigillo</a></li>
+				<li class"nav-header"> codigillo</li>
+				<li class="active"><a href="#"><i class="fa fa-user"></i> codigillo</a></li>
+				<li><a href="#"><i class="fa fa-user"></i> codigillo</a></li>
+				<li><a href="#"><i class="fa fa-user"></i> codigillo</a></li>
+				<li class="divider"></li><!--para la linea separadora-->
+				<li><a href="#"><i class="fa fa-check"></i> codigillo</a></li>
+			</ul>
+		</div>
+		<div class="span4">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#">Test 1</a></li>
+				<li><a href="#">Test 2</a></li>
+				<li><a href="#">Test 3</a></li>
+				<li class="disabled"><a href="#">Test 4</a></li>
+			</ul>
+
+			<hr>
+			<ul class="nav nav-tabs nav-stacked">
+				<li class="active"><a href="#">Test 1</a></li>
+				<li><a href="#">Test 2</a></li>
+				<li><a href="#">Test 3</a></li>
+				<li class="disabled"><a href="#">Test 4</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="spand12">
+			<div class="page-header">
+				<h1>Grupos de Botones</h1>
+			</div>
+			<div class="btn-group">
+				<a href="" class="btn">Izq</a>
+				<a href="" class="btn">Centro</a>
+				<a href="" class="btn">Der</a>
+			</div>
+			<div class="btn-toolbar">
+			<div class="btn-group">
+				<a href="" class="btn">Izq</a>
+				<a href="" class="btn">Centro</a>
+				<a href="" class="btn">Der</a>
+			</div>
+				<div class="btn-group">
+				<a href="" class="btn">1</a>
+				<a href="" class="btn">2</a>
+				<a href="" class="btn">3</a>
+			</div>
+			</div>
+			<hr>
+
+			</div>
+				<div class="btn-group btn-group-vertical">
+				<a href="" class="btn">1</a>
+				<a href="" class="btn">2</a>
+				<a href="" class="btn">3</a>
+			</div>
+			<hr>
+			<div class="btn-group">
+				<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Desplegable
+				<span class="caret"></span><!--sale la flechita hacia abajo de desplegable-->
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="">This is test</a></li>
+					<li><a href="">This is test</a></li>
+					<li><a href="">This is test</a></li>
+					<li><a href="">This is test</a></li>
+				</ul>
+			</div>
+	</div>
+
+
+
+
+	<div class="row-fluid">
+		<div class="spand12">
+			<div class="page-header">
+				<h1>Iconos Vectoriales</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row fluid">
+		<div class="span12">
+			<i class="fa fa-user text-big"></i>
+		</div>
+	</div>
+
+
+	<div class="row-fluid">
+		<div class="spand12">
+			<div class="page-header">
+				<h1>Iconos</h1>
+				
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			
+			<i class="icon-pencil"></i>
+			<i class="icon-star-empty"></i>
+			<i class="icon-file"></i>
+			<i class="icon-ok"></i>
+		</div>
+		<div class="span4">
+			<a href="" class="btn"><i class="fa fa-user"></i> Register</a>
+		</div>
+		<div class="span4">
+			<div class="input-prepend">
+				<spand class="add-on"><i class="fa fa-play"></i></spand>
+				<input type="text">
+			</div>
+			<hr>
+			<div class="input-append">
+				<input type="text">
+				<spand class="add-on"><i class="fa fa-cloud"></i></spand>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="spand12">
+			<div class="page-header">
+				<h1>Imagenes</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<img src="img/5.jpg" alt="Prueba" class="img-rounded">
+		</div>
+		<div class="span4">
+			<img src="img/5.jpg" alt="Prueba" class="img-circle">
+		</div>
+		<div class="span4">
+			<img src="img/5.jpg" alt="Prueba" class="img-polaroid">
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="spand12">
+			<div class="page-header">
+				<h1>Botones</h1>
+			</div>
+		</div>
+	</div>
+
+<div class="row-fluid">
+	<div class="span4">
+		<a href="" class="btn">Link</a>
+		<input type="submit" value="Submit" class="btn">
+		<input type="button" value="Button" class="btn">
+		<button class="btn">Tag Button</button>
+		
+		<hr>
+
+		 <a href="" class="btn btn-link">Link</a>
+		<input type="submit" value="Submit" class="btn btn-link">
+		<input type="button" value="Button" class="btn btn-link">
+		<button class="btn btn-link">Tag Button</button>
+
+		<hr>
+
+		 <a href="" class="btn btn-block btn-primary btn-large">block</a>
+		<input type="submit" value="Submit" class="btn btn-block">
+		<input type="button" value="Button" class="btn btn-block">
+		<button class="btn btn-block">Tag Button</button>
+	</div>
+	<div class="span4">
+		<a href="" class="btn btn-primary">Link</a>
+		<input type="submit" value="Submit" class="btn btn-primary">
+		<input type="button" value="Button" class="btn btn-primary">
+		<button class="btn btn-primary">Tag Button</button>
+
+		<hr>
+
+		<a href="" class="btn btn-success">Link</a>
+		<input type="submit" value="Submit" class="btn btn-success">
+		<input type="button" value="Button" class="btn btn-success">
+		<button class="btn btn-success">Tag Button</button>
+
+		<hr>
+
+		<a href="" class="btn btn-warning">Link</a>
+		<input type="submit" value="Submit" class="btn btn-warning">
+		<input type="button" value="Button" class="btn btn-warning">
+		<button class="btn btn-warning">Tag Button</button>
+
+		<hr>
+
+		<a href="" class="btn btn-info">Link</a>
+		<input type="submit" value="Submit" class="btn btn-info">
+		<input type="button" value="Button" class="btn btn-info">
+		<button class="btn btn-info">Tag Button</button>
+
+		<hr>
+
+		<a href="" class="btn btn-danger">Link</a>
+		<input type="submit" value="Submit" class="btn btn-danger">
+		<input type="button" value="Button" class="btn btn-danger">
+		<button class="btn btn-danger">Tag Button</button>
+
+		<hr>
+
+		<a href="" class="btn btn-inverse">Link</a>
+		<input type="submit" value="Submit" class="btn btn-inverse">
+		<input type="button" value="Button" class="btn btn-inverse">
+		<button class="btn btn-inverse">Tag Button</button>
+	</div>
+	<div class="span4">
+		<a href="" class="btn btn-large">Link</a>
+		<input type="submit" value="Submit" class="btn btn-large">
+		<input type="button" value="Button" class="btn btn-large">
+		<button class="btn btn-large">Tag Button</button>
+
+		<hr>
+		<a href="" class="btn">Link</a>
+		<input type="submit" value="Submit" class="btn">
+		<input type="button" value="Button" class="btn">
+		<button class="btn">Tag Button</button>
+
+		<hr>
+		<a href="" class="btn btn-small">Link</a>
+		<input type="submit" value="Submit" class="btn btn-small">
+		<input type="button" value="Button" class="btn btn-small">
+		<button class="btn btn-small">Tag Button</button>
+
+		<hr>
+		<a href="" class="btn btn-mini">Link</a>
+		<input type="submit" value="Submit" class="btn btn-mini">
+		<input type="button" value="Button" class="btn btn-mini">
+		<button class="btn btn-mini">Tag Button</button>
+
+	</div>
+</div>
+
+
+<div class="row-fluid">
+	<div class="span6">
+		<form action="">
+		<legend>Datos</legend>
+		<label for="">Name</label>
+		<input type="text">
+		<legend>Mas Datos</legend>
+		<label for="">Name</label>
+		<input type="text">
+		<label for="">Name</label>
+		<input type="text">
+		<br>
+		<input type="submit" class="btn">
+		</form>
+	</div>
+	<div class="span6">
+		<form action="">
+			<!--boton redondeado-->
+			<input type="text" class="search-query">
+		</form>
+		<hr>
+		<!--boton alineado-->
+		<form action="" class="form-inline">
+			<input type="text">
+			<input type="submit" class="btn">
+		</form>
+		<hr>
+		<form action="">
+			<div class="input-prepend">
+			<span class="add-on">@</span>
+			<input type="text" typt="text">
+			</div>
+		</form>
+		<hr>
+		<form action="">
+			<div class="input-append">
+			<input type="text" typt="text">
+			<span class="add-on">@</span>
+			</div>
+		</form>
+		<hr>
+		<form action="">
+			<div class="input-append input-prepend">
+			<span class="add-on">$</span>
+			<input type="text" typt="text">
+			<span class="add-on">.00</span>
+			</div>
+		</form>
+		<hr>
+		<form action="">
+			<div class="input-append">
+			<input type="text" typt="text">
+			<input type="submit" class="btn">
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!--crear tablas-->
+<div class="row-fluid">
+	<div class="span12">
+	<!--borde |sebra|se resalta al pasa el mouse|arregla el pading-->
+		<table class="table-bordered table-striped table-hover table-condensed">
+			<tr>
+				<th>Campos</th>
+				<th>Campos</th>
+				<th>Campos</th>
+				<th>Campos</th>
+			</tr>
+			<tr>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+			</tr>
+			<tr>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+			</tr>
+			<tr>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+				<td>Campos</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+
+<!-- esto es para hacer invisible algo-->
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="well hidden-desktop"><!--invisible solo en escritorios-->
+				<h1 class="text-center">Desktop</h1>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well hidden-tablet"><!--invisible solo en escritorios-->
+				<h1 class="text-center">Tablet</h1>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well hidden-phone"><!--invisible solo en escritorios-->
+				<h1 class="text-center">Phone</h1>
+			</div>
+		</div>
+	</div>
+
+<!-- esto es para hacer visible algo
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="well visible-desktop"><!--visible solo en escritorios->
+				<h1 class="text-center">Desktop</h1>
+			</div>
+			<div class="well visible-tablet"><!--visible solo en escritorios->
+				<h1 class="text-center">Tablet</h1>
+			</div>
+			<div class="well visible-phone"><!--visible solo en escritorios->
+				<h1 class="text-center">Phone</h1>
+			</div>
+		</div>
+	</div>
+-->
+	<div class="row"><!--crea una fila-->
+		<div class="span12"><!--dentro de la fila lo que hay dentro se expande toda la pantalla osea 12-->
+			<h1>This is test1</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+	<div class="row-fluid"><!--crea otra fila-->
+		<div class="span6"><!--ocupa la mitad de la fila-->
+		<div class="row-fluid">
+			<div class="span3">
+				<h1>This is test3</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing 
+			</div>
+			<div class="span3">
+				<h1>This is test3</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing 
+			</div>	
+		</div>
+		</div>
+		<div class="span6"><!--ocupa la otra mitad de la fila-->
+			<h1>This is test3</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span3">
+						<h1>This is test3</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		<div class="span3">
+						<h1>This is test3</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		<div class="span3">
+						<h1>This is test3</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		<div class="span3">
+						<h1>This is test3</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+</div>
+
+<!--Colcar archivos javascrpt necesarios-->
+<script src="js/jquery-1.11.1.min.js"></script><!--para que sirvan los botones desplegables-->
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+
+	/*para el slide*/
+	$().ready(function(){
+		/*$(".carousel").*//*para todos*/
+		$("#myslide").carousel({
+			interval: 10000, /*tiempo de cambio*/
+			pause: "hover", /*se detiene si el usuario pone el mouse dentro*/
+
+		});
+
+		$("#ejemplo").on("click",function(e){
+			e.preventDefault();
+			//$("#myslide").carousel("next");/*la manda al siguiente*/
+			//$("#myslide").carousel("prev");/*la manda ala anterior*/
+			$("#myslide").carousel(2);/*va a un slide fijo*/
+			//$("#myslide").carousel("pause");/*pausa*/
+		});
+
+		$("#myslide").on("slide",function(){
+			console.log("se ha invocado un slide");
+		});
+		$("#myslide").on("slide",function(){
+			console.log("se ha terminado el slide");
+		});
+	});
+
+	/*para los popOver*/
+	$().ready(function(){
+		/*para los tootip*/
+		$(".myPop").popover({
+			placement: "bottom",/*todos los posibles lados*/
+			title: "este es el title",
+			content: "POPOVER Lorem  <a href='#' class='btn btn-primary'>Aqui</a>ipsum dolor sit amet, consectetur adipisicing elit. Illum, voluptates, labore, ea sit culpa quos accusantium placeat suscipit voluptatibus fugit voluptas nisi nihil inventore dolor ad vitae adipisci sapiente nesciunt.",
+			/*para poner codifo html*/
+			html: true,
+		});
+		/*invocar algunos eventos del popover*/
+		/*para que se muestre a los 2 segundo*/
+		/*setTimeout(function(){
+		$(".myPop").popover("show");
+		},2000)*/
+		/*para que se oculte a los 4 segundos*/
+		/*setTimeout(function(){
+		$(".myPop").popover("hide");
+		},4000)*/
+		/*setTimeout(function(){
+		$(".myPop").popover("toggle");
+		},6000)*/
+		/*setTimeout(function(){
+		$(".myPop").popover("destroy");
+		},8000)*/
+
+		$(".myPop").on("show",function(){
+			console.log("mostrando");
+		});
+		$(".myPop").on("hide",function(){
+			console.log("ocultando");
+		});
+	});
+	
+	/*para los tooltips*/
+	$().ready(function(){
+		/*para los tootip*/
+		$("a").tooltip({
+			placement: "right",/*todos los posibles lados*/
+		});
+	});
+
+	/*para el modal*/
+	/*Aperecera el modal en 2 segundos*/
+	/*$().ready(function(){
+		setTimeout(function(){
+			$("#myModal").modal("show");
+		},2000);
+	});*/
+	/*Desaparecera el modal en 4 segundos*/
+	/*$().ready(function(){
+		setTimeout(function(){
+			$("#myModal").modal("hide");
+		},4000);
+	});*/
+	/*desaparece si esta y viceversa*/
+	/*setTimeout(function(){
+			$("#myModal").modal("toggle");
+		},6000);
+	*/
+	//$().ready(function(){
+
+		//$("#myModal").modal({
+			/*si queremos que se muestre lo negro*/
+			//backdrop: true,
+			/*si queremos que sirva Esc*/
+			//keyboard: true,
+			//show: true,
+			/*devolver la url o algo asi*/
+			//remote: "ajax.html"
+		//});
+
+
+		
+		$("#myModal").on("hide",function(){
+			console.log("Se ha ocultado");
+		});
+		$("#myModal").on("hidden",function(){
+			console.log("Se ha terminado de ocultar");
+		});
+		$("#myModal").on("show",function(){
+			console.log("Se ha mostrado");
+		});
+		$("#myModal").on("shown",function(){
+			console.log("Se ha terminado de mostrar");
+		});
+	//});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="mylook" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>This is title modal</h3>
+				</div>
+				<div class="modal-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor natus repellat modi quasi minima! Voluptatum, rerum, quidem, dolorum, alias veniam deleniti culpa placeat tempore voluptatibus maxime illo adipisci minima assumenda?</p>
+				</div>
+				<div class="modal-footer">
+					<button tyoe="button" data-dismiss="modal" class="btn">Close</button>
+					<button tyoe="button" class="btn btn-primary">Send</button>
+				</div>
+			</div>
+			<a href="#mylook" data-toggle="modal" class="btn">Buscar</a>
+
