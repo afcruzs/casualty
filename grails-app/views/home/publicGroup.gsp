@@ -5,6 +5,7 @@
 <!-- para que sirvan los botones desplegables y otras funcinalidades-->
 <g:javascript src="jquery-1.11.1.min.js" />
 <g:javascript src="bootstrap.min.js" />
+<g:javascript src="groups.js" />
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -122,8 +123,7 @@
 			<!--end create the modal-->
 
 	<!-- inicio container -->
-<body
-	onload="initialize('${user}','${username}','${group}','${cond}')">
+<body>
 
 	
 		<div class="span12">&nbsp;</div>
@@ -164,55 +164,17 @@
 						<div class="well">
 							<p>${group.description}</p>
 						</div>
-		                
-		
 						<hr>
-						
+				</div>
+			</div>
 					</g:form>
 				</div>
 
-		</div>
-
-
-	</div>
-
-</div>
-
 	<!-- Fin container -->
-
-
-	<!-- inicio footer -->
-	<footer>
-		<div class="row-fluid">
-			<div class="span12">&nbsp;</div>
-
-			<div class="span12">
-				<p class="pull-right">
-					<a href="#">Back to top</a>
-				</p>
-				<p>
-					&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
-					<a href="#">Terms</a>
-				</p>
-			</div>
-			<div class="span12">&nbsp;</div>
-
-		</div>
-	</footer>
-	<!-- fin footer -->
-
+<button  onclick = "joinToGroup('${group.nameGroup}')" class="btn btn-info"> Unirse a Grupo</button>
 
 </body>
 
-<script>
-	$().ready(function() {
-		$("a").tooltip({
-			placement : "right",
-
-		});
-
-	})
-</script>
 </html>
 
 

@@ -677,4 +677,14 @@ class HomeController {
 		render currentUser.classGroup as JSON
 	}
 	
+	def joinToGroup(){
+		def theGroup = ClassGroup.findByNameGroup(params.groupName)
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		
+		if( theGroup != null ){
+			theGroup.addToUser(currentUser)
+			render "Success"
+		}else render "ERROR"
+	}
+	
 }
