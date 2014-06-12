@@ -13,7 +13,7 @@ function joinToGroup(theGroup){
         url:"joinToGroup",
         success:function(data,textStatus){ 
         	if( data != "ERROR"){
-        		alert('Usted se ha unido a ' + theGroup + ' satisfactoriamente.');
+        		//alert('Usted se ha unido a ' + theGroup + ' satisfactoriamente.');
         		location.reload();
         	}
         	
@@ -30,7 +30,7 @@ function leaveGroup(theGroup){
         url:"leaveGroup",
         success:function(data,textStatus){ 
         	if( data != "ERROR"){
-        		alert('Usted ha abandonado ' + theGroup + ' satisfactoriamente.');
+        		//alert('Usted ha abandonado ' + theGroup + ' satisfactoriamente.');
         		location.reload();
         	}
 
