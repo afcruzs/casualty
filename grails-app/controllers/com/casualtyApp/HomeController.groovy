@@ -432,20 +432,40 @@ class HomeController {
 			render( view: "publicProfile",model : [user : currentUser , username :
 				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username] )
 		}else{
-			render( view: "publicGroup",model : [ groupName : username ] )
+		
+			def currentGroup = ClassGroup.findByNameGroup(params.username)
+			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+			def cond=true
+			if(currentGroup.screenshot==null){
+				cond=false
+			}
+			render( view: "publicGroup",model : [user : currentUser , username :
+			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
+			//render( view: "publicGroup",model : [ groupName : username ] )
 			
 		}
 	}
 	
+	/*
+	 * altamente acoplado con public profile
+	 * deben ir igual las condiciones cuando se render publicGroup :v
+	 */
 	def publicGroupProxy(){
 		
 		def theGroup = ClassGroup.get(params.id)
 		
 		
 		
-		if( theGroup != null )
-			render( view: "publicGroup",model : [ groupName : theGroup.getNameGroup() ] )
-		else 
+		if( theGroup != null ){
+			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+			def cond=true
+			if(theGroup.screenshot == null)
+				cond=false
+				
+			render( view: "publicGroup",model : [user : currentUser , username :
+					SecurityUtils.getSubject().getPrincipal() , group : theGroup, cond : cond] )
+			
+		}else 
 			render( view: "index" )
 	
 			
