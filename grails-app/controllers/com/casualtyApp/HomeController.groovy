@@ -468,6 +468,7 @@ class HomeController {
 	def updateGroups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		print params.nameGroup
+		
 		def newGroup;
 		if(ClassGroupTemp!=null){
 			newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator())
