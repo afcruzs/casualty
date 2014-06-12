@@ -48,7 +48,7 @@
 	    <!-- Para que sirva el el autocompletar -->
 		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
 	    
-	    
+	
 	</head>
 	
 
@@ -139,12 +139,25 @@
 							
 							<h4 class="text-center">Agregar Evento</h4>
 							<div class="row-fluid">
-								
-
+							
 								<div class="span12">
+								
+								
 									
 									<label for="">Nombre del evento</label>
 									<input type="text" id = "nombre_evento"><br>
+									
+									<label for="">¿Crear como Grupo?</label>
+									<select id="categoria" name ="categoria" >
+										<script>
+											for(var i=0; i<10; i++){
+												document.write("<option>i</option>");
+											}
+										</script>
+										<option selected>No</option>
+										<option>Si</option>
+									</select>
+									
 									<label for="">Fecha de inicio</label>
 									
 									<div class="input-append date" id="d2" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
@@ -217,7 +230,7 @@
           	  <li class="divider-vertical"></li>
               <li>
               <g:form class="navbar-form">
-				<richui:autoComplete name="group" action="${createLinkTo('dir': 'home/lookAJAX')}" onItemSelect="goToLocation(id)" />
+				<richui:autoComplete name="group" action="${createLinkTo('dir': 'home/lookAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'home/publicGroup')}/' + id;" />
            	  </g:form>
               </li>
           </ul>
