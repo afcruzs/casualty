@@ -315,7 +315,10 @@
 
 
 	<!-- inicio footer -->
+	
 	<footer>
+	<div class="container">
+	
 		<div class="row-fluid">
 			<div class="span12">&nbsp;</div>
 
@@ -331,6 +334,7 @@
 			<div class="span12">&nbsp;</div>
 
 		</div>
+	</div>
 	</footer>
 	<!-- fin footer -->
 

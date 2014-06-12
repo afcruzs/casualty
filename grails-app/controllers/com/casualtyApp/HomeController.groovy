@@ -407,6 +407,11 @@ class HomeController {
 			 nombresEvent=nombresEvent + event.title + "@"
 		 }
 		
+		if(currentUser.eventCreator.events.size()>=1){
+			descEvent = descEvent.substring(0, descEvent.size()-1);
+			 nombresEvent = nombresEvent.substring(0, nombresEvent.size()-1);
+		}
+		
 		render( view: "profile",model : [user : currentUser , username :
 		   SecurityUtils.getSubject().getPrincipal() , names : nombresEvent , desc : descEvent , tam : currentUser.eventCreator.events.size()] )
 		
@@ -518,30 +523,39 @@ class HomeController {
 	
 	def updateGroups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
-		print params.nameGroup
-		
+		def cond=false
 		def newGroup;
 		if(ClassGroupTemp!=null || params.screenshot!=null){
-			if(params.screenshot!=null){
-				newGroup = new ClassGroup(screenshot:params.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator(), adminId : currentUser.id)
+			if(ClassGroupTemp!=null){
+				newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator(), adminId : currentUser.id)
+				cond=true
 			}else{
-			newGroup = new ClassGroup(screenshot:ClassGroupTemp.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator(), adminId : currentUser.id)
+				newGroup = new ClassGroup(screenshot:params.screenshot,nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator(), adminId : currentUser.id)
+				cond=true
 			}
+				
+				
 			
 		}else{
 			newGroup = new ClassGroup(nameGroup:params.nameGroup ,description:params.descripcionGroup,createAt: new Date(),userType:4,eventCreator : new EventCreator(), adminId : currentUser.id)
+			cond = false
 		}
 		
 		newGroup.save(flush:true)
 		
 		newGroup.addToUser(currentUser)
-		
 	
-		redirect(controller: 'home', action: 'groups' )
+		
+		flash.message = "Grupo creado con exito"
+		redirect(action:'groups')
+		
+		/*render( view: "modifyGroup",model : [user : currentUser , username :
+		SecurityUtils.getSubject().getPrincipal() , group : newGroup, cond : cond] )*/
+		
+		//redirect(controller: 'home', action: 'groups' )
 		
 		
 	}
-	
 	
 	//VIene de public profile
 	def publicGroup(){}
@@ -554,9 +568,8 @@ class HomeController {
 		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def cond=true
-		if(currentGroup.screenshot==null){
+		if(currentGroup!=null && currentGroup.screenshot==null){
 			cond=false
-		}else{
 		}
 		
 		render( view: "modifyGroup",model : [user : currentUser , username :
@@ -608,13 +621,18 @@ class HomeController {
 			 nombresGrupos=nombresGrupos + group.nameGroup + "@"
 			 
 		 }
-		
+		if(currentUser.classGroup.size()>=1){
+			descGrupos = descGrupos.substring(0, descGrupos.size()-1);
+			nombresGrupos = nombresGrupos.substring(0, nombresGrupos.size()-1);
+		}
+		 print descGrupos
 		render( view: "groups",model : [user : currentUser , username :
 		   SecurityUtils.getSubject().getPrincipal() , names : nombresGrupos , desc : descGrupos , tam : currentUser.classGroup.size(),cond : false] )
 	}
 	
+	
 	def modifyImage(){
-		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
+		def currentGroup = ClassGroup.findById(params.idGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def cond=true
 		
@@ -625,7 +643,9 @@ class HomeController {
 			currentGroup.screenshot = params.screenshot.getBytes()
 		}
 		
-		if(currentGroup.save()){
+		if(currentGroup.save(flush:true)){
+			print ("guardando grupo")
+			
 			render( view: "modifyGroup",model : [user : currentUser , username :
 				SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
 		}else{
@@ -634,12 +654,17 @@ class HomeController {
 				SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond] )
 		}
 		
+		//flash.message = "Grupo modificado con exito"
+		//redirect(action:'modifyGroup')
+		
 		
 	}
 	
 	
 	def initPage(){
-		
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		session.nickname = SecurityUtils.getSubject().getPrincipal()
+		render( view: "initPage", model : [username : SecurityUtils.getSubject().getPrincipal() ] )
 		
 	}
 	
