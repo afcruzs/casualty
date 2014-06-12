@@ -148,14 +148,38 @@
 									<input type="text" id = "nombre_evento"><br>
 									
 									<label for="">¿Crear como Grupo?</label>
-									<select id="categoria" name ="categoria" >
+									<select id="userGroups" name ="categoria"  >
 										<script>
-											for(var i=0; i<10; i++){
-												document.write("<option>i</option>");
-											}
+
+											/*
+												Inicializa con los grupos
+											*/
+
+											jQuery.ajax({
+												type:'POST', 
+										        url:'getUserGroups',
+										        success:function(data,textStatus){
+										        			
+										        			for( var i=0; i<data.length; i++){
+										        				console.log( $("#userGroups").val() );
+										        				$("#userGroups").append( // Append an object to the inside of the select box
+										        			            $("<option></option>") // Yes you can do this.
+										        			                .text(data[i].nameGroup)
+										        			                .val(data[i].nameGroup) );
+										        			}	
+											       		},
+										        error:function(XMLHttpRequest,textStatus,errorThrown){}
+									        	}
+								        	);
+
+
+											$("#userGroups").append( 
+					        			            $("<option selected></option>") 
+					        			                .text("No")
+					        			                .val("No") );
+											
 										</script>
-										<option selected>No</option>
-										<option>Si</option>
+										
 									</select>
 									
 									<label for="">Fecha de inicio</label>

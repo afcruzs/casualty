@@ -157,8 +157,9 @@ function buildNewEventInMap(){
 	//console.log("Category "+ categoryName);
 	var start_hour = $('#start_hour').val();
 	var end_hour = $('#end_hour').val();
+	var selectedGroup = $('#userGroups').val();
 	
-	
+		
 	
 	var name = "Anonimo";
 	if( username != null && username != 'null' )
@@ -175,7 +176,8 @@ function buildNewEventInMap(){
 		 "longitude" : longi,
 		 "user" : name,
 		 "startHour" : start_hour,
-		 "endHour" : end_hour
+		 "endHour" : end_hour,
+		 "selectedGroup" : selectedGroup,
 		 
 		 
 	 };
@@ -208,6 +210,11 @@ function buildNewEventInMap(){
 	 
 	 newEvent.id = lastEventId ;
 	 idCurrentEvent = lastEventId;
+	 
+	 
+	 if( selectedGroup != "No" )
+		 newEvent.user = selectedGroup; 
+	 
 	 showMarker(newEvent);
 	 $('#myModal').modal('hide');
 }
