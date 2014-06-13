@@ -424,9 +424,14 @@ class HomeController {
 		def username = params.username
 		
 		
-		if( SecUser.findByUsername(username) != null ){
-			def currentUser = User.get( SecUser.findByUsername(username).id )
-			
+		if( SecUser.findByUsername(username) != null || User.findByName(username)!=null){
+			def currentUser
+			def cond=false
+			if(SecUser.findByUsername(username) != null)
+				currentUser = User.get( SecUser.findByUsername(username).id )
+			else{
+				currentUser = User.get( User.findByName(username).id )
+			}
 			def namesEvent="";
 			def descEvent="";
 			for(event in currentUser.eventCreator.events){
@@ -434,23 +439,53 @@ class HomeController {
 				 namesEvent=namesEvent + event.title + "@"
 				 
 			 }
+			if(currentUser==null || currentUser.screenshot==null){
+				cond=false
+			}
 			
 			render( view: "publicProfile",model : [user : currentUser , username :
-				SecurityUtils.getSubject().getPrincipal() , names : namesEvent , desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username] )
+				SecurityUtils.getSubject().getPrincipal() , names : namesEvent ,
+				 desc : descEvent , tam : currentUser.eventCreator.events.size(),temp : username, temp : currentUser.id ] )
 		}else{
 		
 			def currentGroup = ClassGroup.findByNameGroup(params.username)
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 			def cond=true
-			if(currentGroup.screenshot==null){
+			if(currentGroup==null || currentGroup.screenshot==null){
 				cond=false
 			}
+			
+			def namesEvent="";
+			def descEvent="";
+			for(event in currentGroup.eventCreator.events){
+				descEvent=descEvent + event.description + "@"
+				namesEvent=namesEvent + event.title + "@"
+				
+					 
+			}
+			
+			if(currentGroup.eventCreator.events.size()>=1){
+				descEvent = descEvent.substring(0, descEvent.size()-1);
+				namesEvent = namesEvent.substring(0, namesEvent.size()-1);
+			}
+			
+			
+			def nameUsers="";
+			for(user in currentGroup.user){
+				nameUsers=nameUsers + user.name + "@"
+			}
+			
+			if(currentGroup.user.size()>=1){
+				nameUsers = nameUsers.substring(0, nameUsers.size()-1);
+			}
+			
 			
 			
 			def inGroup = currentGroup.user.contains(currentUser)
 			
 			render( view: "publicGroup",model : [user : currentUser , username :
-			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond, inGroup : inGroup] )
+			SecurityUtils.getSubject().getPrincipal() , group : currentGroup, cond : cond, inGroup : inGroup , names : namesEvent , 
+			desc : descEvent , tam : currentGroup.eventCreator.events.size(), nameUser : nameUsers , tamUser :currentGroup.user.size() ] )
 			//render( view: "publicGroup",model : [ groupName : username ] )
 			
 		}
@@ -466,20 +501,27 @@ class HomeController {
 		def theGroup = ClassGroup.get(params.id)
 		
 		
-		
-		
 		if( theGroup != null ){
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 			def cond=true
 			if(theGroup.screenshot == null)
 				cond=false
+			
 				
+			def namesEvent="";
+			def descEvent="";
+			for(event in theGroup.eventCreator.events){
+				descEvent=descEvent + event.description + "@"
+				namesEvent=namesEvent + event.title + "@"
+				
+					 
+			}
 			
 			def inGroup = theGroup.user.contains(currentUser)
 			
 			
 			render( view: "publicGroup",model : [user : currentUser , username :
-					SecurityUtils.getSubject().getPrincipal() , group : theGroup, cond : cond, inGroup : inGroup] )
+					SecurityUtils.getSubject().getPrincipal() , group : theGroup, cond : cond, inGroup : inGroup,  names : namesEvent , desc : descEvent , tam : theGroup.eventCreator.events.size()] )
 			
 		}else render( view: "index" )
 	
@@ -559,13 +601,16 @@ class HomeController {
 	}
 	
 	//VIene de public profile
-	def publicGroup(){}
+	def publicGroup(){
+		
+		print("hola")
+	}
 	
 	
 	
 	
 	def updateGroupCreator(){
-		
+		print "entra yaaa"
 		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def cond=true
