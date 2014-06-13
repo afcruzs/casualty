@@ -5,7 +5,6 @@
 	function validateInitialDate(){
 		var date = document.getElementById("date2").value;
 		var btnSave = document.getElementById("btnSave1");
-		console.log("Nestor      "+ date);
 		var initialDateInput = document.getElementById("date2");
 		var currentDate = new Date();
 		var aux = currentDate.getMonth()+1;
@@ -67,7 +66,6 @@
 	
 	function getDate(){
 		fecha = new Date();
-		console.log("xd");
 		var a=fecha.getDate();
 		var b=fecha.getMonth()+1;
 		if(a<10){
@@ -91,8 +89,6 @@
 		var initialDate = document.getElementById("date2").value;
 		var initialDateR = parseInt(initialDate.split("-")[2]+""+parseInt( initialDate.split("-")[1])+""+ initialDate.split("-")[0]);
 		var finalDateR = parseInt(date.split("-")[2]+""+parseInt( date.split("-")[1])+""+ date.split("-")[0]);
-		console.log("initial "+initialDateR);
-		console.log("final "+finalDateR);
 		if(finalDateR < initialDateR){
 			finalDateInput.style.border="1px solid #ff0000";
 			btnSave.disabled = true;
@@ -132,8 +128,6 @@
 		var titleInput = document.getElementById("nombre_evento");
 		var btnSave = document.getElementById("btnSave1");
 		var title = document.getElementById("nombre_evento").value;
-		console.log(" title:  "+title);
-		console.log(title == "");
 		if(title==""){
 			titleInput.style.border="1px solid #ff0000";
 			btnSave.disabled = true;
@@ -147,7 +141,6 @@
 	        url:"valNameEvent",
 	        async : false,
 	        success:function(data,textStatus){
-	        	 console.log(data);
 	        	if( data == "Error" )
 	        		alert("Ha ocurrido un error");
 	        	if( data == "True" )
