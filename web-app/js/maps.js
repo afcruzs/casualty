@@ -143,19 +143,18 @@ function showEvents(events){
  * @author: Felipe
  */
 function buildNewEventInMap(){
-	
-	
-	
-
+	if(validateEventName() && validateInitialDate() && validateInitialTime() && validationFinalDate() && validateFinalTime()){
 	
 	var my_title = $('#nombre_evento').val();
 	var desc = $('#descripcion').val();
 	var tags = $('#tags').val();
 	var d2 = $('#date2').val();
 	var d = $('#date').val();
+
 	var categoryName = $("#categoria option:selected").html();
 	//console.log("Category "+ categoryName);
 	var start_hour = $('#start_hour').val();
+	console.log(start_hour);
 	var end_hour = $('#end_hour').val();
 	var selectedGroup = $('#userGroups').val();
 	
@@ -217,6 +216,7 @@ function buildNewEventInMap(){
 	 
 	 showMarker(newEvent);
 	 $('#myModal').modal('hide');
+	}
 }
 
 

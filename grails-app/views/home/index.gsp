@@ -4,6 +4,8 @@
 	
 	<g:javascript src="chat.js" />
 	<g:javascript src="maps.js" />
+	<g:javascript src="validations.js" />
+
 	
 	<!--<g:javascript library="jquery"/> -->
 	<!-- para que sirvan los botones desplegables y otras funcinalidades-->
@@ -145,7 +147,7 @@
 								
 									
 									<label for="">Nombre del evento</label>
-									<input type="text" id = "nombre_evento"><br>
+									<input type="text" onkeyup="validateEventName()" id = "nombre_evento"><br>
 									
 									<label for="">¿Crear como Grupo?</label>
 									<select id="userGroups" name ="categoria"  >
@@ -184,22 +186,14 @@
 									
 									<label for="">Fecha de inicio</label>
 									
-									<div class="input-append date" id="d2" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
-									  	<input class="span10" type="text" value="02-05-2014" id = "date2">
+									<div class="input-append date" id="d2" data-date="02-05-2014"  data-date-format="dd-mm-yyyy">
+									  	<input class="span10" type="text" onkeyup="validateInitialDate(this.value)" value="02-05-2014" id = "date2">
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
 									<!-- <input type="date" id="date2"><br>-->
 									
 									<label for="">Hora Inicial</label>
-									<input type="time" id="start_hour"><br>
-									<br>
-									<label for="">Fecha de finalización</label>
-									<!--  <input type="date" id="date"><br>-->
-									
-									<div class="input-append date" id="d" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
-									  <input class="span10"  type="text" value="02-05-2014" id="date">
-									  <span class="add-on"><i class="icon-th"></i></span>
-									</div>	
+									<input type="time" onkeyup="validateInitialTime(this.value)" id="start_hour"><br>
 									
 									<label for="">Categoria</label>
 									<select id="categoria" name ="categoria" >
@@ -208,10 +202,21 @@
 										<option>Academico</option>
 										<option selected>Otro</option>
 									</select>
+									
+									<br>
+									<label for="">Fecha de finalización</label>
+									<!--  <input type="date" id="date"><br>-->
+									
+									<div class="input-append date" id="d" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
+									  <input class="span10"  onkeyup="validationFinalDate(this.value)" type="text" value="02-05-2014" id="date">
+									  <span class="add-on"><i class="icon-th"></i></span>
+									</div>	
+									
+									
 
 									<br>
 									<label for="">Hora Final</label>
-									<input type="time" id="end_hour"><br>
+									<input type="time" onkeyup="validateFinalTime(this.value)" id="end_hour" ><br>
 									<label for="">Descripción</label>
 									<input type="text" id="descripcion"><br>
 									<label for="">Etiquetas</label>
@@ -230,7 +235,7 @@
 					
 						<div class="modal-footer"> 
 							<button type="button" class ="btn" data-dismiss="modal" >Cerrar</button>
-							<button type="button" class ="btn btn-primary" onclick="buildNewEventInMap()" >Guardar</button>
+							<button type="button" id="btnSave1" class ="btn btn-primary" onclick="buildNewEventInMap()" >Guardar</button>
 						</div>
 					</div>
 			<!--end create the modal-->
@@ -422,83 +427,58 @@
 	<!-- fin actually loads the map -->
 	
 	<script>
-		function getDate(){
-			fecha = new Date();
-			console.log("xd");
-			var a=fecha.getDate();
-			var b=fecha.getMonth();
-			if(a<10){
-				a="0"+a;
-			}
-			if(b<10){
-				b="0"+b;
-			}
-			var cad = a +"-" +b +"-" +fecha.getFullYear();
+	$().ready(function(){
+		// me sirve para que sirvan los date
+		//jQuery('#date').datepicker();	
+		//jQuery('#date2').datepicker();	
+		//$('.datepicker').datepicker()
 
-			//valor.value =""+fecha.getDate+"-"+fecha.getFullYear()+"";
-			document.getElementById('date2').value = cad;
-			document.getElementById('date').value = cad;
-			//$("#d").val(new Date().toISOString().substring(0, 10));
-		}
-		</script>
-	
-	<script>
-		$().ready(function(){
-			// me sirve para que sirvan los date
-			//jQuery('#date').datepicker();	
-			//jQuery('#date2').datepicker();	
-			//$('.datepicker').datepicker()
+		/*$("#myModal").on("show",function(){
+				fecha = new Date();
+				console.log("xd");
+				var a=fecha.getDate();
+				var b=fecha.getMonth();
+				if(a<10){
+					a="0"+a;
+				}
+				if(b<10){
+					b="0"+b;
+				}
+				var cad = a +"-" +b +"-" +fecha.getFullYear();
 
-			/*$("#myModal").on("show",function(){
-					fecha = new Date();
-					console.log("xd");
-					var a=fecha.getDate();
-					var b=fecha.getMonth();
-					if(a<10){
-						a="0"+a;
-					}
-					if(b<10){
-						b="0"+b;
-					}
-					var cad = a +"-" +b +"-" +fecha.getFullYear();
-	
-					//valor.value =""+fecha.getDate+"-"+fecha.getFullYear()+"";
-					document.getElementById('date2').value = cad;
-					document.getElementById('date').value = cad;
-					//valor.value =cad;
-	
-				})*/
-			
+				//valor.value =""+fecha.getDate+"-"+fecha.getFullYear()+"";
+				document.getElementById('date2').value = cad;
+				document.getElementById('date').value = cad;
+				//valor.value =cad;
 
-			$('#d2').datepicker().on('changeDate', function (ev) {
-				$('#date2').change();
-			});
-
-			$('#d').datepicker().on('changeDate', function (ev) {
-			    $('#date').change();
-			});
-			
-			
-		var checkout = $('#d').datepicker({
-			  onRender: function(date) {
-			    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-			  }
-			}).on('changeDate', function(ev) {
-			  checkout.hide();
-			}).data('datepicker');
+			})*/
 		
 
+		$('#d2').datepicker().on('changeDate', function (ev) {
+			$('#date2').change();
+		});
 
-
-		
+		$('#d').datepicker().on('changeDate', function (ev) {
+		    $('#date').change();
 		});
 		
 		
+	var checkout = $('#d').datepicker({
+		  onRender: function(date) {
+		    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+		  }
+		}).on('changeDate', function(ev) {
+		  checkout.hide();
+		}).data('datepicker');
+	
 
-		
+
+
+	
+	});
 
 
 	</script>
-		
+
 </body>
 </html>

@@ -69,6 +69,22 @@ class HomeController {
 	}
 	
 	
+	def valNameEvent(){
+		try{
+		def c = Event.countByTitle(params.title);
+		print("la cantidad de eventos con el titulo: "+params.title+" es "+ c)
+		if(c > 0)
+			render "False"
+		
+		else
+			render "True"
+		}
+		catch(Exception e){
+			render "Error"
+		}
+		
+	}
+	
 	/*
 	 * Se salva el nuevo evento en la base de datos relacionandolo con
 	 * el usuario actualmente logueado.
