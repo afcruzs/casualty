@@ -111,7 +111,7 @@
 	</div>
 
 	<!-- Fin menu -->
-	<!-- create the modal to look up-->
+		<!-- create the modal to look up-->
 				  
 				   <div id="mylook" class="modal hide fade">
 							<div class="modal-header">
@@ -124,33 +124,34 @@
 								
 				            <!-- inicio datos de mas -->
 	
-
-        
-        <div class="flex">		
+		  
+		   <div class="flex">		
    
         <div class="span4 text-center">
-          <r:img class="img-circle" file="Donato.png" alt=""/>	
-          <h2>Donato Ariza</h2>
+          <r:img class="img-circle" file="Donato.png"  width="50%" height="50%" alt="img"/>	
+          <h2>Andres Donato</h2>
           <p>Estudiante de Ingenieria de Sistemas, 20 años, experiencia en apps moviles y standalone; areas de interes: inteligencia artifical y mineria de datos,ingenieria de software </p>
         <p>correo: nadonatoa@unal.edu.co</p>
         </div>
         
          </div>
-        <div class="flex">	
+		  
+
+      <div class="flex">	
         
-         
         <div class="span4 text-center">
-          <r:img class="img-circle" file="felipe.png" alt=""/>	
+          <r:img class="img-circle" file="felipe.png"  width="50%" height="50%" alt="img"/>	
           <h2>Felipe Cruz</h2>
           <p>"Estudiante de Ingeniería de Sistemas y Computación, experiencia en desarrollo de aplicaciones móviles y standalone, areas de interés: Análisis y diseño de Algoritmos, Ingeniería de Software,Complejidad Computacional y teoría de juegos"</p>
             <p>correo: afcruzs@unal.edu.co</p>
         </div>
         
-        </div>
+        </div>  	
+        
         <div class="flex">	
         
         <div class="span4 text-center">
-          <r:img class="img-circle" file="Fabian.png" alt=""/>		
+          <r:img class="img-circle" file="Fabian.png"width="50%" height="50%" alt="img"/>		
           <h2>Fabian Rodríguez</h2>
           <p>Estudiante de Ingenieria de sistemas y computacion, areas de interés: programacion visual, Analisis de algorimia avanzada con enfoque a la computacion grafica,Analisis de complegidad de algoritmos</p>
             <p>correo: faarodriguezbe@unal.edu.co</p>
@@ -162,7 +163,7 @@
       
           	
         <div class="span4 text-center">
-          <r:img class="img-circle" file="Maikol.png" alt=""/>	
+          <r:img class="img-circle" file="Maikol.png" width="50%" height="50%" alt="img"/>	
           <h2 >Maikol Bonilla</h2>
           <p>"Estudiante de Ingeniería de Sistemas y Computación, experiencia en desarrollo de aplicaciones standalone,areas de interés: Diseño de aplicaciones y Algoritmia.</p> 	
            <p>correo:  mabonillagi@unal.edu.co</p>
@@ -172,7 +173,7 @@
            <div class="flex">
            
           <div class="span4 text-center">
-          <r:img class="img-circle" file="Diego.png" alt=""/>	
+          <r:img class="img-circle" file="Diego.png" width="40%" height="30%" alt="img"/>	
           <h2>Diego Vanegas</h2>
           <p>"Estudiante de Ingeniería de Sistemas, areas de interés: Analisis de metodos numericos orientado a señales de comunicacion;Estudio de algoritmos enfocados a la programacion lineal, entera y no lineal, Ingeniería de Software;Analisis de modelos estocasticos enfocado al manejo de redes Ad-Hoc"</p>
           <p>correo: davanegaspr@unal.edu.co</p>
