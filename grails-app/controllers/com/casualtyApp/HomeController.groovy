@@ -387,6 +387,10 @@ class HomeController {
 		}
 	}
 	
+	def contact(){
+		
+	}
+	
 	
 	//Revisa si dado el id de un evento el currentUser es el dueño.
 	def isOwner(){

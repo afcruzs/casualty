@@ -50,7 +50,7 @@
               </li>
               
               
-              <li><a href="#contact">Contacto</a></li>
+              <li class="inactive"><a href="contact">Contacto</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -153,14 +153,14 @@
           <p>Los markers en los mapas te mostrarán los eventos que estan ocurriendo actualmente, dales click y descubre toda la información que necesitas para poder asistir.</p>
           
           
-          <p><a class="btn" href="#">Ver más &raquo;</a></p>
+ 
         </div><!-- /.span4 -->
         <div class="span4 text-center">
           <h2 >Grupos</h2>
           <p>Causality te permite tambien crear grupos y añadir usuarios a ellos para así poder publicar eventos a nombre del grupo. Si eres parte de una equipo de futbol, o de
           maratones de programación, o eres miembro de una compañia de teatro esto es para ti, entra y descubre más.</p>
           
-          <p><a class="btn" href="#">Ver más &raquo;</a></p>
+ 
           <r:img class="img-circle" file="groups.png" alt=""/>	
         </div><!-- /.span4 -->
         <div class="span4 text-center">
@@ -168,7 +168,7 @@
           <h2>Aprovecha tu tiempo</h2>
           <p>Si tienes cuatro horas de hueco en el horario y no sabes que hacer : facil, registrate en causality y busca entre los eventos alguno de tu interes, hay para todos los gustos
            en casuality encontrarás eventos de deportes, ocio, estudio y otras "cosas". Qué esperas? entra ya!</p>
-          <p><a class="btn" href="#">Ver más &raquo;</a></p>
+ 
         </div><!-- /.span4 -->
      </div><!-- /.row -->
 	<!-- fin datos de mas -->

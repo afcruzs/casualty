@@ -93,14 +93,7 @@
               </li>
               
               
-             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contacto<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li class="divider"></li>
-                  <li class="nav-header">Informacion Personal</li>
-					<li><a href="#mylook" data-toggle="modal">Consultar</a></li>                    
-                </ul>
-              </li>
+            <li class="inactive"><a href="contact">Contacto</a></li>
               
               
               <li class="dropdown">
@@ -263,7 +256,8 @@
 								
 				            <!-- inicio datos de mas -->
 	
-		  
+		  	
+		  	
 		   <div class="flex">		
    
         <div class="span4 text-center">

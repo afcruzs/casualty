@@ -12,7 +12,8 @@ class SecSecurityFilters {
 	 */
 	def publicActions = [
 		signup: ['*'],
-		auth:['*']
+		auth:['*'],
+		home:['contact']
 	]
 	
 	/*

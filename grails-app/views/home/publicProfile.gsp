@@ -50,7 +50,7 @@
 						<li class="divider-vertical"></li>
 						<li class="active"><a href="index">Eventos</a></li>
 						<li><a href="#about">Grupos</a></li>
-						<li><a href="#contact">Contacto</a></li>
+						<li class="inactive"><a href="contact">Contacto</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> ${username}<b class="caret"></b>
 						</a>

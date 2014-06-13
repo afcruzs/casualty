@@ -35,7 +35,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">Inicio</a></li>
-              <li><a href="#contact">Contacto</a></li>
+              <li class="inactive"><a href="../home/contact">Contacto</a></li>
               <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                 <ul class="dropdown-menu">
