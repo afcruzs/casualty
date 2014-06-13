@@ -59,7 +59,8 @@ class HomeController {
 	 */
 	def submitMessage(String message, long idEvent, long userId) {
 		
-		new Message(nickname: session.nickname, message:message, event: Event.get(idEvent), user : User.get(userId)).save()
+		if( !message.trim().equals("") )
+			new Message(nickname: session.nickname, message:message, event: Event.get(idEvent), user : User.get(userId)).save()
 		render "<script>retrieveLatestMessages()</script>"
 	}
 
@@ -731,6 +732,31 @@ class HomeController {
 			theGroup.removeFromUser(currentUser)
 			render "Success"
 		}else render "ERROR"
+	}
+	
+	def deleteGroup(){
+		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
+		if( currentUser.id == ClassGroup.get(params.idGroup).adminId && ClassGroup.get(params.idGroup) != null ){
+			
+			def theGroup = ClassGroup.get(params.idGroup)
+			def users = theGroup.user
+			
+			users.each{u->
+				u.removeFromClassGroup(theGroup)
+				u.save(flush : true)
+			}
+			
+			theGroup.eventCreator.events.each{event->
+				sendEmailToAssistants(event.id)
+			}
+			
+			ClassGroup.get(params.idGroup).delete(flush : true)	
+			
+			redirect(controller: 'home', action: 'index' )
+		}else{
+		render( view: "modifyGroup",model : [user : currentUser , username :
+			SecurityUtils.getSubject().getPrincipal() , group : ClassGroup.get(params.idGroup)] )
+		}
 	}
 	
 }

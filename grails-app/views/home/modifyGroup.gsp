@@ -114,8 +114,7 @@
 			<!--end create the modal-->
 
 	<!-- inicio container -->
-<body
-	onload="initialize('${user}','${username}','${group}','${cond}')">
+<body>
 
 	
 		<div class="span12">&nbsp;</div>
@@ -174,6 +173,10 @@
 								<input type="submit" class="btn btn-primary"
 									value="Guardar Cambios"
 									onclick="this.form.action = 'modifyImage'" />
+									<div class="span12">&nbsp;</div>
+									<input type="submit" class="btn btn-warning"
+									value="Eliminar Grupo"
+									onclick="this.form.action = 'deleteGroup'" />
 								<!--  <a href="#"  class="btn btn-primary" onclick = "this.form.action = 'updateProfile'">Guardar Cambios</a> -->
 							</div>
 						
