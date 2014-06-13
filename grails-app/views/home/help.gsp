@@ -125,7 +125,7 @@
 		<div class="row-fluid">
 				<div class="span12">&nbsp;</div>
 				<div class="span12">
-					<iframe width="800" height="400" src="http://www.powtoon.com/embed/cPzCl4dZGBi/" frameborder="0" allowfullscreen></iframe>
+					<iframe width="1000" height="590" src="http://www.powtoon.com/embed/cPzCl4dZGBi/" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>
