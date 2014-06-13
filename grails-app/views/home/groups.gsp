@@ -31,25 +31,6 @@
 	 <!-- Para que sirva el el autocompletar -->
 		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
 	
-	<!-- ------------------------------------------------------------------------- -->
-	<style>
-
-
-
-  
-
- /* colors */
-   
-   .flex > div:nth-child(3){ background : #CE2B37; }
-
-   .flex > div:hover
-   {
-        width: 200px;
-   }
-   
-   </style>
-	
-	<!-- ------------------------------------------------------------------------- -->
 	
 	
 	
@@ -69,6 +50,13 @@
 				<a class="brand" href="index">Causality</a>
 				<ul class="nav">
 					<li class="divider-vertical"></li>
+					<li>
+				              <g:form class="navbar-form">
+								<richui:autoComplete name="group" 
+								action="${createLinkTo('dir': 'home/lookAJAX')}"
+								onItemSelect="document.location.href = '${createLinkTo(dir: 'home/publicGroupProxy')}?id=' + id;" />
+				           	  </g:form>
+				        </li>
 				</ul>
 				<div class="nav-collapse collapse pull-right">
 					<ul class="nav">

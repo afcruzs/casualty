@@ -50,25 +50,7 @@
 	    <!-- Para que sirva el el autocompletar -->
 		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
 	    
-	<!-- ------------------------------------------------------------------------- -->
-	<style>
-
-
-
-  
-
- /* colors */
-   
-   .flex > div:nth-child(3){ background : #CE2B37; }
-
-   .flex > div:hover
-   {
-        width: 200px;
-   }
-   
-   </style>
 	
-	<!-- ------------------------------------------------------------------------- -->
 	
 	
 	</head>
@@ -280,22 +262,29 @@
 				
 								
 				            <!-- inicio datos de mas -->
-	
-
-        
+	<table>
+			<tr>
+		                <td align="center" style="width: 300px;">
+				      
+				        
         <div class="flex">		
    
         <div class="span4 text-center">
           <r:img class="img-circle" file="Donato.png" alt=""/>	
-          <h2>Donato Ariza</h2>
+          <h2>Andres Donato</h2>
           <p>Estudiante de Ingenieria de Sistemas, 20 años, experiencia en apps moviles y standalone; areas de interes: inteligencia artifical y mineria de datos,ingenieria de software </p>
         <p>correo: nadonatoa@unal.edu.co</p>
         </div>
         
          </div>
-        <div class="flex">	
+				      
+				</td>
+				
+				<td style="width:50px;">&nbsp;</td>
+				<td>	
+					 
+					 <div class="flex">	
         
-         
         <div class="span4 text-center">
           <r:img class="img-circle" file="felipe.png" alt=""/>	
           <h2>Felipe Cruz</h2>
@@ -304,6 +293,17 @@
         </div>
         
         </div>
+					 
+				</td>	
+				<td><div id="loadingConfirm" class="hide" style="margin-top: -10px;"></div></td>    
+			</tr>	
+		  </table>		
+		  
+		  
+		  
+
+      
+        
         <div class="flex">	
         
         <div class="span4 text-center">
