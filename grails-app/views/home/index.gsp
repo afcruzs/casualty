@@ -50,6 +50,26 @@
 	    <!-- Para que sirva el el autocompletar -->
 		<resource:include components="autoComplete" autoComplete="[skin: 'custom']"/>
 	    
+	<!-- ------------------------------------------------------------------------- -->
+	<style>
+
+
+
+  
+
+ /* colors */
+   
+   .flex > div:nth-child(3){ background : #CE2B37; }
+
+   .flex > div:hover
+   {
+        width: 200px;
+   }
+   
+   </style>
+	
+	<!-- ------------------------------------------------------------------------- -->
+	
 	
 	</head>
 	
@@ -81,19 +101,26 @@
               <li class="active"><a href="#">Eventos</a></li>
               
               
-              
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="divider"></li>
-                  <li class="nav-header">Grupos</li>
-					<li><a href="#mylook" data-toggle="modal">Buscar</a></li>         
+                  <li class="nav-header">Grupos</li>         
                   <li><a href="groups">Mis Grupos</a></li>                  
                 </ul>
               </li>
               
               
-              <li><a href="#contact">Contacto</a></li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contacto<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="divider"></li>
+                  <li class="nav-header">Informacion Personal</li>
+					<li><a href="#mylook" data-toggle="modal">Consultar</a></li>                    
+                </ul>
+              </li>
+              
+              
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -246,23 +273,73 @@
 				   <div id="mylook" class="modal hide fade">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3>Iniciar Busqueda</h3>
+								<h3>Contactos</h3>
 							</div>
 							<div class="modal-body">
 							
-							
+				
 								
-				              <g:form class="navbar-form">
-								<richui:autoComplete name="group" 
-								action="${createLinkTo('dir': 'home/lookAJAX')}"
-								onItemSelect="document.location.href = '${createLinkTo(dir: 'home/publicGroupProxy')}?id=' + id;" />
-				           	  </g:form>
+				            <!-- inicio datos de mas -->
+	
 
-							  <!--Machete-->							              
-							  <br>
-							  <br>
-							  <br>
-							  <br>
+        
+        <div class="flex">		
+   
+        <div class="span4 text-center">
+          <r:img class="img-circle" file="Donato.png" alt=""/>	
+          <h2>Donato Ariza</h2>
+          <p>Estudiante de Ingenieria de Sistemas, 20 años, experiencia en apps moviles y standalone; areas de interes: inteligencia artifical y mineria de datos,ingenieria de software </p>
+        <p>correo: nadonatoa@unal.edu.co</p>
+        </div>
+        
+         </div>
+        <div class="flex">	
+        
+         
+        <div class="span4 text-center">
+          <r:img class="img-circle" file="felipe.png" alt=""/>	
+          <h2>Felipe Cruz</h2>
+          <p>"Estudiante de Ingeniería de Sistemas y Computación, experiencia en desarrollo de aplicaciones móviles y standalone, areas de interés: Análisis y diseño de Algoritmos, Ingeniería de Software,Complejidad Computacional y teoría de juegos"</p>
+            <p>correo: afcruzs@unal.edu.co</p>
+        </div>
+        
+        </div>
+        <div class="flex">	
+        
+        <div class="span4 text-center">
+          <r:img class="img-circle" file="Fabian.png" alt=""/>		
+          <h2>Fabian Rodríguez</h2>
+          <p>Estudiante de Ingenieria de sistemas y computacion, areas de interés: programacion visual, Analisis de algorimia avanzada con enfoque a la computacion grafica,Analisis de complegidad de algoritmos</p>
+            <p>correo: faarodriguezbe@unal.edu.co</p>
+            </div>
+       
+          </div>
+        <div class="flex">
+          
+      
+          	
+        <div class="span4 text-center">
+          <r:img class="img-circle" file="Maikol.png" alt=""/>	
+          <h2 >Maikol Bonilla</h2>
+          <p>"Estudiante de Ingeniería de Sistemas y Computación, experiencia en desarrollo de aplicaciones standalone,areas de interés: Diseño de aplicaciones y Algoritmia.</p> 	
+           <p>correo:  mabonillagi@unal.edu.co</p>
+        </div>
+         
+           </div>
+           <div class="flex">
+           
+          <div class="span4 text-center">
+          <r:img class="img-circle" file="Diego.png" alt=""/>	
+          <h2>Diego Vanegas</h2>
+          <p>"Estudiante de Ingeniería de Sistemas, areas de interés: Analisis de metodos numericos orientado a señales de comunicacion;Estudio de algoritmos enfocados a la programacion lineal, entera y no lineal, Ingeniería de Software;Analisis de modelos estocasticos enfocado al manejo de redes Ad-Hoc"</p>
+          <p>correo: davanegaspr@unal.edu.co</p>
+        </div>
+        
+     
+        </div>	
+        
+    
+	<!-- fin datos de mas -->
 							
 						</div>
 					</div>
