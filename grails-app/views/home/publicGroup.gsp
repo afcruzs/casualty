@@ -33,22 +33,7 @@
 <resource:include components="autoComplete"
 	autoComplete="[skin: 'custom']" />
 
-<!-- ------------------------------------------------------------------------- -->
-	<style>
 
-
- /* colors */
-   
-   .flex > div:nth-child(3){ background : #CE2B37; }
-
-   .flex > div:hover
-   {
-        width: 200px;
-   }
-   
-   </style>
-	
-	<!-- ------------------------------------------------------------------------- -->
 	
 	
 
