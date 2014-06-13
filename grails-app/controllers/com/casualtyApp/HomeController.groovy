@@ -395,12 +395,25 @@ class HomeController {
 		def currentEvent = Event.get(params.idevent)
 		
 		//System.out.println(currentUser.eventCreator.events.get(params.idevent));
-		if(currentEvent.eventCreator.id == currentUser.eventCreator.id){
+		
+		
+		
+		if(currentEvent.eventCreator.id == currentUser.eventCreator.id ){
 			//System.out.println("Si es el dueño")
 			render "Yes"
 		}
-		else
-			render "No"
+		else{
+			def userGroups = ClassGroup.list().findAll( { 
+				it.adminId == currentUser.id && it.eventCreator.id == currentEvent.eventCreator.id
+			} )
+			
+			println userGroups
+			if( userGroups != null )
+				if( userGroups.size() > 0 )
+					render "Yes"
+				else render "No"
+			else render "No"
+		}
 		
 		}
 		catch(NullPointerException x){

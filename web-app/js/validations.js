@@ -100,11 +100,12 @@
 	}
 	
 	function validateFinalTime(){
-		time=document.getElementById("end_hour").value;
+		var time=document.getElementById("end_hour").value;
+		var iniTime = document.getElementById("start_hour").value;
 		var btnSave = document.getElementById("btnSave1");
 		var finalTimeInput = document.getElementById("end_hour");
 		var currentDate = new Date();
-		var curTimeR = currentDate.getHours()+""+currentDate.getMinutes();
+		var initialTimeR =parseInt( iniTime.split(":")[0]+ iniTime.split(":")[1]);
 		if(time==""){
 			finalTimeInput.style.border="1px solid #ff0000";
 			btnSave.disabled = true;
@@ -112,7 +113,7 @@
 		}
 		var finalTimeR = parseInt( time.split(":")[0]+ time.split(":")[1]);
 		if(equalsDate(document.getElementById("date").value) ){
-			if(finalTimeR < curTimeR){
+			if(finalTimeR < initialTimeR){
 				finalTimeInput.style.border="1px solid #ff0000";
 				btnSave.disabled = true;
 				return false;
