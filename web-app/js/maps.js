@@ -76,11 +76,11 @@ function initialize(events,u_name) {
 
 
 function showLoading(){
-	$('#customAlert2').modal('show');
+	//$('#customAlert2').modal('show');
 }
 
 function closeLoading(){
-	$('#customAlert2').modal('hide');
+	//$('#customAlert2').modal('hide');
 }
 
 
