@@ -143,7 +143,8 @@
 
 
 	<div class="row-fluid">
-		<div class="span2"></div>
+		<div class="span12">
+			<div class="span2"></div>
 		<g:form id="form1" enctype="multipart/form-data">
 			<div class="span2">
 				<ul class="thumbnails">
@@ -176,10 +177,22 @@
 						<p>
 							${group.description}
 						</p>
-					</div>
-					
-					
-					
+				</div>
+					<br>
+					<g:if test="${inGroup == true}">
+						<button id="joinBtn" onclick="leaveGroup('${group.nameGroup}')"
+							class="btn btn-warning">Abandonar Grupo</button>
+					</g:if>
+					<g:else>
+						<button id="joinBtn2" onclick="joinToGroup('${group.nameGroup}')"
+							class="btn btn-info">Unirse a Grupo</button>
+					</g:else>
+
+					<hr>
+				</div>
+				</div>
+				<div class="span3">	
+				
 					<div class="accordion" id="main">
 							<div class="accordion-group">
 								<div class="accordion-heading">
@@ -277,30 +290,14 @@
 								</div>
 							</div>
 						</div>
+					</div>
 					
 					
 					
-					
-					<g:if test="${inGroup == true}">
-						<button id="joinBtn" onclick="leaveGroup('${group.nameGroup}')"
-							class="btn btn-warning">Abandonar Grupo</button>
-					</g:if>
-					<g:else>
-						<button id="joinBtn2" onclick="joinToGroup('${group.nameGroup}')"
-							class="btn btn-info">Unirse a Grupo</button>
-					</g:else>
-
-					<hr>
-				</div>
-
-
 			</div>
-
-
-
-
 		</g:form>
-	</div>
+		</div>
+	
 
 	<!-- Fin container -->
 
