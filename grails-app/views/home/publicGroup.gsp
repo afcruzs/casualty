@@ -250,12 +250,12 @@
 				</div>
 					<br>
 					<g:if test="${inGroup == true}">
-						<button id="joinBtn" onclick="leaveGroup('${group.nameGroup}')"
-							class="btn btn-warning">Abandonar Grupo</button>
+						<input onclick="leaveGroup('${group.nameGroup}')"
+							class="btn btn-warning" value="Abandonar Grupo">
 					</g:if>
 					<g:else>
-						<button id="joinBtn2" onclick="joinToGroup('${group.nameGroup}')"
-							class="btn btn-info">Unirse a Grupo</button>
+						<input onclick="joinToGroup('${group.nameGroup}')"
+							class="btn btn-info" value="Unirse a Grupo">
 					</g:else>
 
 					<hr>

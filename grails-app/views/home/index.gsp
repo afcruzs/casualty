@@ -410,10 +410,16 @@
 									se debe de cerrar el chat, mostar un mensaje de alerta
 									y cerrar el marker actual.
 								*/
-							    function handleMessages(data){
-								    if(data != "DeletedEvent")
+								function handleMessages(data){
+								    if(data != "DeletedEvent"){
 							    		jQuery('#chatMessages').html(jQuery('#chatMessages').html()+data);
-								    else{
+								    		
+							    		var objDiv = document.getElementById("chatMessages");
+									    objDiv.scrollTop = objDiv.scrollHeight;
+							    		
+
+							    		
+								    }else{
 								    	hiddenId = "";
 								    	$('#customAlert').modal('show'); 
 								    	$('#chatModal').modal('hide');
