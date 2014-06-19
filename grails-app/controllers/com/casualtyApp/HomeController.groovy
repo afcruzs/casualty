@@ -837,4 +837,32 @@ class HomeController {
 		}
 	}
 	
+	/*
+	 * este metodo debe filtrar la base de datos de eventos por
+	 * fecha de inicio/final, hora de inicio/final, categoria y tags.
+	 * 
+	 * @author: Felipe
+	 * 
+	 * "fechaInicial" : $("#inicioDiaFilter").val(),
+			"horaInicial" : $("#inicioHoraFilter").val(),
+			"fechaFinal" : $("#finalDiaFilter").val(),
+			"horaFinal" : $("#finalHoraFilter").val(),
+			"tagsString" : $("#tagsFilter").val(),
+			"categoria": console.log()
+	 */
+	def queryEvents(){
+		//Date fechaInicial = parseDate(params.fechaInicial, params.horaInicial)
+		//Date fechaFinal = parseDate(params.fechaFinal, params.horaFinal)
+		String [] tags = params.tagsString.split(",")
+		String categoria = params.categoria
+		
+		/*
+		 * Implementar bien lo de la fecha!!!
+		 */
+		def result = eventsService.filterEvents(null, null, tags, categoria)
+		if( result != null )
+			render result as JSON
+		else render "ERROR"
+	}
+	
 }

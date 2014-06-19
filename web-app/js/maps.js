@@ -28,7 +28,7 @@ var errorFlag=false;
 
 var url = String(document.URL);
 
-
+var allMarkers = [];
 
 
 
@@ -76,11 +76,11 @@ function initialize(events,u_name) {
 
 
 function showLoading(){
-	//$('#customAlert2').modal('show');
+	$('#customAlert2').modal('show');
 }
 
 function closeLoading(){
-	//$('#customAlert2').modal('hide');
+	$('#customAlert2').modal('hide');
 }
 
 
@@ -393,7 +393,9 @@ function showMarker(jsonMarker){
     	
         
      });
-    	
+    
+    
+    allMarkers.push(marker);
 }
 
 function aux(value){
@@ -681,4 +683,65 @@ function goToLocation(idEvent){
 
 	// console.log(idEvent);
 	
+}
+
+
+/*
+ * Elimina todos los markers del mapa
+ */
+function clearMarkers(){
+	 while(allMarkers[0]){
+		 allMarkers.pop().setMap(null);
+		  }
+}
+
+
+/*
+ * Metodo para consultar la DB
+ * y recargar el mapa cuando se filtra.
+ * 
+ * @author: Felipe
+ */
+function queryAndReload(){
+
+	
+
+	
+	var _data = {
+			"fechaInicial" : $("#inicioDiaFilter").val(),
+			"horaInicial" : $("#inicioHoraFilter").val(),
+			"fechaFinal" : $("#finalDiaFilter").val(),
+			"horaFinal" : $("#finalHoraFilter").val(),
+			"tagsString" : $("#tagsFilter").val(),
+			"categoria": $("#filtroCategoria").val()
+			
+			};
+	 
+	console.log(_data);
+	 jQuery.ajax({
+	        type:'POST', 
+	        data : _data,
+	        url:"queryEvents",
+	        success:function(data){
+	        	$('#filterModal').modal('hide');
+	        	
+	        	if( data != "ERROR" ){
+	        		
+	        		console.log(data);
+	        		for(var i=0; i<data.length; i++){
+	        			data[i] = JSON.parse(data[i]);
+	        		}
+	        		console.log(data);
+	        		
+	        		//Borra todos los markers
+	        		clearMarkers();
+	        		
+	        		//Muestra los filtrados...
+	        		showEvents(data);
+	        		
+	        	}	        		
+
+	        },
+	        error:function(XMLHttpRequest,textStatus,errorThrown){}
+	  });
 }

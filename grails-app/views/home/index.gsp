@@ -82,6 +82,13 @@
 			  <li class="divider-vertical"></li>
               <li class="active"><a href="#">Eventos</a></li>
               
+              <li class="unactive"><a href="#"  onclick="return openFilterModal();">Filtrar búsqueda</a></li>
+              <script type="text/javascript">
+			    function openFilterModal() {
+					$('#filterModal').modal('show');
+			        return false;
+			    }
+			</script>
               
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<b class="caret"></b></a>
@@ -239,6 +246,72 @@
 							<button type="button" class ="btn" data-dismiss="modal" >Cerrar</button>
 							<button type="button" id="btnSave1" class ="btn btn-primary" onclick="buildNewEventInMap()" >Guardar</button>
 						</div>
+					</div>
+			<!--end create the modal-->
+			
+			<!-- create the modal-->
+				<div id="filterModal" class="modal hide fade">
+						<div class="modal-header">
+
+							<button type="button" class="close" data-dismiss="modal">salir</button>
+							
+							<h4 class="text-center">Filtrar búsqueda</h4>
+							<div class="row-fluid">
+							
+								<div class="span12">
+								
+									
+									<h4>Categoría</h4>
+									<select id="filtroCategoria" name ="filtroCategoria" >
+										<option>Deportes</option>
+										<option>Ocio</option>
+										<option selected>Academico</option>
+										
+									</select>
+									
+									<br>
+									
+									<h4>Fecha Inicio</h4>
+									<!-- Toca poner el que es-->
+									<input id="inicioDiaFilter"></input>
+									
+									<br>
+									
+									<h4>Hora Inicio</h4>
+									<!-- Toca poner el que es-->
+									<input id="inicioHoraFilter"></input>
+									
+									<br>
+									
+									<h4 id="finalDiaFilter">Fecha Final</h4>
+									<!-- Toca poner el que es-->
+									<input></input>
+									
+									<br>
+									
+									<h4>Hora Final</h4>
+									<!-- Toca poner el que es-->
+									<input id="finalHoraFilter"></input>
+									
+									<br>
+									
+									<h4 >Tags (separadas por coma)</h4>
+									
+									<input id="tagsFilter"></input>
+									
+									<br>
+									<br>
+									
+									<button type="submit" onclick = "queryAndReload()" class="btn btn-info">Consultar</button>
+
+								</div>
+
+								
+							</div>
+
+
+						</div>
+				
 					</div>
 			<!--end create the modal-->
 			

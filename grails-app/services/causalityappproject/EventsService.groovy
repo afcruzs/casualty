@@ -3,8 +3,7 @@ package causalityappproject
 import groovy.json.JsonBuilder
 
 import com.casualtyApp.model.Event
-import com.casualtyApp.model.SecUser
-import com.casualtyApp.model.User
+import com.casualtyApp.model.EventCategory
 
 class EventsService {
 	/*
@@ -82,5 +81,29 @@ class EventsService {
 			return e.getEventCreator().getUser().getShiroUser().getUsername()
 		else
 			return e.getEventCreator().getClassGroup().getNameGroup()
+	}
+	
+	/*
+	 * consulta la DB para filtrar los eventos de acuerdo al os aprametros pasados.
+	 * 
+	 * retorna una lista convertida en json para mostar los eventos
+	 */
+	
+	def filterEvents(Date fechaInicial, Date fechaFinal, String[] tags, String categoria ){
+		try{
+			/*
+			 * Falta implementar el resto de filtros, solo esta categoria
+			 * @author: Felipe
+			 */
+			def events = Event.findByCategory( EventCategory.findByName(categoria) )
+			
+			def jsonEvents = []
+			for( Event e : events ){
+				jsonEvents.add( eventToJSON(e) )
+			}
+			return jsonEvents
+		}catch(Exception ex){
+			println ex
+		}
 	}
 }
