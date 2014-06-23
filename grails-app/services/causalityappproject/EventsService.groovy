@@ -1,5 +1,7 @@
 package causalityappproject
 
+import java.util.concurrent.ForkJoinPool;
+
 import groovy.json.JsonBuilder
 
 import com.casualtyApp.model.Event
@@ -95,7 +97,30 @@ class EventsService {
 			 * Falta implementar el resto de filtros, solo esta categoria
 			 * @author: Felipe
 			 */
-			def events = Event.findByCategory( EventCategory.findByName(categoria) )
+			
+			//def events = Event.findAllByCategoryOrStartTimeOrEndTimeOrTags(EventCategory.findByName(categoria),fechaInicial,fechaFinal,tags[0])
+			
+			print fechaInicial
+			
+			def events = []
+			
+			for( Event event : Event.all ){
+				if(event.category.name.equals(categoria)){
+					events.add(event)
+				}
+				if(event.startTime.equals(fechaInicial)){
+					events.add(event)
+				}
+				if(event.endTime.equals(fechaFinal)){
+					events.add(event)
+				}
+				for(String s : tags){
+						if(event.tags.contains(s)){
+							events.add(event)
+						}
+			    }
+				
+			}
 			
 			def jsonEvents = []
 			for( Event e : events ){

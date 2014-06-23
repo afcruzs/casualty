@@ -727,11 +727,11 @@ function queryAndReload(){
 	        	
 	        	if( data != "ERROR" ){
 	        		
-	        		console.log(data);
+	        		//console.log(data);
 	        		for(var i=0; i<data.length; i++){
 	        			data[i] = JSON.parse(data[i]);
 	        		}
-	        		console.log(data);
+	        		//console.log(data);
 	        		
 	        		//Borra todos los markers
 	        		clearMarkers();

@@ -54,14 +54,14 @@ class BootStrap {
 		academico.save(flush:true)
 		otro.save(flush:true)
 		
-		def ev = new Event('Yoga en la UN ',new Date(),new Date(),'Relajate con Yoga en la UN, es gratis.',"Jugar,correr,yoga",ocio,4.6348317,-74.0820247)
+		def ev = new Event('Yoga en la UN ',new Date(),new Date(),'Relajate con Yoga en la UN, es gratis.',"jugar,correr,yoga",ocio,4.6348317,-74.0820247)
 		
 		ev.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(ev)
 		usuario11.eventCreator.addToEvents( ev )
 		
 		
-		Event eventoMarcha = new Event('Marcha a la 30',new Date(),new Date(),'Marcha en apoyo al paro agrario',"Marcha,campesinos",otro,4.6356794,-74.0825153)
+		Event eventoMarcha = new Event('Marcha a la 30',new Date(),new Date(),'Marcha en apoyo al paro agrario',"marcha,campesinos",otro,4.6356794,-74.0825153)
 		
 		eventoMarcha.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoMarcha)
@@ -69,14 +69,14 @@ class BootStrap {
 		
 		
 		
-		Event eventoToque = new Event('Toque al aire libre.',new Date(),new Date(),'Toque al aire libre organizado por la facultad de artes.',"Toque, musica, arte", ocio,4.635862,-74.0826558)
+		Event eventoToque = new Event('Toque al aire libre.',new Date(),new Date(),'Toque al aire libre organizado por la facultad de artes.',"toque, musica, arte", ocio,4.635862,-74.0826558)
 		
 		eventoToque.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoToque)
 		usuario11.eventCreator.addToEvents( eventoToque )
 		
 		
-		Event eventoLibro = new Event('Dona un libro.',new Date(),new Date(),'Donacion de libros para jovenes de bachillerato, dona los libros que ya no uses.',"Educacion, libros", academico,4.6352444,-74.082923)
+		Event eventoLibro = new Event('Dona un libro.',new Date(),new Date(),'Donacion de libros para jovenes de bachillerato, dona los libros que ya no uses.',"educacion, libros", academico,4.6352444,-74.082923)
 		
 		eventoLibro.addToAssistants(usuario11)
 		usuario11.addToEventsToAttend(eventoLibro)

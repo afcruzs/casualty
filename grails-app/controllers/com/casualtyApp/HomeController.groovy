@@ -13,6 +13,9 @@ import com.sun.org.omg.CORBA.ExcDescriptionSeqHelper;
 
 import grails.converters.JSON
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 class HomeController {
 	
 	def eventsService
@@ -97,7 +100,7 @@ class HomeController {
 			def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 			def cat = EventCategory.findByName(params.categoryName)
 			
-						
+			print parseDate(params.startTime, params.startHour)			
 			Event newEvent =  new Event(params.title,parseDate(params.startTime, params.startHour),
 													parseDate(params.endTime, params.endHour),params.description, params.tags,
 													cat, 
@@ -224,19 +227,18 @@ class HomeController {
 	def parseDate(String d,String hour){
 		
 		def t = d.split("-")
-		int year = Integer.parseInt(t[0])
+		int day = Integer.parseInt(t[0])
 		int month = Integer.parseInt(t[1])-1
-		int day = Integer.parseInt(t[2])
+		int year = Integer.parseInt(t[2])
 		
 		def h = hour.split(":")
 		int _hour = Integer.parseInt( h[0] )
 		int minute = Integer.parseInt( h[1] )
 		
 		Calendar date = Calendar.getInstance();
-		date.set(Calendar.YEAR, year);
-		date.set(Calendar.MONTH, month);
 		date.set(Calendar.DAY_OF_MONTH, day);
-		
+		date.set(Calendar.MONTH, month);
+		date.set(Calendar.YEAR, year);
 		
 		date.set(Calendar.HOUR_OF_DAY, _hour)
 		date.set(Calendar.MINUTE, minute)
@@ -851,18 +853,23 @@ class HomeController {
 			"categoria": console.log()
 	 */
 	def queryEvents(){
-		//Date fechaInicial = parseDate(params.fechaInicial, params.horaInicial)
-		//Date fechaFinal = parseDate(params.fechaFinal, params.horaFinal)
-		String [] tags = params.tagsString.split(",")
+
+		
+		String [] tags = (params.tagsString+",").split(",")
 		String categoria = params.categoria
 		
-		/*
-		 * Implementar bien lo de la fecha!!!
-		 */
-		def result = eventsService.filterEvents(null, null, tags, categoria)
+		Date fechaInicial = null
+		Date fechaFinal = null
+		try{
+		fechaInicial = parseDate(params.fechaInicial, params.horaInicial)
+		fechaFinal = parseDate(params.fechaFinal, params.horaFinal)
+		}catch(Exception e){}
+
+		def result = eventsService.filterEvents(fechaInicial, fechaFinal, tags, categoria)
 		if( result != null )
 			render result as JSON
 		else render "ERROR"
+
 	}
 	
 }

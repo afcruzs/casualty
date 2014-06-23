@@ -69,11 +69,6 @@
           <a class="brand" href="initPage">Causality</a>
           <ul class="nav">
           	  <li class="divider-vertical"></li>
-              <li>
-              <g:form class="navbar-form">
-				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" onItemSelect="goToLocation(id)" />
-           	  </g:form>
-              </li>
           </ul>
           <div class="nav-collapse collapse pull-right">
             <ul class="nav">
@@ -93,7 +88,7 @@
               
                <li class="active"><a href="#">Contacto</a></li>
               
-              
+               </ul>
           </div><!--/.nav-collapse -->
         </div>
   	</div>
@@ -105,23 +100,28 @@
 				            <!-- inicio datos de mas -->
 				            <div style="text-align: center;">
 	
-	
+	<div class="container">
 			<br>
-			<center><h1>Causality</h1>
+			<h1>Causality</h1>
 			<p>
 			Causality es una aplicación desarrollada por estudiantes
 			de la Universidad nacional de colombia.
 			</p>
 			
 			<strong>Contacto:</strong> <b>causalityapp@gmail.com</b>
-			</center>
+		
 		  	<br>
 		  	
-		  	<center><h1>Equipo de Trabajo</h1></center>
+		  	<h1>Equipo de Trabajo</h1>
 		  	
 		  	<br>	
+	</div>
 
 
+	<div class="row-fluid">
+	
+	<div class="span1">&nbsp;</div>
+	
 	<div class="span2 text-align: center;">
           <r:img class="img-circle" file="Diego.png" width="40%" height="30%" alt="img"/>	
           <h3>Diego Vanegas</h3>
@@ -194,18 +194,14 @@
           <br><br>
          <b> faarodriguezbe@unal.edu.co</b>
           </p>
-            </div>
-       
-          
-      
-          	
-        
+            </div>   	
          </div>
-           
-          
-        
-     
-    
+         
+         
+         <div class="span1">&nbsp;</div>
+         
+     </div>
+		
 	<!-- fin datos de mas -->
 		
 </body>

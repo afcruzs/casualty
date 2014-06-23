@@ -4,6 +4,7 @@ class EventCategory {
 
 	def String name
 	def String description
+	
  static constraints = {
 	 name (nullable: false, blank: false, unique: true, maxSize:300)
 	 }

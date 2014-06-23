@@ -45,7 +45,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Causalty</a>
+				<a class="brand" href="#">Causality</a>
 				<ul class="nav">
 					<li class="divider-vertical"></li>
 				</ul>

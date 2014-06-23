@@ -71,6 +71,13 @@
           <a class="brand" href="initPage">Causality</a>
           <ul class="nav">
           	  <li class="divider-vertical"></li>
+          	  <li class="unactive"><a href="#"  onclick="return openFilterModal();">Filtrar búsqueda</a></li>
+              <script type="text/javascript">
+			    function openFilterModal() {
+					$('#filterModal').modal('show');
+			        return false;
+			    }
+			</script>
               <li>
               <g:form class="navbar-form">
 				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" onItemSelect="goToLocation(id)" />
@@ -81,15 +88,7 @@
             <ul class="nav">
 			  <li class="divider-vertical"></li>
               <li class="active"><a href="#">Eventos</a></li>
-              
-              <li class="unactive"><a href="#"  onclick="return openFilterModal();">Filtrar búsqueda</a></li>
-              <script type="text/javascript">
-			    function openFilterModal() {
-					$('#filterModal').modal('show');
-			        return false;
-			    }
-			</script>
-              
+
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -297,7 +296,7 @@
 									
 									<h4 >Tags (separadas por coma)</h4>
 									
-									<input id="tagsFilter"></input>
+									<input id="tagsFilter" type="text"></input>
 									
 									<br>
 									<br>
