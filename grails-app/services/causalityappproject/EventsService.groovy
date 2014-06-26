@@ -129,8 +129,10 @@ class EventsService {
 				else for(String s : tags){
 						if(event.tags.contains(s)){
 							events.add(event)
+							break
 						}
 			    }
+				
 				
 			}
 			

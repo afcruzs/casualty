@@ -266,6 +266,7 @@
 									<select id="filtroCategoria" name ="filtroCategoria" >
 										<option>Deportes</option>
 										<option>Ocio</option>
+										<option>Otro</option>
 										<option selected>Academico</option>
 										
 									</select>
