@@ -600,7 +600,7 @@ function deleteEvent(){
  * 
  * @author: Felipe
  */
-function updateMapIfNeeded(){
+/*function updateMapIfNeeded(){
 	var currentTime = (new Date());
 	if( currentTime.getTime() - lastupdate > 3000 ){
 		//console.log("update",currentTime - lastupdate);
@@ -619,7 +619,7 @@ function updateMapIfNeeded(){
 	}
 		
 }
-
+*/
 /*
  * Inits the map
  */
@@ -651,7 +651,7 @@ function default_map_loader(){
     */ 
     google.maps.event.addListener(map, 'bounds_changed', function(event) {
     	
-    	updateMapIfNeeded();
+    	//updateMapIfNeeded();
     	
      });
 }
@@ -705,13 +705,11 @@ function clearMarkers(){
 function queryAndReload(){
 
 	
-
-	
+	console.log("hola");
+	console.log($("#inicioDiaFilter").val());
 	var _data = {
 			"fechaInicial" : $("#inicioDiaFilter").val(),
-			"horaInicial" : $("#inicioHoraFilter").val(),
 			"fechaFinal" : $("#finalDiaFilter").val(),
-			"horaFinal" : $("#finalHoraFilter").val(),
 			"tagsString" : $("#tagsFilter").val(),
 			"categoria": $("#filtroCategoria").val()
 			

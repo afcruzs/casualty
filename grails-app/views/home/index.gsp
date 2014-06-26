@@ -194,7 +194,7 @@
 									
 									<label for="">Fecha de inicio</label>
 									
-									<div class="input-append date" id="d2" data-date="02-05-2014"  data-date-format="dd-mm-yyyy">
+									<div class="input-append date" id="d2" data-date="26-06-2014" data-date-format="dd-mm-yyyy">
 									  	<input class="span10" type="text" onkeyup="validateInitialDate(this.value)" value="02-05-2014" id = "date2">
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
@@ -215,7 +215,7 @@
 									<label for="">Fecha de finalización</label>
 									<!--  <input type="date" id="date"><br>-->
 									
-									<div class="input-append date" id="d" data-date="02-05-2014" data-date-format="dd-mm-yyyy">
+									<div class="input-append date" id="d" data-date="26-06-2014" data-date-format="dd-mm-yyyy">
 									  <input class="span10"  onkeyup="validationFinalDate(this.value)" type="text" value="02-05-2014" id="date">
 									  <span class="add-on"><i class="icon-th"></i></span>
 									</div>	
@@ -271,28 +271,23 @@
 									<br>
 									
 									<h4>Fecha Inicio</h4>
-									<!-- Toca poner el que es-->
-									<input id="inicioDiaFilter"></input>
+									<div class="input-append date" id="inputInicioDiaFilter" data-date="26-06-2014"  data-date-format="dd-mm-yyyy">
+									  	<input class="span10" type="text" value="26-06-2014" id = "inicioDiaFilter" name = 'aa'>
+									  <span class="add-on"><i class="icon-th"></i></span>
+									</div>
 									
 									<br>
 									
-									<h4>Hora Inicio</h4>
-									<!-- Toca poner el que es-->
-									<input id="inicioHoraFilter"></input>
+									
+									<h4>Fecha Final</h4>
+									<div class="input-append date" id="inputFinalDiaFilter" data-date="26-06-2014"  data-date-format="dd-mm-yyyy">
+									  	<input class="span10" type="text" value="26-06-2014" id = "finalDiaFilter">
+									  <span class="add-on"><i class="icon-th"></i></span>
+									</div>
 									
 									<br>
 									
-									<h4 id="finalDiaFilter">Fecha Final</h4>
-									<!-- Toca poner el que es-->
-									<input></input>
 									
-									<br>
-									
-									<h4>Hora Final</h4>
-									<!-- Toca poner el que es-->
-									<input id="finalHoraFilter"></input>
-									
-									<br>
 									
 									<h4 >Tags (separadas por coma)</h4>
 									
@@ -593,6 +588,15 @@
 		$('#d').datepicker().on('changeDate', function (ev) {
 		    $('#date').change();
 		});
+		
+		$('#inputInicioDiaFilter').datepicker().on('changeDate', function (ev) {
+		    $('#inicioDiaFilter').change();
+		});
+		
+		$('#inputFinalDiaFilter').datepicker().on('changeDate', function (ev) {
+		    $('#finalDiaFilter').change();
+		});
+		
 		
 		
 	var checkout = $('#d').datepicker({

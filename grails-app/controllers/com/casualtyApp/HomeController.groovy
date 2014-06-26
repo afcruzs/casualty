@@ -235,6 +235,7 @@ class HomeController {
 		int _hour = Integer.parseInt( h[0] )
 		int minute = Integer.parseInt( h[1] )
 		
+		
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.DAY_OF_MONTH, day);
 		date.set(Calendar.MONTH, month);
@@ -243,6 +244,26 @@ class HomeController {
 		date.set(Calendar.HOUR_OF_DAY, _hour)
 		date.set(Calendar.MINUTE, minute)
 		
+		
+		
+		return date.getTime()
+
+		
+	}
+	
+	
+	def parseDateModal(String d){
+		
+		def t = d.split("-")
+		int day = Integer.parseInt(t[0])
+		int month = Integer.parseInt(t[1])-1
+		int year = Integer.parseInt(t[2])
+		
+		
+		Calendar date = Calendar.getInstance();
+		date.set(Calendar.DAY_OF_MONTH, day);
+		date.set(Calendar.MONTH, month);
+		date.set(Calendar.YEAR, year);
 		
 		
 		return date.getTime()
@@ -347,14 +368,6 @@ class HomeController {
 		render jsonEvents as JSON
 	}
 	
-	
-	def changePassword(){
-		println ("asdsaeloo")
-		redirect(controller: 'home', action: 'index' )
-		
-		
-	}
-	
 	//Envía emails a los asistentes al evento
 	def sendEmailToAssistants(idEvent){
 		
@@ -433,7 +446,13 @@ class HomeController {
 		
 	}
 	
-	
+	/**
+	 * toma el usuario actual, carga los nombres de los eventos 
+	 * para poder ser cargados desde el perfil
+	 * por el render se pasa a la vista con los datos necesarios
+	 * 
+	 * @author fabianandres
+	 * */
 	def profile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def nombresEvent="";
@@ -454,7 +473,15 @@ class HomeController {
 	}
 	
 	
-
+/**
+ * dado un Username que viene de parte
+ * de la vista se muestra el perfil
+ * publico no modificable	.
+ * tambien se puede acceder a grupos publicos
+ * 
+ * 
+ * @author fabianandres
+ * */
 	def publicProfile(){
 		def username = params.username
 		
@@ -565,7 +592,11 @@ class HomeController {
 	
 	
 	
-
+	/**
+	 * me todo que actualiza el
+	 * perfil cuando se hace un cambio
+	 * ya sea en la foto como en otros datos
+	 * */
 	def updateProfile(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		currentUser.biography=params.biography
@@ -598,7 +629,12 @@ class HomeController {
 	
 	
 	
-	
+	/**
+	 * actualiza los
+	 * datos de un grupo
+	 * creado por un user
+	 * 
+	 * */
 	def updateGroups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def cond=false
@@ -643,9 +679,13 @@ class HomeController {
 	
 	
 	
-	
+	/**
+	 * modifica la
+	 * informacion de un grupo
+	 * 
+	 * @author fabianandres
+	 * */
 	def updateGroupCreator(){
-		print "entra yaaa"
 		def currentGroup = ClassGroup.findByNameGroup(params.nameGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def cond=true
@@ -665,7 +705,6 @@ class HomeController {
 	 *Carga la imagen de un grupo antes de ser creado
 	 *
 	 * */
-	
 	def loadImage(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def nombresGrupos="";
@@ -692,6 +731,11 @@ class HomeController {
 	}
 	
 	
+	/**
+	 * carga la info de un grupo 
+	 * creado por mi
+	 * 
+	 * */
 	def groups(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		def nombresGrupos="";
@@ -712,6 +756,12 @@ class HomeController {
 	}
 	
 	
+	/**
+	 * modifica la imagen 
+	 * para uqe al presionar
+	 * en ver imagen se muestre
+	 * @author fabianandres
+	 * */
 	def modifyImage(){
 		def currentGroup = ClassGroup.findById(params.idGroup)
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
@@ -741,7 +791,11 @@ class HomeController {
 		
 	}
 	
-	
+	/**
+	 * manda a la pagina inicial
+	 * de causalty sin el login
+	 * 
+	 * */
 	def initPage(){
 		def currentUser = User.get( SecUser.findByUsername(SecurityUtils.getSubject().getPrincipal()).id )
 		session.nickname = SecurityUtils.getSubject().getPrincipal()
@@ -751,7 +805,13 @@ class HomeController {
 	
 	
 	
-	
+	/**
+	 * carga un conjunto
+	 * de bytes en una
+	 * imagen sacada de la 
+	 * base de datos
+	 * @author fabianandres
+	 * */
 	def showImage()  {
 		def currentUser
 		println(params.id)
@@ -765,7 +825,13 @@ class HomeController {
 	}
 	
 	
-	
+	/**
+	 * carga un conjunto
+	 * de bytes en una
+	 * imagen sacada de la
+	 * base de datos
+	 * @author fabianandres
+	 * */
 	
 	def showImageGroup()  {
 		response.outputStream << ClassGroupTemp.screenshot
@@ -861,11 +927,13 @@ class HomeController {
 		Date fechaInicial = null
 		Date fechaFinal = null
 		try{
-		fechaInicial = parseDate(params.fechaInicial, params.horaInicial)
-		fechaFinal = parseDate(params.fechaFinal, params.horaFinal)
+		fechaInicial = parseDateModal(params.fechaInicial)
+		fechaFinal = parseDateModal(params.fechaFinal)
 		}catch(Exception e){}
-
+		
 		def result = eventsService.filterEvents(fechaInicial, fechaFinal, tags, categoria)
+		
+		
 		if( result != null )
 			render result as JSON
 		else render "ERROR"

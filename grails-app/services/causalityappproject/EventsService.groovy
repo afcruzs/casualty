@@ -1,6 +1,6 @@
 package causalityappproject
 
-import java.util.concurrent.ForkJoinPool;
+//import java.util.concurrent.ForkJoinPool;
 
 import groovy.json.JsonBuilder
 
@@ -21,6 +21,8 @@ class EventsService {
 		}
 		return jsonEvents
 	}
+	
+	
 	
 	
 	/*
@@ -91,6 +93,15 @@ class EventsService {
 	 * retorna una lista convertida en json para mostar los eventos
 	 */
 	
+	
+	def dateEquals(Date d1, Date d2){
+		
+		if(d1.dateString.equals(d2.dateString))
+			return true;
+			
+		return false;
+	}
+	
 	def filterEvents(Date fechaInicial, Date fechaFinal, String[] tags, String categoria ){
 		try{
 			/*
@@ -108,13 +119,14 @@ class EventsService {
 				if(event.category.name.equals(categoria)){
 					events.add(event)
 				}
-				if(event.startTime.equals(fechaInicial)){
+				
+				else if(dateEquals(fechaInicial, event.startTime)){
 					events.add(event)
 				}
-				if(event.endTime.equals(fechaFinal)){
+				else if(dateEquals(fechaFinal, event.endTime)){
 					events.add(event)
 				}
-				for(String s : tags){
+				else for(String s : tags){
 						if(event.tags.contains(s)){
 							events.add(event)
 						}
