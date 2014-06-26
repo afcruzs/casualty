@@ -940,4 +940,11 @@ class HomeController {
 
 	}
 	
+	def queryAllEvents(){
+				def result = eventsService.allEvents()
+				render result as JSON
+			}
+	
+	
+	
 }

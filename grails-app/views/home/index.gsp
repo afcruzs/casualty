@@ -83,6 +83,8 @@
 				<richui:autoComplete name="event" action="${createLinkTo('dir': 'home/searchAJAX')}" onItemSelect="goToLocation(id)" />
            	  </g:form>
               </li>
+              <li class="unactive"><a href=""  onclick="allEvents()">mostrar todos</a></li>
+              
           </ul>
           <div class="nav-collapse collapse pull-right">
             <ul class="nav">

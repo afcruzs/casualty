@@ -703,10 +703,6 @@ function clearMarkers(){
  * @author: Felipe
  */
 function queryAndReload(){
-
-	
-	console.log("hola");
-	console.log($("#inicioDiaFilter").val());
 	var _data = {
 			"fechaInicial" : $("#inicioDiaFilter").val(),
 			"fechaFinal" : $("#finalDiaFilter").val(),
@@ -742,4 +738,20 @@ function queryAndReload(){
 	        },
 	        error:function(XMLHttpRequest,textStatus,errorThrown){}
 	  });
+}
+
+function allEvents(){
+	
+	jQuery.ajax({
+        type:'POST', 
+        url:"queryAllEvents",
+        success:function(data){
+        	//$('#filterModal').modal('hide');
+         		
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
+	
+	
+	
 }

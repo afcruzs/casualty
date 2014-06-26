@@ -143,4 +143,32 @@ class EventsService {
 			println ex
 		}
 	}
+	
+	def allEvents(){
+		
+		
+		try{
+			/*
+			 * Falta implementar el resto de filtros, solo esta categoria
+			 * @author: Felipe
+			 */
+			
+			def events = []
+			
+			for( Event event : Event.all ){
+					events.add(event)
+			}
+			
+			def jsonEvents = []
+			for( Event e : events ){
+				jsonEvents.add( eventToJSON(e) )
+			}
+			return jsonEvents
+		}catch(Exception ex){
+			println ex
+		}
+		
+		
+		
+	}
 }
