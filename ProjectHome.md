@@ -1,0 +1,1 @@
+Casualty lets people find other people with common interests in quick and smart way, go to nearby events and activities such as study, sports or leisure. Initially (but not restricted in the future) in the Universidad Nacional de Colombia.
